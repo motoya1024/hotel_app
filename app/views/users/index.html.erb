@@ -1,0 +1,21 @@
+<% provide(:title, 'ユーザー一覧') %>
+
+<h1>ユーザー一覧</h1>
+
+<table id="user_index" class="table-bordered table-striped">
+  <tr>
+      <th>名前</th>
+      <th>メールアドレス</th>
+      <th colspan="2"></th>
+  </tr>
+　<% @users.each do |user| %>
+    <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to "編集", edit_user_path(user), class: 'btn btn-primary' %></td>
+        <td><%= link_to "削除", user_path(user) , method: :delete, class: 'btn btn-primary',data: { confirm: "消去してもいいですか？" } %></td>
+    </tr>
+  <% end %> 
+</table>  
+<script>
+

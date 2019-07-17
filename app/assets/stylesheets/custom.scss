@@ -1,0 +1,159 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+$gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+
+.center{
+  text-align:center;
+}
+
+
+/* universal */
+
+body {
+  padding-top: 60px;
+}
+
+.jumbotron {
+ /*
+  background-color: rgba(255,165,0,0);
+  */
+  background-color: $gray-medium-light;
+}
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-light;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#user_index,#hotel_index{
+  width:100%;
+}
+
+.hotelname,.hoteladdress,.hotelinformation{
+  width:20%;
+}
+
+.hotel_btn{
+  text-align:center;
+}
+
+#myhotelcomment{
+  width:50%;
+}
+
+#myhotelname{
+  width:30%;
+}
+
+th{
+  height:35px;
+}
+
+td{
+  height:40px;
+}
+
+.myhotel_btn{
+  width:30%;
+  margin:auto;
+  margin-top:30px;
+}
+
+#maxRows{
+  width:20%;
+}
+
+.picture:hover,.map:hover{
+  color:blue;
+  text-decoration:underline;
+}
+
+.site_form{
+  font-size:20px;
+  float:right;
+  padding-bottom:10px;
+}
+
+.site_rakuten{
+  margin-right:20px;
+}
+
+.search_form{
+  width:30%;
+}
+
+.search_btn{
+  width:10%;
+}

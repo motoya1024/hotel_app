@@ -1,2 +1,36 @@
-<h1>Hotels#new</h1>
-<p>Find me in app/views/hotels/new.html.erb</p>
+<% provide(:title, 'マイホテル登録') %>
+<% provide(:button_text, '登録') %>
+<h1>マイホテル登録</h1>
+
+<%= form_for(@hotel) do |f| %>
+   <%= f.hidden_field :hotel_number, value: @arr.elements["//hotels/hotel/hotelBasicInfo/hotelNo"].text %>
+   <table id="hotel_index" class="table-bordered table-striped">
+      <tr>
+        　<th>項目</th>
+        　<th>内容</th>
+      </tr>
+       <tr>
+        　<td>ホテル名</td>
+        　<td><%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %></td>
+      </tr>
+       <tr>
+        　<td>住所</td>
+        　<td><%= @arr.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= @arr.elements["//hotels/hotel/hotelBasicInfo/address2"].text %></td>
+      </tr>
+       <tr>
+        　<td>価格</td>
+        　<td><%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円</td>
+      </tr>
+      <tr>
+        　<td>URL</td>
+        　<td><%= link_to @arr.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,@arr.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %></td>
+      </tr>
+       <tr>
+        　<td>コメント</td>
+        　<td><%= f.text_area :comment, :size => "20x5"  %></td>
+      </tr>
+   </table>  
+   <div class="myhotel_btn">
+     <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+   </div>
+<% end %>

@@ -1,0 +1,22 @@
+<% provide(:title, 'マイホテル一覧') %>
+
+<h1>マイホテル一覧</h1>
+
+<%= will_paginate @hotels, prev_label: '&lt 前へ', next_label: '次へ &gt' %>
+
+<table id="hotel_index" class="table-bordered table-striped">
+  <tr>
+      <th>ホテル名</th>
+      <th>コメント</th>
+      <th colspan="2"></th>
+  </tr>
+  <% @hotels.each do |hotel| %>
+  <% hotel_info = get_hotelinfo(hotel.hotel_number) %>
+    <tr>
+        <td id="myhotelname"><%= hotel_info.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %></td>
+        <td id="myhotelcomment"><%= hotel.comment %></td>
+        <td class="hotel_btn"><%= link_to "編集",edit_hotel_path(hotel), class: 'btn btn-primary' %></td>
+        <td class="hotel_btn"><%= link_to "削除",hotel_path(hotel), method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %></td>
+     </tr>
+   <% end %>
+</table>  

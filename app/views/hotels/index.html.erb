@@ -1,0 +1,106 @@
+<% provide(:title, 'ホテル一覧') %>
+
+<h1>ホテル一覧</h1>
+
+<div>
+  <%= form_with url: hotels_path, local:true,method: :get do |f| %>
+    <%= f.hidden_field :site, value:@site %>
+    <%= f.label :search,"住所検索" %>
+    <%= f.text_field :search, value:@search,class:"form_control search_form" %>
+    <%= f.submit "検索する",class:"search_btn" %>
+  <% end %>
+</div>
+<select class="form-control" name="state" id="maxRows">
+  <option value="5000">全表示</option>
+  <option value="5">5</option>
+  <option value="10">10</option>
+  <option value="15">15</option>
+  <option value="20">20</option>
+  <option value="50">50</option>
+  <option value="70">70</option>
+  <option value="100">100</option>
+</select>
+<div class='pagination-container'>
+	<nav>
+	  <ul class="pagination">
+	   <!--	Here the JS Function Will Add the Rows -->
+	  </ul>
+	</nav>
+</div>
+<div class='site_form'>
+  <%= link_to "1:楽点",hotels_path(site:1),class:"site_rakuten" %>
+  <%= link_to "2:じゃらん",hotels_path(site:2),class:"site_jalan" %>
+</div>
+<table id="hotel_index" class="table-bordered table-striped mytable">
+  <thead>
+    <tr>
+      <th class="hotelname">ホテル名</th>
+      <th class="hoteladdress">住所</th>
+      <% if @site == nil || @site == "1" %>
+        <th>価格(最安値)</th>
+      <% end %>
+      <th class="hotelinformation">URL</th>
+      <th>画像</th>
+      <th>地図</th>
+      <% if logged_in? %>
+        <th>マイホテル登録</th>
+      <% end %>
+    </tr>
+  </thead>
+   <% if @site == nil || @site == "1" %>
+      <% @arr.elements.each('//root/hotels/hotel/') do |hotel| %>
+        <tr>
+          <td><%= hotel.elements["hotelBasicInfo/hotelName"].text %></td>
+          <td><%= hotel.elements["hotelBasicInfo/address1"].text %><%= hotel.elements["hotelBasicInfo/address2"].text %></td>
+          <td><%= hotel.elements["hotelBasicInfo/hotelMinCharge"].text %>円</td>
+          <td><%= link_to hotel.elements["hotelBasicInfo/hotelInformationUrl"].text,hotel.elements["hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %></td>
+          <td><buttom class="picture" data-toggle="modal" data-target="#picture" data-id="<%= hotel.elements["hotelBasicInfo/roomImageUrl"].text %>">【表示】</buttom>  
+            　 <%= render :partial => "picture" %>
+          </td>
+          <td><buttom class="map" data-toggle="modal" data-target="#map" data-id="">【表示】</buttom>  
+            　 <%= render :partial => "map" %>
+          </td>
+          <% if logged_in? %>
+             <% if current_user.hotels.where(hotel_number: hotel.elements["hotelBasicInfo/hotelNo"].text).present? %>
+                <td class="hotel_btn">登録済み</td>
+             <% else %>
+                <td class="hotel_btn"><%= link_to "登録",new_hotel_path(number: hotel.elements["hotelBasicInfo/hotelNo"].text),class: "btn btn-primary" %></td>
+             <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+   <% elsif %>
+      <% @arr.elements.each('//Hotel/') do |hotel| %>
+        <tr>
+          <td><%= hotel.elements["HotelName"].text %></td>
+          <td><%= hotel.elements["HotelAddress"].text %></td>
+          <td><%= link_to hotel.elements["HotelDetailURL"].text,hotel.elements["HotelDetailURL"].text %></td>
+          <td><buttom class="picture" data-toggle="modal" data-target="#picture" data-id="<%= hotel.elements["PictureURL"].text %>">【表示】</buttom>  
+            　 <%= render :partial => "picture" %>
+          </td>
+          <td><表示></td>
+          <% if logged_in? %>
+             <% if current_user.hotels.where(hotel_number: hotel.elements["HotelID"].text).present? %>
+                <td class="hotel_btn">登録済み</td>
+             <% else %>
+                <td class="hotel_btn"><%= link_to "登録",new_hotel_path(number: hotel.elements["HotelID"].text),class: "btn btn-primary" %></td>
+             <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+  <% end %>
+</table>  
+
+<script>
+$(function(){
+ getPagination('.mytable');
+ 
+ $('.picture').click(function() {
+    var picture = $(this).data("id");
+    $('.modal-body').children('img').attr('src', picture);
+  });
+ 
+});  
+
+</script>
+

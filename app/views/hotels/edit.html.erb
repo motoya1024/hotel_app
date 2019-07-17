@@ -1,0 +1,41 @@
+<% provide(:title, 'マイホテル編集') %>
+<% provide(:button_text, '編集') %>
+<h1>マイホテル編集</h1>
+
+<%= form_for(@hotel) do |f| %>
+   <%= f.hidden_field :hotel_number, value: @hotel.hotel_number %>
+   <% hotel = get_hotelinfo(@hotel.hotel_number) %>
+   <table id="hotel_index" class="table-bordered table-striped">
+      <tr>
+        　<th>項目</th>
+        　<th>内容</th>
+      </tr>
+        <tr>
+        　<td>ホテル名</td>
+        　<td><%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %></td>
+      </tr>
+       <tr>
+        　<td>住所</td>
+        　<td><%= hotel.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= hotel.elements["//hotels/hotel/hotelBasicInfo/address2"].text %></td>
+      </tr>
+       <tr>
+        　<td>価格</td>
+        　<td><%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円</td>
+      </tr>
+      <tr>
+        　<td>URL</td>
+        　<td><%= link_to hotel.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,hotel.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %></td>
+      </tr>
+       <tr>
+        　<td>ホテル名</td>
+        　<td><%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %></td>
+      </tr>
+       <tr>
+        　<td>コメント</td>
+        　<td><%= f.text_area :comment, :size => "20x5"  %></td>
+      </tr>
+   </table>  
+   <div class="myhotel_btn">
+     <%= f.submit yield(:button_text), class: "btn btn-primary",id: "approval_btn" %>
+   </div>
+<% end %>

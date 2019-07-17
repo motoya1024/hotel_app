@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         if user.admin == nil
-           redirect_to timecard_path user
+           redirect_to hotels_path 
         else 
            redirect_to root_path
         end
