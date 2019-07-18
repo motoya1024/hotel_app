@@ -2,33 +2,46 @@
 <% provide(:button_text, '編集') %>
 <h1>マイホテル編集</h1>
 
-<%= form_for(@hotel) do |f| %>
+<%= form_for(@hotel,url: update_hotel_path(@hotel,current_user.id)) do |f| %>
    <%= f.hidden_field :hotel_number, value: @hotel.hotel_number %>
-   <% hotel = get_hotelinfo(@hotel.hotel_number) %>
+   <% hotel = get_hotelinfo(@hotel.hotel_number,@hotel.site) %>
    <table id="hotel_index" class="table-bordered table-striped">
       <tr>
         　<th>項目</th>
         　<th>内容</th>
       </tr>
-        <tr>
-        　<td>ホテル名</td>
-        　<td><%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %></td>
+       <tr>
+         <td>ホテル名</td>
+         <td><% if @hotel.site == 2 %>
+                <%= hotel.elements["//Hotel/HotelName"].text %>
+             <% else %>
+                <%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %>
+             <% end %>
+         </td>
       </tr>
        <tr>
         　<td>住所</td>
-        　<td><%= hotel.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= hotel.elements["//hotels/hotel/hotelBasicInfo/address2"].text %></td>
+        　<td><% if @hotel.site == 2 %>
+                <%= hotel.elements["//Hotel/HotelAddress"].text %>
+              <% else %>
+                <%= hotel.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= hotel.elements["//hotels/hotel/hotelBasicInfo/address2"].text %>
+              <% end %>
+        　 </td>
       </tr>
-       <tr>
-        　<td>価格</td>
-        　<td><%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円</td>
-      </tr>
+      <% if @hotel.site == nil || @hotel.site == 1 %>
+         <tr>
+          　<td>価格</td>
+          　<td><%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円</td>
+        </tr>
+      <% end %>
       <tr>
         　<td>URL</td>
-        　<td><%= link_to hotel.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,hotel.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %></td>
-      </tr>
-       <tr>
-        　<td>ホテル名</td>
-        　<td><%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %></td>
+        　<td><% if @hotel.site == 2 %>
+                <%= link_to hotel.elements["//Hotel/HotelDetailURL"].text,hotel.elements["//Hotel/HotelDetailURL"].text %>
+              <% else %>
+                <%= link_to hotel.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,hotel.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %>
+              <% end %>
+          </td>
       </tr>
        <tr>
         　<td>コメント</td>
@@ -36,10 +49,17 @@
       </tr>
    </table>  
    <div class="picture_map">
-      <buttom type="button" class="picture btn btn-success" data-toggle="modal" data-target="#picture" 
-              data-id="<%= hotel.elements["//hotels/hotel/hotelBasicInfo/roomImageUrl"].text %>">画像を表示</buttom>  
-      <buttom type="button" class="map btn btn-success" data-toggle="modal" data-target="#picture" 
-              data-id="<%= get_map(hotel.elements["//hotels/hotel/hotelBasicInfo/address1"].text + hotel.elements["//hotels/hotel/hotelBasicInfo/address2"].text) %>">地図を表示</buttom> 
+      <% if @hotel.site == 2 %>
+         <buttom type="button" class="picture btn btn-success" data-toggle="modal" data-target="#picture" 
+                 data-id="<%= hotel.elements["//Hotel/PictureURL"].text %>">画像を表示</buttom>  
+         <buttom type="button" class="map btn btn-success" data-toggle="modal" 
+                 data-target="#picture" data-id="<%= get_map(hotel.elements["//Hotel/HotelAddress"].text) %>">地図を表示</buttom>
+      <% else %>
+         <buttom type="button" class="picture btn btn-success" data-toggle="modal" 
+                 data-target="#picture" data-id="<%= hotel.elements["//hotels/hotel/hotelBasicInfo/roomImageUrl"].text %>">画像を表示</buttom>  
+         <buttom type="button" class="map btn btn-success" data-toggle="modal" 
+                 data-target="#picture" data-id="<%= get_map(hotel.elements["//hotels/hotel/hotelBasicInfo/address1"].text + hotel.elements["//hotels/hotel/hotelBasicInfo/address2"].text) %>">地図を表示</buttom>
+      <% end %>
       <%= render :partial => "picture" %>
    </div>
    <div class="myhotel_btn">

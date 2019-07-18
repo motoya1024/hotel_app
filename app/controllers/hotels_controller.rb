@@ -1,19 +1,18 @@
 class HotelsController < ApplicationController
+  
+    before_action :logged_in, only: [:new,:create]
+    before_action :logged_not_current_user, only: [:myhotel,:edit]
+    
     include HotelsHelper
     
     def new
       @user = User.find(current_user.id)
+      @site = params[:site]
+  
       hotel_number = params[:number]
       @hotel = @user.hotels.build
-      key = "1023150086339421281";
-      feedURL = "https://app.rakuten.co.jp/services/api/Travel/HotelDetailSearch/20131024?applicationId=";
-      feedURL = feedURL + key;
-      feedURL = feedURL + "&format=xml";
-      feedURL = feedURL + "&hotelNo="+ hotel_number;
-      xml = open(feedURL).read
-      if xml
-        @arr = REXML::Document.new(xml)
-      end
+      @arr = get_hotelinfo(hotel_number,@site)
+      
     end
   
    def index
@@ -61,22 +60,23 @@ class HotelsController < ApplicationController
       @hotel = @user.hotels.build(hotel_params)
       if @hotel.save
         flash[:success] = "コメントを登録しました。"
-        redirect_to myhotel_path
+        redirect_to myhotel_url(current_user)
       else
         render 'new'
       end
     end 
     
     def myhotel
-      @user = User.find(current_user.id)
-      @hotels = @user.hotels.paginate(page: params[:page], per_page: 1)
+      @user = User.find(params[:id])
+      @hotels = @user.hotels.paginate(page: params[:page], per_page: 3)
+     # render plain:@hotels.inspect
     end
     
     def destroy
       @hotel = Hotel.find(params[:id])
       if @hotel.destroy
          flash[:success] = "マイホテル情報を削除しました。"
-         redirect_to myhotel_path 
+         redirect_to myhotel_url(current_user)
       else
          render 'edit'
       end
@@ -90,7 +90,7 @@ class HotelsController < ApplicationController
       @hotel = Hotel.find(params[:id])
       if @hotel.update_attributes(hotel_params)
         flash[:success] = "マイホテル情報を更新しました。"
-        redirect_to myhotel_url
+        redirect_to myhotel_url(current_user)
       else
         render "edit"
       end
@@ -98,6 +98,6 @@ class HotelsController < ApplicationController
     
     private
       def hotel_params
-        params.require(:hotel).permit(:hotel_number,:comment)
+        params.require(:hotel).permit(:hotel_number,:comment,:site)
       end  
     end

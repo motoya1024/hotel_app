@@ -3,27 +3,49 @@
 <h1>マイホテル登録</h1>
 
 <%= form_for(@hotel) do |f| %>
-   <%= f.hidden_field :hotel_number, value: @arr.elements["//hotels/hotel/hotelBasicInfo/hotelNo"].text %>
+   <% if @site == "2" %>
+ 　   <%= f.hidden_field :hotel_number, value: @arr.elements["//Hotel/HotelID"].text %>
+   <% else %>
+     <%= f.hidden_field :hotel_number, value: @arr.elements["//hotels/hotel/hotelBasicInfo/hotelNo"].text %>
+   <% end %>
+   <%= f.hidden_field :site, value: @site %>
    <table id="hotel_index" class="table-bordered table-striped">
       <tr>
         　<th>項目</th>
         　<th>内容</th>
       </tr>
        <tr>
-        　<td>ホテル名</td>
-        　<td><%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %></td>
+         <td>ホテル名</td>
+         <td><% if @site == "2" %>
+                <%= @arr.elements["//Hotel/HotelName"].text %>
+             <% else %>
+                <%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %>
+             <% end %>
+         </td>
       </tr>
        <tr>
         　<td>住所</td>
-        　<td><%= @arr.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= @arr.elements["//hotels/hotel/hotelBasicInfo/address2"].text %></td>
+        　<td><% if @site == "2" %>
+                <%= @arr.elements["//Hotel/HotelAddress"].text %>
+              <% else %>
+                <%= @arr.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= @arr.elements["//hotels/hotel/hotelBasicInfo/address2"].text %>
+              <% end %>
+        　 </td>
       </tr>
-       <tr>
-        　<td>価格</td>
-        　<td><%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円</td>
-      </tr>
+      <% if @site == nil || @site == "1" %>
+         <tr>
+          　<td>価格</td>
+          　<td><%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円</td>
+        </tr>
+      <% end %>
       <tr>
         　<td>URL</td>
-        　<td><%= link_to @arr.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,@arr.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %></td>
+        　<td><% if @site == "2" %>
+                <%= link_to @arr.elements["//Hotel/HotelDetailURL"].text,@arr.elements["//Hotel/HotelDetailURL"].text %>
+              <% else %>
+                <%= link_to @arr.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,@arr.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %>
+              <% end %>
+          </td>
       </tr>
        <tr>
         　<td>コメント</td>
@@ -31,8 +53,14 @@
       </tr>
    </table>  
    <div class="picture_map">
-      <buttom type="button" class="picture btn btn-success" data-toggle="modal" data-target="#picture" data-id="<%= @arr.elements["//hotels/hotel/hotelBasicInfo/roomImageUrl"].text %>">画像を表示</buttom>  
-      <buttom type="button" class="map btn btn-success" data-toggle="modal" data-target="#picture" data-id="<%= get_map(@arr.elements["//hotels/hotel/hotelBasicInfo/address1"].text + @arr.elements["//hotels/hotel/hotelBasicInfo/address2"].text) %>">地図を表示</buttom> 
+      <% if @site == "2" %>
+        <buttom type="button" class="picture btn btn-success" data-toggle="modal" data-target="#picture" data-id="<%= @arr.elements["//Hotel/PictureURL"].text %>">画像を表示</buttom>  
+        <buttom type="button" class="map btn btn-success" data-toggle="modal" data-target="#picture" data-id="<%= get_map(@arr.elements["//Hotel/HotelAddress"].text) %>">地図を表示</buttom>
+      <% else %>
+        <buttom type="button" class="picture btn btn-success" data-toggle="modal" data-target="#picture" data-id="<%= @arr.elements["//hotels/hotel/hotelBasicInfo/roomImageUrl"].text %>">画像を表示</buttom>  
+        <buttom type="button" class="map btn btn-success" data-toggle="modal" data-target="#picture" data-id="<%= get_map(@arr.elements["//hotels/hotel/hotelBasicInfo/address1"].text + @arr.elements["//hotels/hotel/hotelBasicInfo/address2"].text) %>">地図を表示</buttom>
+      <% end %>
+       
       <%= render :partial => "picture" %>
    </div>
    <div class="myhotel_btn">

@@ -26,12 +26,16 @@ class ApplicationController < ActionController::Base
   
     # ログイン済みの自分以外のユーザに入れない
     def logged_not_current_user
-       if logged_in?
+       if user_logged_in?
+         if params[:user_id]
+          @user = User.find(params[:user_id])
+         else
           @user = User.find(params[:id])
+         end
           #自分以外のユーザーでなければ
           unless current_user?(@user)
-             flash[:danger] ="他のユーザーはアクセスできません。"
-             redirect_to login_url
+             flash[:danger] ="他のユーザーのサイトにはアクセスできません。"
+             redirect_to hotels_url
           end
        end
     end

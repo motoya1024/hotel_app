@@ -120,9 +120,41 @@ td{
   padding-top:0;
 }
 
+#hotel_index{
+  width:100%;
+  table-layout: fixed;
+  word-break: break-all;
+  word-wrap: break-word;
+}
 
-.hotelname,.hoteladdress,.hotelinformation{
+.hotelname,.hoteladdress{
   width:20%;
+}
+
+.hotelinformation{
+  width:25%;
+}
+
+.hotelprice{
+  width:8%;
+}
+
+.hotelregister{
+  width:10%;
+}
+.hotelpicture{
+  width:8%;
+}
+
+.hotelprice{
+  width:7%;
+}
+
+.center{
+  text-align:center;
+}
+.hotelmap{
+  width:8%;
 }
 
 .hotel_btn,.user_btn{

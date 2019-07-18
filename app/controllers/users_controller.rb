@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :logged_in_admin, only: [:index]
+  before_action :logged_not_current_user, only: [:edit,:update]
   
   def new
     @user = User.new
@@ -6,7 +9,6 @@ class UsersController < ApplicationController
   
   def index
     @search = params[:search]
-    @users = User.order(id: :asc).paginate(page: params[:page], per_page: 10)
     @per_pages = ["全表示",10,20,30,50,100]
     if params[:per_page] == nil || params[:per_page] == "全表示"
        @page = "全表示"
