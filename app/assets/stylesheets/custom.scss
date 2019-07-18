@@ -97,15 +97,35 @@ input {
   }
 }
 
+
+th{
+  height:35px;
+}
+
+td{
+  height:40px;
+}
+
+//user hotel
+
+.user_count{
+  width:80px;
+}
 #user_index,#hotel_index{
   width:100%;
 }
+
+.user_pagination{
+  margin-top:0;
+  padding-top:0;
+}
+
 
 .hotelname,.hoteladdress,.hotelinformation{
   width:20%;
 }
 
-.hotel_btn{
+.hotel_btn,.user_btn{
   text-align:center;
 }
 
@@ -117,13 +137,6 @@ input {
   width:30%;
 }
 
-th{
-  height:35px;
-}
-
-td{
-  height:40px;
-}
 
 .myhotel_btn{
   width:30%;
@@ -156,4 +169,9 @@ td{
 
 .search_btn{
   width:10%;
+}
+
+.picture_map{
+  text-align:center;
+  margin-top:10px;
 }

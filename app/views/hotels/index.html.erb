@@ -54,12 +54,11 @@
           <td><%= hotel.elements["hotelBasicInfo/address1"].text %><%= hotel.elements["hotelBasicInfo/address2"].text %></td>
           <td><%= hotel.elements["hotelBasicInfo/hotelMinCharge"].text %>円</td>
           <td><%= link_to hotel.elements["hotelBasicInfo/hotelInformationUrl"].text,hotel.elements["hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %></td>
-          <td><buttom class="picture" data-toggle="modal" data-target="#picture" data-id="<%= hotel.elements["hotelBasicInfo/roomImageUrl"].text %>">【表示】</buttom>  
-            　 <%= render :partial => "picture" %>
+          <td><buttom class="picture" data-toggle="modal" data-target="#picture" data-id="<%= hotel.elements["hotelBasicInfo/roomImageUrl"].text %>">【表示】</buttom></td>
+          <td><buttom class="map" data-toggle="modal" data-target="#picture" 
+              data-id="<%= get_map(hotel.elements["hotelBasicInfo/address1"].text + hotel.elements["hotelBasicInfo/address2"].text) %>">【表示】</buttom>
           </td>
-          <td><buttom class="map" data-toggle="modal" data-target="#map" data-id="">【表示】</buttom>  
-            　 <%= render :partial => "map" %>
-          </td>
+              <%= render :partial => "picture" %>
           <% if logged_in? %>
              <% if current_user.hotels.where(hotel_number: hotel.elements["hotelBasicInfo/hotelNo"].text).present? %>
                 <td class="hotel_btn">登録済み</td>
@@ -75,10 +74,9 @@
           <td><%= hotel.elements["HotelName"].text %></td>
           <td><%= hotel.elements["HotelAddress"].text %></td>
           <td><%= link_to hotel.elements["HotelDetailURL"].text,hotel.elements["HotelDetailURL"].text %></td>
-          <td><buttom class="picture" data-toggle="modal" data-target="#picture" data-id="<%= hotel.elements["PictureURL"].text %>">【表示】</buttom>  
-            　 <%= render :partial => "picture" %>
-          </td>
-          <td><表示></td>
+          <td><buttom class="picture" data-toggle="modal" data-target="#picture" data-id="<%= hotel.elements["PictureURL"].text %>">【表示】</buttom></td>
+          <td><buttom class="map" data-toggle="modal" data-target="#picture" data-id="<%= get_map(hotel.elements["HotelAddress"].text) %>">【表示】</buttom></td>
+          <%= render :partial => "picture" %>
           <% if logged_in? %>
              <% if current_user.hotels.where(hotel_number: hotel.elements["HotelID"].text).present? %>
                 <td class="hotel_btn">登録済み</td>
@@ -98,8 +96,13 @@ $(function(){
  $('.picture').click(function() {
     var picture = $(this).data("id");
     $('.modal-body').children('img').attr('src', picture);
-  });
+ });
  
+ $('.map').click(function() {
+    var picture = $(this).data("id");
+    console.log(picture);
+    $('.modal-body').children('img').attr('src', picture);
+ });
 });  
 
 </script>

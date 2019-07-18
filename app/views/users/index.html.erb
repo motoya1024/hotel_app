@@ -2,18 +2,41 @@
 
 <h1>ユーザー一覧</h1>
 
+<div>
+  <%= form_with url: users_path, local:true,method: :get do |f| %>
+    <%= f.hidden_field :per_page, value:@page %>
+    <%= f.label :search,"名前検索" %>
+    <%= f.text_field :search, value:@search,class:"form_control search_form" %>
+    <%= f.submit "検索する",class:"search_btn" %>
+  <% end %>
+</div>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle user_count" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <%= @page %>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <% @per_pages.each do |per_page| %>
+      <li><%= link_to(per_page, users_path(per_page: per_page,search:@search)) %></li>
+    <% end %>
+  </ul>
+</div>
+<% if @page != "全表示" %>
+  <%= will_paginate @users, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
+<% end %>
 <table id="user_index" class="table-bordered table-striped">
   <tr>
-      <th>名前</th>
-      <th>メールアドレス</th>
-      <th colspan="2"></th>
+    <th>名前</th>
+    <th>メールアドレス</th>
+    <th colspan="2"></th>
   </tr>
 　<% @users.each do |user| %>
     <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to "編集", edit_user_path(user), class: 'btn btn-primary' %></td>
-        <td><%= link_to "削除", user_path(user) , method: :delete, class: 'btn btn-primary',data: { confirm: "消去してもいいですか？" } %></td>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td class="user_btn"><%= link_to "編集", edit_user_path(user), class: 'btn btn-primary' %></td>
+      <td class="user_btn"><%= link_to "削除", user_path(user) , method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %></td>
     </tr>
   <% end %> 
 </table>  

@@ -26,10 +26,10 @@ class HotelsController < ApplicationController
       end
       if place == nil
          flash[:danger] = "住所が検索できませんでした。"
-         redirect_to hotels_path
+         redirect_to hotels_path(site: @site)
          return
       end
-      p place
+
       if @site == nil || @site == "1"
         key = "1023150086339421281"
         feedURL = "https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId="
@@ -46,10 +46,10 @@ class HotelsController < ApplicationController
         key = "leo157613fc400"
         feedURL = "http://jws.jalan.net/APIAdvance/HotelSearch/V1/?key="
         feedURL = feedURL + key
-        conv_lat = ((place[0] * 1.000106961 - place[1] * 0.000017467 - 0.004602017) * 3600000).floor;
-        conv_lon = ((place[1] * 1.000083049 + place[0] * 0.000046047 - 0.010041046) * 3600000).floor;
-        feedURL = feedURL + "&x=" + conv_lon.to_s;
-        feedURL = feedURL + "&y=" + conv_lat.to_s;
+        conv_lat = ((place[0] * 1.000106961 - place[1] * 0.000017467 - 0.004602017) * 3600000).floor
+        conv_lon = ((place[1] * 1.000083049 + place[0] * 0.000046047 - 0.010041046) * 3600000).floor
+        feedURL = feedURL + "&x=" + conv_lon.to_s
+        feedURL = feedURL + "&y=" + conv_lat.to_s
         feedURL = feedURL + "&range=1.0"
         xml = open(feedURL).read
         @arr = REXML::Document.new(xml)

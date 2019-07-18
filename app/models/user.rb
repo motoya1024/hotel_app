@@ -88,7 +88,10 @@ class User < ApplicationRecord
     ["name", "email","password","admin","superior"]
   end
  
- 
+  def self.search(search)
+      return User.all.order(id: :asc) unless search
+      User.where(['name LIKE ?', "%#{search}%"]).order(id: :asc)
+    end
   private
   
   # メールアドレスをすべて小文字にする

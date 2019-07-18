@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users 
   resources :hotels
   
-  get  '/myhotel',   to: 'hotels#myhotel'
+  get  '/myhotel/:id',   to: 'hotels#myhotel'
   
   root 'tops#home'
   get    '/login',   to: 'sessions#new'
