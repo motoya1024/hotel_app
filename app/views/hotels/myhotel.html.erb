@@ -1,19 +1,19 @@
 <% provide(:title, 'マイホテル一覧') %>
-
 <h1>マイホテル一覧</h1>
-
-<%= will_paginate @hotels, prev_label: '&lt 前へ', next_label: '次へ &gt' %>
-<ul>
-  <li></li>
-</ul>
-
-<table id="myhotel_index" class="table-bordered table-striped">
-  <tr>
-     <th>ホテル名</th>
-     <th>コメント</th>
-     <th colspan="2"></th>
-  </tr>
-</table>  
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle user_count" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <%= @page %>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <% @per_pages.each do |per_page| %>
+      <li><%= link_to(per_page, myhotel_path(@user,per_page: per_page)) %></li>
+    <% end %>
+  </ul>
+</div>
+<% if @page != "全表示" %>
+  <%= will_paginate @users, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
+<% end %>
 
 <table id="myhotel_index" class="table-bordered table-striped">
   <tr>
