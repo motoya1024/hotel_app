@@ -43,31 +43,9 @@
 				 	}else {$(this).show();} 				//else fade in 
 				 }); 										// end of for each tr in table
 					});										// end of on click pagination list
-
-
 		});
 
 												// end of on select change 
-		 
-								
-
 								// END OF PAGINATION 
 	}	
 
-
-
-
-
-
-
-$(function(){
-	// Just to append id number for each row  
-					$('table tr:eq(0)').prepend('<th> ID </th>')
-
-					var id = 0;
-
-					$('table tr:gt(0)').each(function(){	
-						id++
-						$(this).prepend('<td>'+id+'</td>');
-					});
-})
