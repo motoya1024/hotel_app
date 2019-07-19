@@ -1,22 +1,38 @@
 <% provide(:title, 'マイホテル一覧') %>
-
 <h1>マイホテル一覧</h1>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle user_count" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <%= @page %>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <% @per_pages.each do |per_page| %>
+      <li><%= link_to(per_page, myhotel_path(@user,per_page: per_page)) %></li>
+    <% end %>
+  </ul>
+</div>
+<% if @page != "全表示" %>
+  <%= will_paginate @users, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
+<% end %>
 
-<%= will_paginate @hotels, prev_label: '&lt 前へ', next_label: '次へ &gt' %>
-
-<table id="hotel_index" class="table-bordered table-striped">
+<table id="myhotel_index" class="table-bordered table-striped">
   <tr>
-      <th>ホテル名</th>
-      <th>コメント</th>
-      <th colspan="2"></th>
+     <th>ホテル名</th>
+     <th>コメント</th>
+     <th colspan="2"></th>
   </tr>
   <% @hotels.each do |hotel| %>
-  <% hotel_info = get_hotelinfo(hotel.hotel_number) %>
+  <% hotel_info = get_hotelinfo(hotel.hotel_number,hotel.site) %>
     <tr>
+      <% if hotel.site.to_s == "2" %>
+        <td id="myhotelname"><%= hotel_info.elements["//Hotel/HotelName"].text %></td>
+      <% else %>
         <td id="myhotelname"><%= hotel_info.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %></td>
-        <td id="myhotelcomment"><%= hotel.comment %></td>
-        <td class="hotel_btn"><%= link_to "編集",edit_hotel_path(hotel), class: 'btn btn-primary' %></td>
-        <td class="hotel_btn"><%= link_to "削除",hotel_path(hotel), method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %></td>
-     </tr>
-   <% end %>
+      <% end %>
+      <td id="myhotelcomment"><%= hotel.comment %></td>
+      <td class="hotel_btn"><%= link_to "編集",edit_hotel_path(hotel,current_user.id), class: 'btn btn-primary' %></td>
+      <td class="hotel_btn"><%= link_to "削除",delete_hotel_path(hotel,current_user.id), method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %></td>
+    </tr>
+  <% end %>
+
 </table>  

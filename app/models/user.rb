@@ -89,8 +89,8 @@ class User < ApplicationRecord
   end
  
   def self.search(search)
-      return User.all.order(id: :asc) unless search
-      User.where(['name LIKE ?', "%#{search}%"]).order(id: :asc)
+      return User.all unless search
+      User.where(['name LIKE ?', "%#{search}%"])
     end
   private
   

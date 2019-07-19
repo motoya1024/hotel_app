@@ -46,6 +46,7 @@
 		});
 
 												// end of on select change 
+		 
 								// END OF PAGINATION 
 	}	
 

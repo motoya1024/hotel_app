@@ -1,13 +1,22 @@
 module HotelsHelper
 
-      def get_hotelinfo(hotel_number)
-         key = "1023150086339421281";
-         feedURL = "https://app.rakuten.co.jp/services/api/Travel/HotelDetailSearch/20131024?applicationId=";
-         feedURL = feedURL + key
-         feedURL = feedURL + "&format=xml"
-         feedURL = feedURL + "&hotelNo="+ hotel_number.to_s
-         xml = open(feedURL).read
-         arr = REXML::Document.new(xml)
+      def get_hotelinfo(hotel_number,site)
+         if site.to_s == "2"
+            key = "leo157613fc400"
+            feedURL = "http://jws.jalan.net/APIAdvance/HotelSearch/V1/?key="
+            feedURL = feedURL + key
+            feedURL = feedURL + "&h_id=" + hotel_number.to_s
+            xml = open(feedURL).read
+            arr = REXML::Document.new(xml)
+         else 
+            key = "1023150086339421281"
+            feedURL = "https://app.rakuten.co.jp/services/api/Travel/HotelDetailSearch/20131024?applicationId="
+            feedURL = feedURL + key
+            feedURL = feedURL + "&format=xml"
+            feedURL = feedURL + "&hotelNo="+ hotel_number.to_s
+            xml = open(feedURL).read
+            arr = REXML::Document.new(xml)
+         end
       end
       
       def get_map(address)

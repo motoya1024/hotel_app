@@ -37,13 +37,13 @@
       <th class="hotelname">ホテル名</th>
       <th class="hoteladdress">住所</th>
       <% if @site == nil || @site == "1" %>
-        <th>価格(最安値)</th>
+        <th class="hotelprice">価格(最安値)</th>
       <% end %>
       <th class="hotelinformation">URL</th>
-      <th>画像</th>
-      <th>地図</th>
+      <th class="hotelpicture">画像</th>
+      <th class="hotelmap">地図</th>
       <% if logged_in? %>
-        <th>マイホテル登録</th>
+        <th class="hotelregister">マイホテル登録</th>
       <% end %>
     </tr>
   </thead>
@@ -54,16 +54,17 @@
           <td><%= hotel.elements["hotelBasicInfo/address1"].text %><%= hotel.elements["hotelBasicInfo/address2"].text %></td>
           <td><%= hotel.elements["hotelBasicInfo/hotelMinCharge"].text %>円</td>
           <td><%= link_to hotel.elements["hotelBasicInfo/hotelInformationUrl"].text,hotel.elements["hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %></td>
-          <td><buttom class="picture" data-toggle="modal" data-target="#picture" data-id="<%= hotel.elements["hotelBasicInfo/roomImageUrl"].text %>">【表示】</buttom></td>
-          <td><buttom class="map" data-toggle="modal" data-target="#picture" 
+          <td class="center"><buttom class="picture" data-toggle="modal" data-target="#picture" 
+              data-id="<%= hotel.elements["hotelBasicInfo/roomImageUrl"].text %>">【表示】</buttom>
+          </td>
+          <td class="center"><buttom class="map" data-toggle="modal" data-target="#picture" 
               data-id="<%= get_map(hotel.elements["hotelBasicInfo/address1"].text + hotel.elements["hotelBasicInfo/address2"].text) %>">【表示】</buttom>
           </td>
-              <%= render :partial => "picture" %>
           <% if logged_in? %>
              <% if current_user.hotels.where(hotel_number: hotel.elements["hotelBasicInfo/hotelNo"].text).present? %>
                 <td class="hotel_btn">登録済み</td>
              <% else %>
-                <td class="hotel_btn"><%= link_to "登録",new_hotel_path(number: hotel.elements["hotelBasicInfo/hotelNo"].text),class: "btn btn-primary" %></td>
+                <td class="hotel_btn"><%= link_to "登録",new_hotel_path(site: @site, number: hotel.elements["hotelBasicInfo/hotelNo"].text),class: "btn btn-primary" %></td>
              <% end %>
           <% end %>
         </tr>
@@ -74,21 +75,20 @@
           <td><%= hotel.elements["HotelName"].text %></td>
           <td><%= hotel.elements["HotelAddress"].text %></td>
           <td><%= link_to hotel.elements["HotelDetailURL"].text,hotel.elements["HotelDetailURL"].text %></td>
-          <td><buttom class="picture" data-toggle="modal" data-target="#picture" data-id="<%= hotel.elements["PictureURL"].text %>">【表示】</buttom></td>
-          <td><buttom class="map" data-toggle="modal" data-target="#picture" data-id="<%= get_map(hotel.elements["HotelAddress"].text) %>">【表示】</buttom></td>
-          <%= render :partial => "picture" %>
+          <td class="center"><buttom class="picture" data-toggle="modal" data-target="#picture" data-id="<%= hotel.elements["PictureURL"].text %>">【表示】</buttom></td>
+          <td class="center"><buttom class="map" data-toggle="modal" data-target="#picture" data-id="<%= get_map(hotel.elements["HotelAddress"].text) %>">【表示】</buttom></td>
           <% if logged_in? %>
              <% if current_user.hotels.where(hotel_number: hotel.elements["HotelID"].text).present? %>
                 <td class="hotel_btn">登録済み</td>
              <% else %>
-                <td class="hotel_btn"><%= link_to "登録",new_hotel_path(number: hotel.elements["HotelID"].text),class: "btn btn-primary" %></td>
+                <td class="hotel_btn"><%= link_to "登録",new_hotel_path(site: @site,number: hotel.elements["HotelID"].text),class: "btn btn-primary" %></td>
              <% end %>
           <% end %>
         </tr>
       <% end %>
   <% end %>
 </table>  
-
+   <%= render :partial => "picture" %>
 <script>
 $(function(){
  getPagination('.mytable');

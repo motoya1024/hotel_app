@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20190713093205) do
 
   create_table "hotels", force: :cascade do |t|
     t.integer "hotel_number"
+    t.integer "site"
     t.string "comment"
     t.integer "user_id"
     t.datetime "created_at", null: false
