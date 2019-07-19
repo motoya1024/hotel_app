@@ -1,4 +1,8 @@
 class HotelsController < ApplicationController
+  
+    before_action :logged_in, only: [:new,:create,]
+    before_action :logged_not_current_user, only: [:edit,:update,:myhotel,:destroy]
+  
     include HotelsHelper
     
     def new
