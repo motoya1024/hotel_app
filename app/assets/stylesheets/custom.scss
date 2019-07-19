@@ -121,7 +121,7 @@ td{
   padding-top:0;
 }
 
-#hotel_index{
+#hotel_index,#myhotel_index{
   width:100%;
   table-layout: fixed;
   word-break: break-all;
@@ -136,6 +136,10 @@ td{
   width:25%;
 }
 
+.hotelcomment{
+  width:60%;
+}
+
 .hotelprice{
   width:8%;
 }
@@ -144,18 +148,14 @@ td{
   width:10%;
 }
 .hotelpicture{
-  width:8%;
-}
-
-.hotelprice{
-  width:7%;
+  width:10%;
 }
 
 .center{
   text-align:center;
 }
 .hotelmap{
-  width:8%;
+  width:10%;
 }
 
 .hotel_btn,.user_btn{
