@@ -1,18 +1,19 @@
 class HotelsController < ApplicationController
-  
-    before_action :logged_in, only: [:new,:create]
-    before_action :logged_not_current_user, only: [:myhotel,:edit]
-    
     include HotelsHelper
     
     def new
       @user = User.find(current_user.id)
-      @site = params[:site]
-  
       hotel_number = params[:number]
       @hotel = @user.hotels.build
-      @arr = get_hotelinfo(hotel_number,@site)
-      
+      key = "1023150086339421281";
+      feedURL = "https://app.rakuten.co.jp/services/api/Travel/HotelDetailSearch/20131024?applicationId=";
+      feedURL = feedURL + key;
+      feedURL = feedURL + "&format=xml";
+      feedURL = feedURL + "&hotelNo="+ hotel_number;
+      xml = open(feedURL).read
+      if xml
+        @arr = REXML::Document.new(xml)
+      end
     end
   
    def index
@@ -23,36 +24,38 @@ class HotelsController < ApplicationController
       else
          place = Geocoder.coordinates(@search)
       end
-    
-      begin
-        if @site == nil || @site == "1"
-          key = "1023150086339421281"
-          feedURL = "https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId="
-          feedURL = feedURL + key
-          feedURL = feedURL + "&format=xml"
-          feedURL = feedURL + "&latitude="+ place[0].to_s
-          feedURL = feedURL + "&longitude="+ place[1].to_s
-          feedURL = feedURL + "&searchRadius=1.5"
-          feedURL = feedURL + "&allReturnFlag=1"
-          feedURL = feedURL + "&datumType=1"
-          xml = open(feedURL).read
-          @arr = REXML::Document.new(xml)
-        elsif @site == "2"
-          key = "leo157613fc400"
-          feedURL = "http://jws.jalan.net/APIAdvance/HotelSearch/V1/?key="
-          feedURL = feedURL + key
-          conv_lat = ((place[0] * 1.000106961 - place[1] * 0.000017467 - 0.004602017) * 3600000).floor
-          conv_lon = ((place[1] * 1.000083049 + place[0] * 0.000046047 - 0.010041046) * 3600000).floor
-          feedURL = feedURL + "&x=" + conv_lon.to_s
-          feedURL = feedURL + "&y=" + conv_lat.to_s
-          feedURL = feedURL + "&range=1.0"
-          xml = open(feedURL).read
-          @arr = REXML::Document.new(xml)
-         end
-      rescue  StandardError => ex
-         flash[:danger] = "住所が検索できませんでした。"
-         redirect_to hotels_path(site: @site)
-      end
+      
+     begin
+      if @site == nil || @site == "1" || @site == ""
+        key = "1023150086339421281"
+        feedURL = "https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId="
+        feedURL = feedURL + key
+        feedURL = feedURL + "&format=xml"
+        feedURL = feedURL + "&latitude="+ place[0].to_s
+        feedURL = feedURL + "&longitude="+ place[1].to_s
+        feedURL = feedURL + "&searchRadius=1.5"
+        feedURL = feedURL + "&allReturnFlag=1"
+        feedURL = feedURL + "&datumType=1"
+        xml = open(feedURL).read
+        @arr = REXML::Document.new(xml)
+      elsif @site == "2"
+        key = "leo157613fc400"
+        feedURL = "http://jws.jalan.net/APIAdvance/HotelSearch/V1/?key="
+        feedURL = feedURL + key
+        conv_lat = ((place[0] * 1.000106961 - place[1] * 0.000017467 - 0.004602017) * 3600000).floor
+        conv_lon = ((place[1] * 1.000083049 + place[0] * 0.000046047 - 0.010041046) * 3600000).floor
+        feedURL = feedURL + "&x=" + conv_lon.to_s
+        feedURL = feedURL + "&y=" + conv_lat.to_s
+        feedURL = feedURL + "&range=1.0"
+        xml = open(feedURL).read
+        @arr = REXML::Document.new(xml)
+       end
+     rescue => e
+       flash[:danger] = "住所が検索できませんでした。"
+       redirect_to hotels_path(site: @site)
+     end
+     
+     p @site
     end
 
     def create
@@ -67,15 +70,8 @@ class HotelsController < ApplicationController
     end 
     
     def myhotel
-        @per_pages = ["全表示",5,10,20]
-      if params[:per_page] == nil || params[:per_page] == "全表示"
-         @page = "全表示"
-         @hotels = @user.hotels
-      else
-         @page = params[:per_page]
-         @hotels = @user.hotels.paginate(page: params[:page], per_page: @page)
-      end
-      @user = User.find(params[:id])
+      @user = User.find(current_user.id)
+      @hotels = @user.hotels.paginate(page: params[:page], per_page: 1)
     end
     
     def destroy
@@ -104,6 +100,6 @@ class HotelsController < ApplicationController
     
     private
       def hotel_params
-        params.require(:hotel).permit(:hotel_number,:comment,:site)
+        params.require(:hotel).permit(:hotel_number,:comment)
       end  
     end
