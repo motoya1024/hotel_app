@@ -3,17 +3,10 @@ class HotelsController < ApplicationController
     
     def new
       @user = User.find(current_user.id)
+      @site = params[:site]
       hotel_number = params[:number]
       @hotel = @user.hotels.build
-      key = "1023150086339421281";
-      feedURL = "https://app.rakuten.co.jp/services/api/Travel/HotelDetailSearch/20131024?applicationId=";
-      feedURL = feedURL + key;
-      feedURL = feedURL + "&format=xml";
-      feedURL = feedURL + "&hotelNo="+ hotel_number;
-      xml = open(feedURL).read
-      if xml
-        @arr = REXML::Document.new(xml)
-      end
+      @arr = get_hotelinfo(hotel_number,@site)
     end
   
    def index
@@ -71,9 +64,18 @@ class HotelsController < ApplicationController
     
     def myhotel
       @user = User.find(current_user.id)
-      @hotels = @user.hotels.paginate(page: params[:page], per_page: 1)
+      @per_pages = ["全表示",1,5,10,20]
+   
+      if params[:per_page] == nil || params[:per_page] == "全表示"
+        @page = "全表示"
+        @hotels = @user.hotels
+      else
+        @page = params[:per_page]
+        @hotels = @user.hotels.paginate(page: params[:page], per_page: @page)
+      end
+      
     end
-    
+   
     def destroy
       @hotel = Hotel.find(params[:id])
       if @hotel.destroy
@@ -100,6 +102,6 @@ class HotelsController < ApplicationController
     
     private
       def hotel_params
-        params.require(:hotel).permit(:hotel_number,:comment)
+        params.require(:hotel).permit(:hotel_number,:comment,:site)
       end  
     end

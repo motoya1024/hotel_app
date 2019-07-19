@@ -5,7 +5,7 @@
 <%= form_for(@hotel,url: update_hotel_path(@hotel,current_user.id)) do |f| %>
    <%= f.hidden_field :hotel_number, value: @hotel.hotel_number %>
    <% hotel = get_hotelinfo(@hotel.hotel_number,@hotel.site) %>
-   <table id="hotel_index" class="table-bordered table-striped">
+   <table id="hotel_new" class="table-bordered table-striped">
       <tr>
         　<th>項目</th>
         　<th>内容</th>

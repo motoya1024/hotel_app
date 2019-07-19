@@ -36,7 +36,7 @@
     <tr>
       <th class="hotelname">ホテル名</th>
       <th class="hoteladdress">住所</th>
-      <% if @site == nil || @site == "1" %>
+      <% if @site == nil || @site == "1" || @site == "" %>
         <th class="hotelprice">価格(最安値)</th>
       <% end %>
       <th class="hotelinformation">URL</th>
