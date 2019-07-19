@@ -47,7 +47,7 @@
       <% end %>
     </tr>
   </thead>
-   <% if @site == nil || @site == "1" %>
+   <% if @site == "" || @site == "1" || @site == nil %>
       <% @arr.elements.each('//root/hotels/hotel/') do |hotel| %>
         <tr>
           <td><%= hotel.elements["hotelBasicInfo/hotelName"].text %></td>
