@@ -7,7 +7,7 @@
     <%= f.hidden_field :site, value:@site %>
     <%= f.hidden_field :key, value:params[:key] %>
     <%= f.label :search,"住所検索" %>
-    <%= f.text_field :search, value:@search,class:"form_control search_form" %>
+    <%= f.text_field :search, value:@search,class:"form_inline search_form" %>
     <%= f.submit "検索する",class:"search_btn" %>
   <% end %>
 </div>
@@ -16,7 +16,7 @@
   <p>検索順</p>
   <div class="dropdown">
     <button class="btn btn-default dropdown-toggle sort_count" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      <%= @sorts[params[:key]] %>
+      <% if @sorts[params[:key]] %><%= @sorts[params[:key]] %><% else %>選んでください。 <% end %>
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">

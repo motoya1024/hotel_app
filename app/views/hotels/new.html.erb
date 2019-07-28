@@ -5,7 +5,7 @@
 <%= form_for(@hotel) do |f| %>
    <%= render 'shared/error_messages', object: f.object %>
  　 <%= f.hidden_field :hotel_number, value: @hotel_number %>
-   <%= f.hidden_field :site, value: @site %>
+    <%= f.hidden_field :site, value: @site %>
    
    <%= render :partial => "hotel_new", locals: {f: f} %>
    <%= render :partial => "hotel_sp_new", locals: {f: f} %>
