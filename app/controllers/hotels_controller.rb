@@ -1,19 +1,28 @@
 class HotelsController < ApplicationController
   
-    before_action :logged_in, only: [:new,:create,]
+    before_action :logged_in, only: [:create]
     before_action :logged_not_current_user, only: [:edit,:update,:myhotel,:destroy]
   
     include HotelsHelper
     
     def new
       @user = User.find(current_user.id)
+      @hotel = @user.hotels.build
       @site = params[:site]
       @hotel_number = params[:number]
-      @hotel = @user.hotels.build
       @arr = get_hotelinfo(@hotel_number,@site)
-    #  render plain:@hotel.inspect
+      if @site == "2"
+         @sp_hotel = current_user.hotels.where(hotel_number: @arr.elements["//Hotel/HotelID"].text).present? 
+      else 
+         @sp_hotel = current_user.hotels.where(hotel_number: @arr.elements["//hotels/hotel/hotelBasicInfo/hotelNo"].text).present? 
+      end 
     end
   
+    def show
+      @site = params[:site]
+      @hotel_number = params[:id]
+      @arr = get_hotelinfo(@hotel_number,@site)
+    end
    def index
       @site = params[:site]
       @search = params[:search]
@@ -33,7 +42,6 @@ class HotelsController < ApplicationController
       end
       @counts = { "全表示" => 5000, "5" => 5,  "10" => 10, "20" => 20, "50" => 50, "100" => 100}
       @sorts = { "2" => "平均価格の安い順",  "3" => "平均価格の高い順","4" => "おすすめ順"}
-      
       
      begin
       if @site == nil || @site == "1" || @site == ""

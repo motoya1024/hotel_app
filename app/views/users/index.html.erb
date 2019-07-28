@@ -2,7 +2,7 @@
 
 <h1>ユーザー一覧</h1>
 
-<div>
+<div class="search_layout">
   <%= form_with url: users_path, local:true,method: :get do |f| %>
     <%= f.hidden_field :per_page, value:@page %>
     <%= f.label :search,"名前検索" %>

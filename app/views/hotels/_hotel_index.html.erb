@@ -4,15 +4,9 @@
     <tr>
       <th class="hotelname">ホテル名</th>
       <th class="hoteladdress">住所</th>
-      <% if @site == nil || @site == "1" || @site == "" %>
-        <th class="hotelprice">価格</br>(最安値)</th>
-      <% else %>
-        <th class="hotelprice">価格</br>(参考料金)</th>
-      <% end %>
+      <th class="hotelprice">価格</br><% if @site == "2"%>(参考料金)<% else %>(最安値)<% end %></th>
       <th class="hotelinformation">ホームページ</th>
-      <% if logged_in? %>
-        <th class="hotelregister">マイホテル登録</th>
-      <% end %>
+      <th class="hotelregister"><% if logged_in? %>マイホテル登録<% else %>詳細<% end %></th>
     </tr>
   </thead>
    <% if @site == "" || @site == "1" || @site == nil %>
@@ -28,6 +22,8 @@
              <% else %>
                 <td class="text-center"><%= link_to "登録",new_hotel_path(site: @site, number: hotel.elements["hotelBasicInfo/hotelNo"].text),class: "btn btn-primary" %></td>
              <% end %>
+          <% else %>
+             <td class="text-center"><%= link_to "詳細",hotel_path(site: @site,id: hotel.elements["hotelBasicInfo/hotelNo"].text),class: "btn btn-primary" %></td>
           <% end %>
         </tr>
       <% end %>
@@ -44,6 +40,8 @@
              <% else %>
                 <td class="text-center"><%= link_to "登録",new_hotel_path(site: @site,number: hotel.elements["HotelID"].text),class: "btn btn-primary" %></td>
              <% end %>
+          <% else %>
+             <td class="text-center"><%= link_to "詳細",hotel_path(site: @site,id: hotel.elements["HotelID"].text),class: "btn btn-primary" %></td>
           <% end %>
         </tr>
       <% end %>
