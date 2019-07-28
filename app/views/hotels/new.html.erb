@@ -3,72 +3,91 @@
 <h1>マイホテル登録</h1>
 
 <%= form_for(@hotel) do |f| %>
-   <% if @site == "2" %>
- 　   <%= f.hidden_field :hotel_number, value: @arr.elements["//Hotel/HotelID"].text %>
-   <% else %>
-     <%= f.hidden_field :hotel_number, value: @arr.elements["//hotels/hotel/hotelBasicInfo/hotelNo"].text %>
-   <% end %>
+   <%= render 'shared/error_messages', object: f.object %>
+ 　 <%= f.hidden_field :hotel_number, value: @hotel_number %>
    <%= f.hidden_field :site, value: @site %>
-   <table id="hotel_new" class="table-bordered table-striped">
-      <tr>
-        　<th>項目</th>
-        　<th>内容</th>
-      </tr>
-       <tr>
-         <td>ホテル名</td>
-         <td><% if @site == "2" %>
-                <%= @arr.elements["//Hotel/HotelName"].text %>
-             <% else %>
-                <%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %>
-             <% end %>
-         </td>
-      </tr>
-       <tr>
-        　<td>住所</td>
-        　<td><% if @site == "2" %>
-                <%= @arr.elements["//Hotel/HotelAddress"].text %>
-              <% else %>
-                <%= @arr.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= @arr.elements["//hotels/hotel/hotelBasicInfo/address2"].text %>
-              <% end %>
-        　 </td>
-      </tr>
-      <% if @site == nil || @site == "1" %>
-         <tr>
-          　<td>価格</td>
-          　<td><%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円</td>
-        </tr>
-      <% end %>
-      <tr>
-        　<td>URL</td>
-        　<td><% if @site == "2" %>
-                <%= link_to @arr.elements["//Hotel/HotelDetailURL"].text,@arr.elements["//Hotel/HotelDetailURL"].text %>
-              <% else %>
-                <%= link_to @arr.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,@arr.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %>
-              <% end %>
-          </td>
-      </tr>
-       <tr>
-        　<td>コメント</td>
-        　<td><%= f.text_area :comment, :size => "20x5"  %></td>
-      </tr>
-   </table>  
+   
+   <%= render :partial => "hotel_new", locals: {f: f} %>
+   <%= render :partial => "hotel_sp_new", locals: {f: f} %>
+   
    <div class="picture_map">
       <% if @site == "2" %>
-        <buttom type="button" class="picture btn btn-success" data-toggle="modal" data-target="#picture" data-id="<%= @arr.elements["//Hotel/PictureURL"].text %>">画像を表示</buttom>  
-        <buttom type="button" class="map btn btn-success" data-toggle="modal" data-target="#picture" data-id="<%= get_map(@arr.elements["//Hotel/HotelAddress"].text) %>">地図を表示</buttom>
+        <%= link_to "ホームページへ",@arr.elements["//Hotel/HotelDetailURL"].text,target: "new",class:"btn btn-danger" %>
+        <buttom type="button" class="picture btn btn-success" data-toggle="modal" data-target="#picture" 
+                data-id="<%= @arr.elements["//Hotel/PictureURL"].text %>">画像を表示
+        </buttom>  
+        <buttom type="button" class="map btn btn-primary" data-toggle="modal" data-target="#picture" 
+                data-id="<%= get_map(@arr.elements["//Hotel/HotelAddress"].text) %>">地図を表示
+        </buttom>
       <% else %>
-        <buttom type="button" class="picture btn btn-success" data-toggle="modal" data-target="#picture" data-id="<%= @arr.elements["//hotels/hotel/hotelBasicInfo/roomImageUrl"].text %>">画像を表示</buttom>  
-        <buttom type="button" class="map btn btn-success" data-toggle="modal" data-target="#picture" data-id="<%= get_map(@arr.elements["//hotels/hotel/hotelBasicInfo/address1"].text + @arr.elements["//hotels/hotel/hotelBasicInfo/address2"].text) %>">地図を表示</buttom>
+        <%= link_to "ホームページへ",@arr.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,target: "_new",class:"btn btn-danger" %>
+        <buttom type="button" class="picture btn btn-primary" data-toggle="modal" data-target="#picture" 
+                data-id="<%= @arr.elements["//hotels/hotel/hotelBasicInfo/roomImageUrl"].text %>">画像を表示
+        </buttom>  
+        <buttom type="button" class="map btn btn-success" data-toggle="modal" data-target="#picture" 
+                data-id="<%= get_map(@arr.elements["//hotels/hotel/hotelBasicInfo/address1"].text + @arr.elements["//hotels/hotel/hotelBasicInfo/address2"].text) %>">地図を表示
+        </buttom>
       <% end %>
-       
-      <%= render :partial => "picture" %>
    </div>
+   <%= render :partial => "picture" %>
    <div class="myhotel_btn">
-     <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+     <%= f.submit yield(:button_text), class: "btn btn-primary register_btn" %>
+     <%= link_to "戻る",hotels_path,class:"btn btn-success register_btn" %>
    </div>
 <% end %>
 
+ <% if @site == "2" %>
+   <% sp_hotel = current_user.hotels.where(hotel_number: @arr.elements["//Hotel/HotelID"].text).present? %>
+ <% else %>
+   <% sp_hotel = current_user.hotels.where(hotel_number: @arr.elements["//hotels/hotel/hotelBasicInfo/hotelNo"].text).present? %>
+ <% end %>
+ 
 <script>
+ var sp_hotel = <%= sp_hotel %>
+ var widthFlag = "sp"
+  
+ function windowsize (){
+    var w = $(window).width();
+    var x = 768
+    if(w > x && widthFlag != 'pc'){
+       widthFlag = "pc"
+       $(".hotel_new_sp_text").remove();
+       if(!($('.hotel_new_text').length)){
+           if(sp_hotel == false){
+              $("#text_form").append('<textarea cols="20" rows="5" class="hotel_new_text letter"></textarea>');
+           }else{
+              $("#text_form").append('<p class="hotel_new_text">登録済み</p>');  
+           }
+       }
+    }else if(x > w && widthFlag != 'sp'){
+       widthFlag = "sp"
+       $(".hotel_new_text").remove();
+       if(!($('.hotel_new_sp_text').length)){
+           if(sp_hotel == false){
+              $("#text_sp_form").append('<textarea cols="20" rows="5" class="hotel_new_sp_text letter"></textarea>');
+           }else{
+              $("#text_sp_form").append('<p class="hotel_new_sp_text">登録済み</p>');  
+           }
+       }
+    }
+ };
+ 
+  $(window).on( 'load resize', function() {
+      console.log(widthFlag);
+      windowsize();
+  });
+ 
+
+$(function(){
+    
+  $(document).on("keypress paste", ".letter", function () {
+    var count = $(this).val().length;
+    console.log(count);
+    $(".letter_count").text("入力文字数:"+count);
+  });
+  
+ windowsize();
+ 
  $('.picture').click(function() {
     var picture = $(this).data("id");
     $('.modal-body').children('img').attr('src', picture);
@@ -79,4 +98,5 @@
     console.log(picture);
     $('.modal-body').children('img').attr('src', picture);
  });
+});
 </script>

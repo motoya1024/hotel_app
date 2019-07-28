@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   require 'open-uri'
   require 'kconv'
   require 'rexml/document'
+  require 'net/http'
+  require 'uri'
+  require 'json'
   
   private
    # ログイン済みユーザーかどうか確認

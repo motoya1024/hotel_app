@@ -3,58 +3,20 @@
 <h1>マイホテル編集</h1>
 
 <%= form_for(@hotel,url: update_hotel_path(@hotel,current_user.id)) do |f| %>
+　 <%= render 'shared/error_messages', object: f.object %>
    <%= f.hidden_field :hotel_number, value: @hotel.hotel_number %>
    <% hotel = get_hotelinfo(@hotel.hotel_number,@hotel.site) %>
-   <table id="hotel_new" class="table-bordered table-striped">
-      <tr>
-        　<th>項目</th>
-        　<th>内容</th>
-      </tr>
-       <tr>
-         <td>ホテル名</td>
-         <td><% if @hotel.site == 2 %>
-                <%= hotel.elements["//Hotel/HotelName"].text %>
-             <% else %>
-                <%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %>
-             <% end %>
-         </td>
-      </tr>
-       <tr>
-        　<td>住所</td>
-        　<td><% if @hotel.site == 2 %>
-                <%= hotel.elements["//Hotel/HotelAddress"].text %>
-              <% else %>
-                <%= hotel.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= hotel.elements["//hotels/hotel/hotelBasicInfo/address2"].text %>
-              <% end %>
-        　 </td>
-      </tr>
-      <% if @hotel.site == nil || @hotel.site == 1 %>
-         <tr>
-          　<td>価格</td>
-          　<td><%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円</td>
-        </tr>
-      <% end %>
-      <tr>
-        　<td>URL</td>
-        　<td><% if @hotel.site == 2 %>
-                <%= link_to hotel.elements["//Hotel/HotelDetailURL"].text,hotel.elements["//Hotel/HotelDetailURL"].text %>
-              <% else %>
-                <%= link_to hotel.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,hotel.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %>
-              <% end %>
-          </td>
-      </tr>
-       <tr>
-        　<td>コメント</td>
-        　<td><%= f.text_area :comment, :size => "20x5"  %></td>
-      </tr>
-   </table>  
+   <%= render :partial => "hotel_edit", locals: {hotel: hotel,f: f} %>
+   <%= render :partial => "hotel_sp_edit", locals: {hotel: hotel,f: f} %>
    <div class="picture_map">
       <% if @hotel.site == 2 %>
+         <%= link_to "ホームページへ",hotel.elements["//Hotel/HotelDetailURL"].text,target: "new",class:"btn btn-danger" %>
          <buttom type="button" class="picture btn btn-success" data-toggle="modal" data-target="#picture" 
                  data-id="<%= hotel.elements["//Hotel/PictureURL"].text %>">画像を表示</buttom>  
          <buttom type="button" class="map btn btn-success" data-toggle="modal" 
                  data-target="#picture" data-id="<%= get_map(hotel.elements["//Hotel/HotelAddress"].text) %>">地図を表示</buttom>
       <% else %>
+         <%= link_to "ホームページへ",hotel.elements["//hotels/hotel/hotelBasicInfo/hotelInformationUrl"].text,target: "_new",class:"btn btn-danger" %>
          <buttom type="button" class="picture btn btn-success" data-toggle="modal" 
                  data-target="#picture" data-id="<%= hotel.elements["//hotels/hotel/hotelBasicInfo/roomImageUrl"].text %>">画像を表示</buttom>  
          <buttom type="button" class="map btn btn-success" data-toggle="modal" 
@@ -63,11 +25,51 @@
       <%= render :partial => "picture" %>
    </div>
    <div class="myhotel_btn">
-     <%= f.submit yield(:button_text), class: "btn btn-primary",id: "approval_btn" %>
+     <%= f.submit yield(:button_text), class: "btn btn-primary register_btn" %>
+     <%= link_to "戻る",myhotel_path(current_user),class:"btn btn-success register_btn" %>
    </div>
 <% end %>
 
 <script>
+
+ var widthFlag = "sp";
+  
+ function windowsize (){
+    var w = $(window).width();
+    var x = 768
+    if(w > x && widthFlag != 'pc'){
+       widthFlag = "pc"
+       var comment = $(".hotel_edit_sp_text").text();
+       $(".hotel_edit_sp_text").remove();
+       if(!($('.hotel_edit_text').length)){
+           $("#text_edit_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_edit_text letter">'+comment+'</textarea>');
+       }
+    }else if(x > w && widthFlag != 'sp'){
+       widthFlag = "sp"
+       var comment = $(".hotel_edit_text").text();
+       $(".hotel_edit_text").remove();
+       if(!($('.hotel_edit_sp_text').length)){
+           $("#text_edit_sp_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_edit_sp_text letter">'+comment+'</textarea>');
+       }
+    }
+ };
+ 
+  $(window).on( 'load resize', function() {
+      console.log(widthFlag);
+      windowsize();
+  });
+ 
+ 
+$(function(){
+   
+ $(document).on("keypress paste", ".letter", function () {
+    var count = $(this).val().length;
+    console.log(count);
+    $(".letter_count").text("入力文字数:"+count);
+  });
+  
+  windowsize();
+
  $('.picture').click(function() {
     var picture = $(this).data("id");
     $('.modal-body').children('img').attr('src', picture);
@@ -78,4 +80,6 @@
     console.log(picture);
     $('.modal-body').children('img').attr('src', picture);
  });
+});
+
 </script>

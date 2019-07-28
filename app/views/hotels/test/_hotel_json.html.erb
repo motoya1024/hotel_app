@@ -1,0 +1,40 @@
+<table id="hotel_index" class="table-bordered table-striped mytable">
+  <thead>
+    <tr>
+      <th class="hotelname">ホテル名</th>
+      <th class="hoteladdress">住所</th>
+      <% if @site == nil || @site == "1" || @site == "" %>
+        <th class="hotelprice">価格(最安値)</th>
+      <% end %>
+      <th class="hotelinformation">URL</th>
+      <th class="hotelpicture">画像</th>
+      <th class="hotelmap">地図</th>
+      <% if logged_in? %>
+        <th class="hotelregister">マイホテル登録</th>
+      <% end %>
+    </tr>
+  </thead>
+   <% if @site == "" || @site == "1" || @site == nil %>
+      <% @arr["hotels"].each do |hotel| %>
+        <tr>
+          <td><%= hotel["hotel"][0]["hotelBasicInfo"]["hotelName"] %></td>
+          <td><%= hotel["hotel"][0]["hotelBasicInfo"]["address1"] %><%= hotel["hotel"][0]["hotelBasicInfo"]["address2"] %></td>
+          <td><%= hotel["hotel"][0]["hotelBasicInfo"]["hotelMinCharge"] %>円</td>
+          <td><%= link_to hotel["hotel"][0]["hotelBasicInfo"]["hotelInformationUrl"],hotel["hotel"][0]["hotelBasicInfo"]["hotelInformationUrl"],target: "_new" %></td>
+          <td class="center"><buttom class="picture" data-toggle="modal" data-target="#picture" 
+              data-id="<%= hotel["hotel"][0]["hotelBasicInfo"]["roomImageUrl"] %>">【表示】</buttom>
+          </td>
+          <td class="center"><buttom class="map" data-toggle="modal" data-target="#picture" 
+              data-id="<%= get_map(hotel["hotel"][0]["hotelBasicInfo"]["address1"] + hotel["hotel"][0]["hotelBasicInfo"]["address2"]) %>">【表示】</buttom>
+          </td>
+          <% if logged_in? %>
+             <% if current_user.hotels.where(hotel_number: hotel["hotel"][0]["hotelBasicInfo"]["hotelNo"]).present? %>
+                <td class="hotel_btn">登録済み</td>
+             <% else %>
+                <td class="hotel_btn"><%= link_to "登録",new_hotel_path(site: @site, number: hotel["hotel"][0]["hotelBasicInfo"]["hotelNo"]),class: "btn btn-primary" %></td>
+             <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+</table>

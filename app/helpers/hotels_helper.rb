@@ -6,6 +6,7 @@ module HotelsHelper
             feedURL = "http://jws.jalan.net/APIAdvance/HotelSearch/V1/?key="
             feedURL = feedURL + key
             feedURL = feedURL + "&h_id=" + hotel_number.to_s
+            feedURL = feedURL + "&xml_ptn=2"
             xml = open(feedURL).read
             arr = REXML::Document.new(xml)
          else 

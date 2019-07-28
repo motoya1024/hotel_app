@@ -1,10 +1,56 @@
-
-<div class="center jumbotron">
-  <h1>ホテル情報検索システム</h1>
-  <%= link_to "ログイン", login_path, class: "btn btn-lg btn-primary" %>
-  <div class="signup">
-    <%= link_to "アカウント作成はこちらから", new_user_path,class:"account" %>
+<div class="text-center jumbotron">
+<h1>ホテル情報検索サイト</h1>
+  <div>
+    <%= link_to "ログイン", login_path, class: "btn btn-primary account_btn" %>
+    <%= link_to "アカウント作成", new_user_path,class:"btn btn-success account_btn" %>
   </div>
 </div>
-  
-         
+<div class="panel panel-default">
+  <div class="site-information">
+    <h2>ホテル情報検索サイトとは？</h2>
+    <p id="information-content">旅行サイト（楽天、じゃらん）のホテル情報を簡単検索できるサイトです!!</p>
+  </div>
+  <div class="site-feature">
+    <h2>ホテル情報検索サイトの特徴!!</h2>
+    <div class="panel panel-primary feature-1">
+      <div class="panel-heading">
+        <h3>ホテル情報を簡単検索</h3>
+      </div>
+      <div class="panel-body feature-content">
+        <p>検索欄に場所を入力すれば、ホテル名、住所、価格、ホームページへのリンクを一覧表示。また、楽天、じゃらんリンクをクリックすることで、それぞれのサイトの
+        ホテル情報を瞬時に切り替え、表示します。</p>
+        <buttom type="button" class="hotel_sample btn btn-success" data-toggle="modal" data-target="#picture" data-id="assets/hotel_index.png">画像例１</buttom>
+      </div>
+    </div>
+    <div class="panel panel-primary feature-2">
+      <div class="panel-heading">
+        <h3>マイホテル登録</h3>
+      </div>
+      <div class="panel-body feature-content">
+        <p>泊まったホテルの特徴や感想をメモとして記録しておくことができます。後で、前に泊まったホテルの名前なんだっけ？とならないように泊まった
+        ホテルの特徴をマイホテル一覧として、残しておくことができます。</p>
+        <buttom type="button" class="hotel_sample btn btn-success" data-toggle="modal" data-target="#picture" data-id="assets/myhotel_index.png">画像例２</buttom>
+        <buttom type="button" class="hotel_sample btn btn-success" data-toggle="modal" data-target="#picture" data-id="assets/myhotel_new.png">画像例３</buttom>
+      </div>
+    </div>
+    <div class="panel panel-primary feature-3">
+      <div class="panel-heading">
+        <h3>料金は無料</h3>
+      </div>
+      <div class="panel-body feature-content">
+        <p>料金はかかりません。どなたでもサイトを利用することが可能です。ただ、マイホテル登録に関しては、ログインが必要なりますので、アカウント登録をお願いします。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render :partial => "/hotels/picture" %>
+<script>
+
+$('.hotel_sample').click(function() {
+    var picture = $(this).data("id");
+    console.log
+    $('.modal-body').children('img').attr('src', picture);
+ });
+
+</script>

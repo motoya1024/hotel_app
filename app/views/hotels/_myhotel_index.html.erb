@@ -1,0 +1,21 @@
+<table id="myhotel_index" class="table-bordered table-striped">
+  <tr>
+     <th class="hotelname">ホテル名</th>
+     <th class="hotelcomment">コメント</th>
+     <th colspan="2"></th>
+  </tr>
+  <% @hotels.each do |hotel| %>
+  <% hotel_info = get_hotelinfo(hotel.hotel_number,hotel.site) %>
+    <tr>
+      <% if hotel.site.to_s == "2" %>
+        <td id="myhotelname"><%= hotel_info.elements["//Hotel/HotelName"].text %></td>
+      <% else %>
+        <td id="myhotelname"><%= hotel_info.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %></td>
+      <% end %>
+      <td id="myhotelcomment"><%= hotel.comment.truncate(60) %></td>
+      <td class="text-center"><%= link_to "編集",edit_hotel_path(hotel,current_user.id), class: 'btn btn-primary' %></td>
+      <td class="text-center"><%= link_to "削除",delete_hotel_path(hotel,current_user.id), method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %></td>
+    </tr>
+  <% end %>
+</table>  
+

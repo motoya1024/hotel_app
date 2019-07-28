@@ -10,12 +10,6 @@ $gray-medium-light: #eaeaea;
   box-sizing:         border-box;
 }
 
-
-.center{
-  text-align:center;
-}
-
-
 /* universal */
 
 body {
@@ -55,21 +49,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
-}
+}     
 
 h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $gray-light;
+  color: blue;
 }
 
+h3{
+  text-align:center;
+}
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -100,10 +94,12 @@ input {
 
 th{
   height:35px;
+  font-size:20px;
 }
 
 td{
   height:40px;
+  font-size:20px;
 }
 
 
@@ -112,9 +108,67 @@ td{
   font-size:20px;
 }
 
+.site-information{
+  margin-top:50px;
+}
+
+#information-content{
+  padding:20px 0 20px 0;
+  border-radius:10px;
+  font-size:20px;
+  text-align:center;
+  width:80%;
+  margin:auto;
+  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.4);
+}
+
+.feature-1,.feature-2,.feature-3{
+    width:100%;
+  }
+  
+  
+.feature-content{
+  text-align:center;
+  p{
+    font-size:15px;
+  }
+}
+
+.site-feature{
+  width:95%;
+  margin:80px auto 0;
+}
+
+
+@media screen and (min-width:769px) { 
+    /*　画面サイズが768pxまではここを読み込む　*/
+  .feature-1,.feature-2,.feature-3{
+    width:31%;
+    vertical-align:top;
+  }
+
+  .feature-1{
+    float:left;
+  }
+  
+  .feature-2{
+    margin-left:3.5%;
+    display:inline-block;
+  }
+  
+  .feature-3{
+    float:right;
+  }
+}
+
 //login
 .login_check{
   width:8%;
+}
+
+.account_btn{
+  width:130px;
+  padding:10px 0 10px 0;
 }
 
 //user hotel
@@ -122,10 +176,10 @@ td{
   width:80px;
   margin-bottom:3px;
 }
-#user_index,#hotel_index{
+#user_index{
   width:100%;
 }
-
+ 
 .user_pagination{
   margin-top:0;
   padding-top:0;
@@ -143,7 +197,7 @@ td{
 }
 
 .hotelinformation{
-  width:25%;
+  width:11%;
 }
 
 .hotelcomment{
@@ -157,6 +211,7 @@ td{
 .hotelregister{
   width:10%;
 }
+
 .hotelpicture{
   width:10%;
 }
@@ -168,7 +223,7 @@ td{
   width:10%;
 }
 
-.hotel_btn,.user_btn{
+.user_btn{
   text-align:center;
 }
 
@@ -180,17 +235,16 @@ td{
   width:30%;
 }
 
-#hotel_new{
+#hotel_new,#hotel_edit{
   width:100%;
 }
 
 .myhotel_btn{
-  width:30%;
-  margin:auto;
+  text-align:center;
   margin-top:30px;
 }
 
-#maxRows{
+#maxRows,#maxspRows{
   width:20%;
 }
 
@@ -200,8 +254,7 @@ td{
 }
 
 .site_form{
-  font-size:20px;
-  float:right;
+  font-size:25px;
   padding-bottom:10px;
 }
 
@@ -210,14 +263,114 @@ td{
 }
 
 .search_form{
-  width:30%;
+  width:20%;
 }
 
 .search_btn{
-  width:10%;
+  width:15%;
 }
 
+#count{
+  font-weight:bold;
+}
+
+.order_select{
+  display:inline-block;
+  p{
+    display:inline-block;
+    margin-right:10px;
+    font-weight:bold;
+  }
+  .dropdown{
+    display:inline-block;
+  }
+}
 .picture_map{
   text-align:center;
   margin-top:10px;
 }
+
+.hotel_show_sp_index,.hotel_edit_sp_index{
+  display:none;
+}
+
+.hotel_show_content{
+  margin-bottom:30px;
+}
+
+.hotel_sp_layout{
+  display:none;
+}
+
+.myhotel_sp_index{
+  display:none;
+}
+
+.register_btn{
+  width:130px;
+}
+
+
+.search_layout{
+  display:inline-block;
+  width:60%;
+}
+
+
+@media screen and (max-width:768px) { 
+    /*　画面サイズが768pxまではここを読み込む　*/
+  .hotel_sp_index{
+    list-style-type:none;
+    li{
+      margin-top:10px;
+      margin-left:-15px;
+      font-size:30px;
+      background-color:#DDDDDD;
+      padding:5px 0 5px 15px;
+      border-radius:30px;
+    }
+  }
+  
+  .myhotel_sp_index{
+    list-style-type:none;
+    display:block;
+     li{
+      margin-top:5px;
+      font-size:25px;
+      background-color:#DDDDDD;
+      padding:15px 0 15px 15px;
+      border-radius:30px;
+    }
+  }
+  
+  .myhotel_sp_index_btn{
+    margin-right:15px;
+    float:right;
+  }
+  
+  .myhotel_sp_index_name{
+    width : calc(100% - 150px) ;
+    display:inline-block;
+  }
+
+  .hotel_sp_layout{
+    display:block;
+  }
+  
+  .hotel_show_sp_index,.hotel_edit_sp_index{
+    font-size:25px;
+    list-style-type:none;
+    text-align:center;
+    display:block;
+    margin-right:40px;
+ } 
+
+  #hotel_index,#myhotel_index{
+    display:none;
+  }
+  #hotel_new,#hotel_edit{
+    display:none;
+  }
+}
+
+

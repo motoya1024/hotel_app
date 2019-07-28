@@ -1,0 +1,44 @@
+ <table id="hotel_new" class="table-bordered table-striped">
+      <tr>
+        　<th>項目</th>
+        　<th>内容</th>
+      </tr>
+       <tr>
+         <td>ホテル名</td>
+         <td><% if @site == "2" %>
+                <%= @arr.elements["//Hotel/HotelName"].text %>
+             <% else %>
+                <%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %>
+             <% end %>
+         </td>
+      </tr>
+       <tr>
+        　<td>住所</td>
+        　<td><% if @site == "2" %>
+                <%= @arr.elements["//Hotel/HotelAddress"].text %>
+              <% else %>
+                <%= @arr.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= @arr.elements["//hotels/hotel/hotelBasicInfo/address2"].text %>
+              <% end %>
+        　 </td>
+      </tr>
+       <tr>
+        　<td>価格</td>
+        　<td><% if @site == "2" %>
+                <%= @arr.elements["//Hotel/SampleRateFrom"].text %>円
+              <% else %>
+                <%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円
+              <% end %>
+          </td>
+       </tr>
+       <tr>
+        　<td>コメント</br>(250文字以内）</br><span class="letter_count"></span></td>
+        　<td id="text_form">
+         　  <% if (@site != "2" && current_user.hotels.where(hotel_number: @arr.elements["//hotels/hotel/hotelBasicInfo/hotelNo"].text).present?) ||
+                  (@site == "2" && current_user.hotels.where(hotel_number: @arr.elements["//Hotel/HotelID"].text).present?)  %>
+               <p class="hotel_new_text">登録済み</p>
+            <% else %>
+               <%= f.text_area :comment, :size => "20x5",class:"hotel_new_text letter" %>
+            <% end %>
+          </td>
+        </tr>
+   </table> 

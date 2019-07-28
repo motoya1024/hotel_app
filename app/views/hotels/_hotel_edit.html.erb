@@ -1,0 +1,41 @@
+<table id="hotel_edit" class="table-bordered table-striped">
+    <tr>
+      　<th>項目</th>
+      　<th>内容</th>
+    </tr>
+     <tr>
+       <td>ホテル名</td>
+       <td><% if @hotel.site == 2 %>
+              <%= hotel.elements["//Hotel/HotelName"].text %>
+           <% else %>
+              <%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %>
+           <% end %>
+       </td>
+    </tr>
+     <tr>
+      　<td>住所</td>
+      　<td><% if @hotel.site == 2 %>
+              <%= hotel.elements["//Hotel/HotelAddress"].text %>
+            <% else %>
+              <%= hotel.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= hotel.elements["//hotels/hotel/hotelBasicInfo/address2"].text %>
+            <% end %>
+      　 </td>
+    </tr>
+    <tr>
+      　<td>価格</td>
+      　<td><% if @hotel.site == 2 %>
+              <%= hotel.elements["//Hotel/SampleRateFrom"].text %>円
+            <% else %>
+              <%= hotel.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円
+            <% end %>
+        </td>
+     </tr>
+     <tr>
+      　<td>コメント</br>(250文字以内）<br><span class="letter_count"></span></td>
+      　<td id="text_edit_form"><%= f.text_area :comment, :size => "20x5",class:"hotel_edit_text letter" %></td>
+    </tr>
+</table>  
+
+<script>
+  
+</script>

@@ -39,6 +39,8 @@ ja:
         email: メールアドレス
         password: パスワード 
         password_confirmation: パスワード確認
+      hotel:
+        comment: コメント
     will_paginate:
         previous_label: 前
         next_label: 次

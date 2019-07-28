@@ -1,0 +1,43 @@
+<ul class="hotel_show_sp_index">
+   <div class="hotel_show_content">
+      <li class="hotel_show_item">ホテル名</li>
+      <li class="hotel_show_content">
+       <% if @site == "2" %>
+         <%= @arr.elements["//Hotel/HotelName"].text %>
+       <% else %>
+         <%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %>
+       <% end %>  
+      </li>
+   </div>
+   <div class="hotel_show_content">
+      <li class="hotel_show_item">住所</li> 
+      <li class="hotel_show_item">
+        <% if @site == "2" %>
+          <%= @arr.elements["//Hotel/HotelAddress"].text %>
+        <% else %>
+          <%= @arr.elements["//hotels/hotel/hotelBasicInfo/address1"].text %><%= @arr.elements["//hotels/hotel/hotelBasicInfo/address2"].text %>
+        <% end %>  
+      </li> 
+   </div>
+   <div class="hotel_show_content">
+     <li class="hotel_show_item">価格</li> 
+     <li class="hotel_show_item">
+        <% if @site == "2" %>
+          <%= @arr.elements["//Hotel/SampleRateFrom"].text %>円
+        <% else %>
+          <%= @arr.elements["//hotels/hotel/hotelBasicInfo/hotelMinCharge"].text %>円
+        <% end %>
+    <li>
+  </div>
+  <div id="text_sp_form">
+    <% if (@site != "2" && current_user.hotels.where(hotel_number: @arr.elements["//hotels/hotel/hotelBasicInfo/hotelNo"].text).present?) ||
+          (@site == "2" && current_user.hotels.where(hotel_number: @arr.elements["//Hotel/HotelID"].text).present?)  %>
+      <p class="hotel_new_sp_text">登録済み</p>
+    <% else %>
+      <%= f.label :comment %>(250文字以内）<span class="letter_count"></span>
+      <%= f.text_area :comment, :size => "20x5",class:"hotel_new_sp_text letter" %>
+    <% end %>
+  </div>
+</ul>
+   
+ 

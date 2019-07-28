@@ -8,19 +8,32 @@ class HotelsController < ApplicationController
     def new
       @user = User.find(current_user.id)
       @site = params[:site]
-      hotel_number = params[:number]
+      @hotel_number = params[:number]
       @hotel = @user.hotels.build
-      @arr = get_hotelinfo(hotel_number,@site)
+      @arr = get_hotelinfo(@hotel_number,@site)
+    #  render plain:@hotel.inspect
     end
   
    def index
       @site = params[:site]
       @search = params[:search]
+      order = params[:key]? params[:key]:4
+      if params[:key] == "4"
+         sort = "standard"
+      elsif params[:key] == "2"
+         sort = "+roomCharge"
+      else
+         sort = "-roomCharge"
+      end
+      
       if @search == nil
          place = Geocoder.coordinates("東京都千代田区")
       else
          place = Geocoder.coordinates(@search)
       end
+      @counts = { "全表示" => 5000, "5" => 5,  "10" => 10, "20" => 20, "50" => 50, "100" => 100}
+      @sorts = { "2" => "平均価格の安い順",  "3" => "平均価格の高い順","4" => "おすすめ順"}
+      
       
      begin
       if @site == nil || @site == "1" || @site == ""
@@ -31,6 +44,7 @@ class HotelsController < ApplicationController
         feedURL = feedURL + "&latitude="+ place[0].to_s
         feedURL = feedURL + "&longitude="+ place[1].to_s
         feedURL = feedURL + "&searchRadius=1.5"
+        feedURL = feedURL + "&sort=" + sort
         feedURL = feedURL + "&allReturnFlag=1"
         feedURL = feedURL + "&datumType=1"
         xml = open(feedURL).read
@@ -44,26 +58,32 @@ class HotelsController < ApplicationController
         feedURL = feedURL + "&x=" + conv_lon.to_s
         feedURL = feedURL + "&y=" + conv_lat.to_s
         feedURL = feedURL + "&range=1.0"
-        xml = open(feedURL).read
+        feedURL = feedURL + "&xml_ptn=2"
+        feedURL = feedURL + "&count=100"
+        feedURL = feedURL + "&order=" + order.to_s
+        xml = open(feedURL).read 
+        #hash = Hash.from_xml(xml.to_s)
         @arr = REXML::Document.new(xml)
        end
      rescue => e
        flash[:danger] = "住所が検索できませんでした。"
-       redirect_to hotels_path(site: @site)
+       #redirect_to hotels_path(site: @site)
      end
      
-     p @site
     end
 
     def create
-      @user = User.find(current_user.id)
-      @hotel = @user.hotels.build(hotel_params)
-      if @hotel.save
-        flash[:success] = "コメントを登録しました。"
-        redirect_to myhotel_url(current_user)
-      else
-        render 'new'
-      end
+        @user = User.find(current_user.id)
+        @hotel = @user.hotels.build(hotel_params)
+        @hotel_number = hotel_params["hotel_number"]
+        @site = hotel_params["site"]
+        @arr = get_hotelinfo(hotel_params["hotel_number"],hotel_params["site"])
+        if @hotel.save
+            flash[:success] = "コメントを登録しました。"
+            redirect_to myhotel_url(current_user)
+        else
+            render 'new'
+        end
     end 
     
     def myhotel

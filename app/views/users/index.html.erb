@@ -36,7 +36,11 @@
       <td><%= user.name %></td>
       <td><%= user.email %></td>
       <td class="user_btn"><%= link_to "編集", edit_user_path(user), class: 'btn btn-primary' %></td>
-      <td class="user_btn"><%= link_to "削除", user_path(user) , method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %></td>
+      <td class="user_btn">
+        <%if user.admin != true %>
+          <%= link_to "削除", user_path(user) , method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %>
+        <% end %>
+      </td>
     </tr>
   <% end %> 
 </table>  
