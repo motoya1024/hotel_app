@@ -70,7 +70,7 @@ $(document).on("turbolinks:load", function() {
        if(!($('.hotel_edit_sp_text').length)){
            $("#text_edit_sp_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_edit_sp_text letter">'+comment+'</textarea>');
        }
-    }
+     }
   };
   
   $(window).on( 'resize', function() {
