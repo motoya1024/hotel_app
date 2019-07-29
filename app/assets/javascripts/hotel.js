@@ -12,8 +12,10 @@ $(document).on("ready turbolinks:load", function() {
     $('.modal-body').children('img').attr('src', picture);
  });
  // 入力文字数
- $(document).on("keypress paste", ".letter", function () {
-    var count = $(this).val().length;
+ $(document).on("keyup paste", ".letter", function (e) {
+    var txt = $(this).val();
+    var new_txt = $.trim(txt.replace(/\n/g, ""));
+    var count = new_txt.length;
     $(".letter_count").text("入力文字数:"+count);
  });
  
