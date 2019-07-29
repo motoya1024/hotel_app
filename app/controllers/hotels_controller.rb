@@ -75,7 +75,7 @@ class HotelsController < ApplicationController
        end
      rescue => e
        flash[:danger] = "住所が検索できませんでした。"
-       #redirect_to hotels_path(site: @site)
+       redirect_to hotels_path(site: @site)
      end
      
     end

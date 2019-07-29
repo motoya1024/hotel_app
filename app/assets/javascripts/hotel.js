@@ -20,10 +20,16 @@ $(document).on("ready turbolinks:load", function() {
  });
  
 //edit,new
+
+ //var sp_hotel = $('#sp_hotel').data("id");
+
+   windoweditsize();
+   windownewsize();
+   
+});
+
  var widthFlag = "sp";
- var sp_hotel = $('#sp_hotel').data("id");
  var widthnewFlag = "sp"
-  
  function windoweditsize (){
     var w = $(window).width();
     var x = 768
@@ -45,14 +51,16 @@ $(document).on("ready turbolinks:load", function() {
  };
  
   function windownewsize (){
+    var sp_hotel = $('#sp_hotel').data("id");
     var w = $(window).width();
+    console.log(widthnewFlag);
     var x = 768
     if(w > x && widthnewFlag != 'pc'){
        widthnewFlag = "pc"
        $(".hotel_new_sp_text").remove();
        if(!($('.hotel_new_text').length)){
            if(sp_hotel == false){
-              $("#text_form").append('<textarea cols="20" rows="5" class="hotel_new_text letter"></textarea>');
+              $("#text_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_new_text letter"></textarea>');
            }else{
               $("#text_form").append('<p class="hotel_new_text">登録済み</p>');  
            }
@@ -62,7 +70,7 @@ $(document).on("ready turbolinks:load", function() {
        $(".hotel_new_text").remove();
        if(!($('.hotel_new_sp_text').length)){
            if(sp_hotel == false){
-              $("#text_sp_form").append('<textarea cols="20" rows="5" class="hotel_new_sp_text letter"></textarea>');
+              $("#text_sp_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_new_sp_text letter"></textarea>');
            }else{
               $("#text_sp_form").append('<p class="hotel_new_sp_text">登録済み</p>');  
            }
@@ -70,13 +78,10 @@ $(document).on("ready turbolinks:load", function() {
     }
   };
   
-  $(window).on( 'load resize', function() {
+  
+  $(window).on( 'resize', function() {
       windownewsize();
       windoweditsize();
-     
   });
- 
-   windoweditsize();
-   windownewsize();
 
-});
+
