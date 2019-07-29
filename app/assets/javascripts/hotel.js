@@ -1,4 +1,10 @@
-$(document).on("ready turbolinks:load", function() {
+$(document).on("turbolinks:load", function() {
+    var widthFlag = "sp";
+    var widthnewFlag = "sp";
+//edit,new
+     windoweditsize();
+     windownewsize();
+
 // jsを記載
  //地図の画像のモーダル表示
  $('.picture').click(function() {
@@ -8,7 +14,6 @@ $(document).on("ready turbolinks:load", function() {
  
  $('.map').click(function() {
     var picture = $(this).data("id");
-    console.log(picture);
     $('.modal-body').children('img').attr('src', picture);
  });
  // 入力文字数
@@ -19,36 +24,6 @@ $(document).on("ready turbolinks:load", function() {
     $(".letter_count").text("入力文字数:"+count);
  });
  
-//edit,new
-
- //var sp_hotel = $('#sp_hotel').data("id");
-
-   windoweditsize();
-   windownewsize();
-   
-});
-
- var widthFlag = "sp";
- var widthnewFlag = "sp"
- function windoweditsize (){
-    var w = $(window).width();
-    var x = 768
-    if(w > x && widthFlag != 'pc'){
-       widthFlag = "pc"
-       var comment = $(".hotel_edit_sp_text").text();
-       $(".hotel_edit_sp_text").remove();
-       if(!($('.hotel_edit_text').length)){
-           $("#text_edit_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_edit_text letter">'+comment+'</textarea>');
-       }
-    }else if(x > w && widthFlag != 'sp'){
-       widthFlag = "sp"
-       var comment = $(".hotel_edit_text").text();
-       $(".hotel_edit_text").remove();
-       if(!($('.hotel_edit_sp_text').length)){
-           $("#text_edit_sp_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_edit_sp_text letter">'+comment+'</textarea>');
-       }
-    }
- };
  
   function windownewsize (){
     var sp_hotel = $('#sp_hotel').data("id");
@@ -78,10 +53,36 @@ $(document).on("ready turbolinks:load", function() {
     }
   };
   
+  function windoweditsize (){
+    var w = $(window).width();
+    var x = 768
+    if(w > x && widthFlag != 'pc'){
+       widthFlag = "pc"
+       var comment = $(".hotel_edit_sp_text").text();
+       $(".hotel_edit_sp_text").remove();
+       if(!($('.hotel_edit_text').length)){
+           $("#text_edit_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_edit_text letter">'+comment+'</textarea>');
+       }
+    }else if(x > w && widthFlag != 'sp'){
+       widthFlag = "sp"
+       var comment = $(".hotel_edit_text").text();
+       $(".hotel_edit_text").remove();
+       if(!($('.hotel_edit_sp_text').length)){
+           $("#text_edit_sp_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_edit_sp_text letter">'+comment+'</textarea>');
+       }
+    }
+  };
   
   $(window).on( 'resize', function() {
       windownewsize();
       windoweditsize();
   });
+  
+  
+});
 
+
+ 
+  
+  
 
