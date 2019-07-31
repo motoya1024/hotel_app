@@ -31,14 +31,6 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
   
-
-    # 渡された文字列のハッシュ値を返す
-  def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-  end
-
   
   def self.updatable_attributes
     ["name", "email","password","admin","superior"]
