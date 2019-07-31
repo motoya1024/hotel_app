@@ -11,7 +11,7 @@
     <%= f.submit "検索する",class:"search_btn" %>
   <% end %>
 </div>
-
+<p class="text-primary address_sp">ページを開いた時は、「東京都千代田区」周辺のホテル一覧を表示しています。</p>
 <div class="order_select">
   <p>検索順</p>
   <div class="dropdown">
@@ -26,7 +26,7 @@
     </ul>
   </div>
 </div>
- 
+ <p class="text-primary address">ページを開いた時は、「東京都千代田区」周辺のホテル一覧を表示しています。</p>
 <div>
   <p id="count">表示件数</p>
   <select class="form-control state" name="state">
@@ -49,41 +49,4 @@
 <%= render :partial => "hotel_index" %>
 <%= render :partial => "hotel_sp_index" %>
 <%= render :partial => "picture" %>
-
-<script>
-
-  function windowsize (){
-    var w = $(window).width();
-    var x = 768
-    if(w > x){
-      $(".state").attr("id","maxRows");
-    }else{
-      $(".state").attr("id","maxspRows");
-    }
-	};
-	
-  $(window).resize(function() {
-     windowsize();
-     getPagination('.mytable');
-     getspPagination();
-  });
-
-$(function(){
-   windowsize();
-   getPagination('.mytable');
-   getspPagination();
- 
- $('.picture').click(function() {
-    var picture = $(this).data("id");
-    $('.modal-body').children('img').attr('src', picture);
- });
- 
- $('.map').click(function() {
-    var picture = $(this).data("id");
-    console.log(picture);
-    $('.modal-body').children('img').attr('src', picture);
- });
-});  
- 
-</script>
 

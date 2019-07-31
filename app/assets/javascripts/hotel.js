@@ -4,6 +4,9 @@ $(document).on("turbolinks:load", function() {
 //edit,new
      windoweditsize();
      windownewsize();
+     windowindexsize();
+     getPagination('.mytable');
+     getspPagination();
 
 // jsを記載
  //地図の画像のモーダル表示
@@ -73,9 +76,23 @@ $(document).on("turbolinks:load", function() {
      }
   };
   
+  function windowindexsize (){
+    var w = $(window).width();
+    var x = 768
+    if(w > x){
+      $(".state").attr("id","maxRows");
+    }else{
+      $(".state").attr("id","maxspRows");
+    }
+	};
+  
+  
   $(window).on( 'resize', function() {
       windownewsize();
       windoweditsize();
+      windowindexsize();
+      getPagination('.mytable');
+      getspPagination();
   });
   
   

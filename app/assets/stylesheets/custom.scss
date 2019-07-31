@@ -1,7 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-
 $gray-medium-light: #eaeaea;
 
 @mixin box_sizing {
@@ -36,8 +35,15 @@ body {
   padding-top: 9px;
   font-weight: bold;
   &:hover {
-    color: white;
+    color: white; 
     text-decoration: none;
+  }
+}
+
+@media only screen and (max-width:768px) { 
+    /*　画面サイズが768pxまではここを読み込む　*/
+  #logo{
+    font-size: 1.5em;
   }
 }
 
@@ -113,7 +119,7 @@ td{
 }
 
 #information-content{
-  padding:20px 0 20px 0;
+  padding:20px 10px 20px 10px;
   border-radius:10px;
   font-size:20px;
   text-align:center;
@@ -140,7 +146,7 @@ td{
 }
 
 
-@media screen and (min-width:769px) { 
+@media only screen and (min-width:769px) { 
     /*　画面サイズが768pxまではここを読み込む　*/
   .feature-1,.feature-2,.feature-3{
     width:31%;
@@ -316,6 +322,9 @@ td{
   width:55%;
 }
 
+.address_sp{
+  display:none;
+}
 
 @media screen and (max-width:768px) { 
     /*　画面サイズが768pxまではここを読み込む　*/
@@ -323,7 +332,7 @@ td{
     list-style-type:none;
     li{
       margin-top:10px;
-      margin-left:-15px;
+      margin-left:-25px;
       font-size:30px;
       background-color:#DDDDDD;
       padding:5px 0 5px 15px;
@@ -331,6 +340,13 @@ td{
     }
   }
   
+  .address{
+    display:none;
+  }
+  
+  .address_sp{
+    display:block;
+  }
   .search_layout{
     width:100%;
    }
@@ -340,6 +356,7 @@ td{
     display:block;
      li{
       margin-top:5px;
+      margin-left:-25px;
       font-size:25px;
       background-color:#DDDDDD;
       padding:15px 0 15px 15px;
@@ -362,7 +379,7 @@ td{
   }
   
   .hotel_show_sp_index,.hotel_edit_sp_index{
-    font-size:25px;
+    font-size:30px;
     list-style-type:none;
     text-align:center;
     display:block;

@@ -9,25 +9,7 @@
       <th class="hotelregister"><% if logged_in? %>マイホテル登録<% else %>詳細<% end %></th>
     </tr>
   </thead>
-   <% if @site == "" || @site == "1" || @site == nil %>
-      <% @arr.elements.each('//root/hotels/hotel/') do |hotel| %>
-        <tr>
-          <td><%= hotel.elements["hotelBasicInfo/hotelName"].text %></td>
-          <td><%= hotel.elements["hotelBasicInfo/address1"].text %><%= hotel.elements["hotelBasicInfo/address2"].text %></td>
-          <td><%= hotel.elements["hotelBasicInfo/hotelMinCharge"].text %>円</td>
-          <td class="text-center"><%= link_to "ホームページへ",hotel.elements["hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %></td>
-          <% if logged_in? %>
-             <% if current_user.hotels.where(hotel_number: hotel.elements["hotelBasicInfo/hotelNo"].text).present? %>
-                <td class="text-center">登録済み</td>
-             <% else %>
-                <td class="text-center"><%= link_to "登録",new_hotel_path(site: @site, number: hotel.elements["hotelBasicInfo/hotelNo"].text),class: "btn btn-primary" %></td>
-             <% end %>
-          <% else %>
-             <td class="text-center"><%= link_to "詳細",hotel_path(site: @site,id: hotel.elements["hotelBasicInfo/hotelNo"].text),class: "btn btn-primary" %></td>
-          <% end %>
-        </tr>
-      <% end %>
-   <% else %>
+   <% if @site == "2" %>
       <% @arr.elements.each('//Hotel/') do |hotel| %>
         <tr>
           <td><%= hotel.elements["HotelName"].text %></td>
@@ -42,6 +24,24 @@
              <% end %>
           <% else %>
              <td class="text-center"><%= link_to "詳細",hotel_path(site: @site,id: hotel.elements["HotelID"].text),class: "btn btn-primary" %></td>
+          <% end %>
+        </tr>
+     <% end %>
+   <% else %>
+      <% @arr.elements.each('//root/hotels/hotel/') do |hotel| %>
+        <tr>
+          <td><%= hotel.elements["hotelBasicInfo/hotelName"].text %></td>
+          <td><%= hotel.elements["hotelBasicInfo/address1"].text %><%= hotel.elements["hotelBasicInfo/address2"].text %></td>
+          <td><%= hotel.elements["hotelBasicInfo/hotelMinCharge"].text %>円</td>
+          <td class="text-center"><%= link_to "ホームページへ",hotel.elements["hotelBasicInfo/hotelInformationUrl"].text,target: "_new" %></td>
+          <% if logged_in? %>
+             <% if current_user.hotels.where(hotel_number: hotel.elements["hotelBasicInfo/hotelNo"].text).present? %>
+                <td class="text-center">登録済み</td>
+             <% else %>
+                <td class="text-center"><%= link_to "登録",new_hotel_path(site: @site, number: hotel.elements["hotelBasicInfo/hotelNo"].text),class: "btn btn-primary" %></td>
+             <% end %>
+          <% else %>
+             <td class="text-center"><%= link_to "詳細",hotel_path(site: @site,id: hotel.elements["hotelBasicInfo/hotelNo"].text),class: "btn btn-primary" %></td>
           <% end %>
         </tr>
       <% end %>

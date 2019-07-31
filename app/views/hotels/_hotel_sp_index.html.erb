@@ -1,7 +1,18 @@
 <div class="hotel_sp_layout">
  <p>ホテル名をクリックすると詳細が表示されます。</p>
  <ul class="hotel_sp_index mysptable">
-  <% if @site == "" || @site == "1" || @site == nil %>
+  <% if @site == "2" %>
+     <% @arr.elements.each('//Hotel/') do |hotel| %>
+       <li>
+         <div>
+            <%= link_to hotel.elements["HotelName"].text ,new_hotel_path(site: @site, number: hotel.elements["HotelID"].text) %>
+         </div>
+         <div>
+            <%= hotel.elements["SampleRateFrom"].text %>円
+         </div>
+       </li>
+     <% end %>   
+   <% else %>
       <% @arr.elements.each('//root/hotels/hotel/') do |hotel| %>
         <li>
           <div>
@@ -12,17 +23,6 @@
           </div>
         </li>
       <% end %>
-   <% else %>
-      <% @arr.elements.each('//Hotel/') do |hotel| %>
-        <li>
-         <div>
-            <%= link_to hotel.elements["HotelName"].text ,new_hotel_path(site: @site, number: hotel.elements["HotelID"].text) %>
-         </div>
-         <div>
-            <%= hotel.elements["SampleRateFrom"].text %>円
-         </div>
-       </li>
-      <% end %>
-  <% end %>
-</ul>
+   <% end %>
+ </ul>
 </div>

@@ -23,8 +23,10 @@ class HotelsController < ApplicationController
       @hotel_number = params[:id]
       @arr = get_hotelinfo(@hotel_number,@site)
     end
+    
+    
    def index
-      @site = params[:site]
+      @site = params[:site]?params[:site]:"1"
       @search = params[:search]
       order = params[:key]? params[:key]:4
       if params[:key] == "4"
@@ -34,7 +36,7 @@ class HotelsController < ApplicationController
       else
          sort = "-roomCharge"
       end
-      
+  
       if @search == nil
          place = Geocoder.coordinates("東京都千代田区")
       else
@@ -44,20 +46,20 @@ class HotelsController < ApplicationController
       @sorts = { "2" => "平均価格の安い順",  "3" => "平均価格の高い順","4" => "おすすめ順"}
       
      begin
-      if @site == nil || @site == "1" || @site == ""
+      if @site == "1"
         key = "1023150086339421281"
         feedURL = "https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId="
         feedURL = feedURL + key
         feedURL = feedURL + "&format=xml"
         feedURL = feedURL + "&latitude="+ place[0].to_s
         feedURL = feedURL + "&longitude="+ place[1].to_s
-        feedURL = feedURL + "&searchRadius=1.5"
+        feedURL = feedURL + "&searchRadius=1.0"
         feedURL = feedURL + "&sort=" + sort
         feedURL = feedURL + "&allReturnFlag=1"
         feedURL = feedURL + "&datumType=1"
         xml = open(feedURL).read
         @arr = REXML::Document.new(xml)
-      elsif @site == "2"
+      else
         key = "leo157613fc400"
         feedURL = "http://jws.jalan.net/APIAdvance/HotelSearch/V1/?key="
         feedURL = feedURL + key
