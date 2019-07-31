@@ -129,6 +129,7 @@ td{
   width:80%;
   margin:auto;
   box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.4);
+  background-color:white;
 }
 
 .feature-1,.feature-2,.feature-3{
@@ -142,10 +143,14 @@ td{
     font-size:15px;
   }
 }
+.site-layout{
+  background-image: url(/assets/b032.gif);
+}
 
 .site-feature{
   width:95%;
   margin:80px auto 0;
+  z-index:0;
 }
 
 
