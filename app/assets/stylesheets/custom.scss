@@ -113,6 +113,9 @@ td{
 .account{
   font-size:20px;
 }
+.hotel_sample{
+  display:none;
+}
 
 .site-information{
   margin-top:50px;
@@ -157,6 +160,13 @@ td{
     float:left;
   }
   
+  .hotel_sample{
+    display:inline-block;
+  }
+  
+  .hotel_sp_sample{
+    display:none;
+  }
   .feature-2{
     margin-left:3.5%;
     display:inline-block;

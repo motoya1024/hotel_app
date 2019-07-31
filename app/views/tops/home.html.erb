@@ -20,6 +20,7 @@
         <p>検索欄に場所を入力すれば、ホテル名、住所、価格、ホームページへのリンクを一覧表示。また、楽天、じゃらんリンクをクリックすることで、それぞれのサイトの
         ホテル情報を瞬時に切り替え、表示します。</p>
         <buttom type="button" class="hotel_sample btn btn-success" data-toggle="modal" data-target="#picture" data-id="assets/hotel_index.png">画像例１</buttom>
+        <buttom type="button" class="hotel_sp_sample btn btn-success" data-toggle="modal" data-target="#picture" data-id="assets/hotel_sp_index.png">画像例１</buttom>
       </div>
     </div>
     <div class="panel panel-primary feature-2">
@@ -30,7 +31,9 @@
         <p>泊まったホテルの特徴や感想をメモとして記録しておくことができます。後で、前に泊まったホテルの名前なんだっけ？とならないように泊まった
         ホテルの特徴をマイホテル一覧として、残しておくことができます。</p>
         <buttom type="button" class="hotel_sample btn btn-success" data-toggle="modal" data-target="#picture" data-id="assets/myhotel_index.png">画像例２</buttom>
+        <buttom type="button" class="hotel_sp_sample btn btn-success" data-toggle="modal" data-target="#picture" data-id="assets/myhotel_sp_index.png">画像例２</buttom>
         <buttom type="button" class="hotel_sample btn btn-success" data-toggle="modal" data-target="#picture" data-id="assets/myhotel_new.png">画像例３</buttom>
+        <buttom type="button" class="hotel_sp_sample btn btn-success" data-toggle="modal" data-target="#picture" data-id="assets/myhotel_sp_new.png">画像例３</buttom>
       </div>
     </div>
     <div class="panel panel-primary feature-3">
@@ -38,7 +41,7 @@
         <h3>料金は無料</h3>
       </div>
       <div class="panel-body feature-content">
-        <p>料金はかかりません。どなたでもサイトを利用することが可能です。ただ、マイホテル登録に関しては、ログインが必要なりますので、アカウント登録をお願いします。</p>
+        <p>料金はかかりません。どなたでもサイトを利用することが可能です。ただ、マイホテル登録に関しては、ログインが必要になりますので、アカウント登録をお願いします。</p>
       </div>
     </div>
   </div>
@@ -49,7 +52,11 @@
 
 $('.hotel_sample').click(function() {
     var picture = $(this).data("id");
-    console.log
+    $('.modal-body').children('img').attr('src', picture);
+ });
+ 
+ $('.hotel_sp_sample').click(function() {
+    var picture = $(this).data("id");
     $('.modal-body').children('img').attr('src', picture);
  });
 
