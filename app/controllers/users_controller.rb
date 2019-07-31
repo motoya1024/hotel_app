@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)  
     if @user.save
        log_in @user
-       redirect_to timecard_path @user
+       redirect_to myhotel_url @user
     else
       render 'new'
     end
