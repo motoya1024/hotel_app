@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
         log_in user
         if user.admin == nil
-           redirect_to myhotel_path(current_user)
+           redirect_to favoritehotel_path(current_user)
         else 
            redirect_to root_path
         end
