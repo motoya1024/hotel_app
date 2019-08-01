@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :logged_in_admin, only: [:index]
+  before_action :logged_in_admin, only: [:index,:destroy]
   before_action :logged_not_current_user, only: [:edit,:update]
   
   def new
@@ -35,8 +35,11 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    log_out
-    redirect_to root_url
+    user = User.find(params[:id])
+    if user.destroy
+      flash[:success] = "ユーザー情報を削除しました。"
+      redirect_to users_url 
+    end
   end
   
   def update
