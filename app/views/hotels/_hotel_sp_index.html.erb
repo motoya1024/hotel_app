@@ -5,7 +5,11 @@
      <% @arr.elements.each('//Hotel/') do |hotel| %>
        <li>
          <div>
-            <%= link_to hotel.elements["HotelName"].text ,new_hotel_path(site: @site, number: hotel.elements["HotelID"].text) %>
+           <% if logged_in? %>
+             <%= link_to hotel.elements["HotelName"].text ,new_hotel_path(site: @site, number: hotel.elements["HotelID"].text) %>
+           <% else %>
+             <%= link_to hotel.elements["HotelName"].text ,hotel_path(site: @site,id: hotel.elements["HotelID"].text) %>
+           <% end %>
          </div>
          <div>
             <%= hotel.elements["SampleRateFrom"].text %>円
@@ -16,7 +20,11 @@
       <% @arr.elements.each('//root/hotels/hotel/') do |hotel| %>
         <li>
           <div>
-            <%= link_to hotel.elements["hotelBasicInfo/hotelName"].text ,new_hotel_path(site: @site, number: hotel.elements["hotelBasicInfo/hotelNo"].text) %></td>
+            <% if logged_in? %>
+               <%= link_to hotel.elements["hotelBasicInfo/hotelName"].text ,new_hotel_path(site: @site, number: hotel.elements["hotelBasicInfo/hotelNo"].text) %>
+            <% else %>
+               <%= link_to hotel.elements["hotelBasicInfo/hotelName"].text ,hotel_path(site: @site,id: hotel.elements["hotelBasicInfo/hotelNo"].text) %>
+            <% end %>
           </div>
           <div>
             <%= hotel.elements["hotelBasicInfo/hotelMinCharge"].text %>円
