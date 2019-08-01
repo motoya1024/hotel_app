@@ -12,10 +12,10 @@ class UsersController < ApplicationController
     @per_pages = ["全表示",10,20,30,50,100]
     if params[:per_page] == nil || params[:per_page] == "全表示"
        @page = "全表示"
-       @users = User.search(@search)
+       @users = User.search(@search).order(id: :asc)
     else
        @page = params[:per_page]
-       @users = User.search(@search).paginate(page: params[:page], per_page: @page)
+       @users = User.search(@search).paginate(page: params[:page], per_page: @page).order(id: :asc)
     end
     p @page
   end
