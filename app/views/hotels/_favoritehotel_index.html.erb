@@ -1,4 +1,4 @@
-<table id="myhotel_index" class="table-bordered table-striped">
+<table id="favoritehotel_index" class="table-bordered table-striped">
   <tr>
      <th class="hotelname">ホテル名</th>
      <th class="hotelcomment">コメント</th>
@@ -7,14 +7,14 @@
   <% @hotels.each do |hotel| %>
   <% hotel_info = get_hotelinfo(hotel.hotel_number,hotel.site) %>
     <tr>
-      <td id="myhotelname">
+      <td id="favoritehotelname">
         <% if hotel.site.to_s == "2" %>
           <%= hotel_info.elements["//Hotel/HotelName"].text %></td>
         <% else %>
           <%= hotel_info.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %>
         <% end %>
       </td>
-      <td id="myhotelcomment"><%= hotel.comment.truncate(60) %></td>
+      <td id="favoritehotelcomment"><%= hotel.comment.truncate(60) %></td>
       <td class="text-center"><%= link_to "編集",edit_hotel_path(hotel,current_user.id), class: 'btn btn-primary' %></td>
       <td class="text-center"><%= link_to "削除",delete_hotel_path(hotel,current_user.id), method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %></td>
     </tr>

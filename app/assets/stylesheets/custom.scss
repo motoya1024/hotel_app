@@ -206,7 +206,7 @@ td{
   padding-top:0;
 }
 
-#hotel_index,#myhotel_index{
+#hotel_index,#favoritehotel_index{
   width:100%;
   table-layout: fixed;
   word-break: break-all;
@@ -248,11 +248,11 @@ td{
   text-align:center;
 }
 
-#myhotelcomment{
+#favoritehotelcomment{
   width:50%;
 }
 
-#myhotelname{
+#favoritehotelname{
   width:30%;
 }
 
@@ -260,7 +260,7 @@ td{
   width:100%;
 }
 
-.myhotel_btn{
+.favoritehotel_btn{
   text-align:center;
   margin-top:30px;
 }
@@ -323,7 +323,7 @@ td{
   display:none;
 }
 
-.myhotel_sp_index{
+.favoritehotel_sp_index{
   display:none;
 }
 
@@ -366,7 +366,7 @@ td{
     width:100%;
    }
   
-  .myhotel_sp_index{
+  .favoritehotel_sp_index{
     list-style-type:none;
     display:block;
      li{
@@ -379,12 +379,12 @@ td{
     }
   }
   
-  .myhotel_sp_index_btn{
+  .favoritehotel_sp_index_btn{
     margin-right:15px;
     float:right;
   }
   
-  .myhotel_sp_index_name{
+  .favoritehotel_sp_index_name{
     width : calc(100% - 150px) ;
     display:inline-block;
   }
@@ -401,7 +401,7 @@ td{
     margin-right:40px;
  } 
 
-  #hotel_index,#myhotel_index{
+  #hotel_index,#favoritehotel_index{
     display:none;
   }
   #hotel_new,#hotel_edit{

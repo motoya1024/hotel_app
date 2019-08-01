@@ -1,7 +1,7 @@
 class HotelsController < ApplicationController
   
     before_action :logged_in, only: [:create]
-    before_action :logged_not_current_user, only: [:edit,:update,:myhotel,:destroy]
+    before_action :logged_not_current_user, only: [:edit,:update,:favoritehotel,:destroy]
   
     include HotelsHelper
     
@@ -90,15 +90,15 @@ class HotelsController < ApplicationController
         @arr = get_hotelinfo(hotel_params["hotel_number"],hotel_params["site"])
         if @hotel.save
             flash[:success] = "コメントを登録しました。"
-            redirect_to myhotel_url(current_user)
+            redirect_to favoritehotel_url(current_user)
         else
             render 'new'
         end
     end 
     
-    def myhotel
+    def favoritehotel
       @user = User.find(current_user.id)
-      @per_pages = ["全表示",1,5,10,20]
+      @per_pages = ["全表示",5,10,20]
    
       if params[:per_page] == nil || params[:per_page] == "全表示"
         @page = "全表示"
@@ -113,8 +113,8 @@ class HotelsController < ApplicationController
     def destroy
       @hotel = Hotel.find(params[:id])
       if @hotel.destroy
-         flash[:success] = "マイホテル情報を削除しました。"
-         redirect_to myhotel_url(current_user)
+         flash[:success] = "お気に入りホテル情報を削除しました。"
+         redirect_to favoritehotel_url(current_user)
       else
          render 'edit'
       end
@@ -127,8 +127,8 @@ class HotelsController < ApplicationController
     def update
       @hotel = Hotel.find(params[:id])
       if @hotel.update_attributes(hotel_params)
-        flash[:success] = "マイホテル情報を更新しました。"
-        redirect_to myhotel_url(current_user)
+        flash[:success] = "お気に入りホテル情報を更新しました。"
+        redirect_to favoritehotel_url(current_user)
       else
         render "edit"
       end

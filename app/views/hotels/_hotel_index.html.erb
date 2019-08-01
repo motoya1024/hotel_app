@@ -6,7 +6,7 @@
       <th class="hoteladdress">住所</th>
       <th class="hotelprice">価格</br><% if @site == "2"%>(参考料金)<% else %>(最安値)<% end %></th>
       <th class="hotelinformation">ホームページ</th>
-      <th class="hotelregister"><% if logged_in? %>マイホテル登録<% else %>詳細<% end %></th>
+      <th class="hotelregister"><% if logged_in? %>お気に入りホテル登録<% else %>詳細<% end %></th>
     </tr>
   </thead>
    <% if @site == "2" %>

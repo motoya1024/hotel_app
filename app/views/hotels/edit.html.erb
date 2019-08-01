@@ -1,6 +1,6 @@
-<% provide(:title, 'マイホテル編集') %>
+<% provide(:title, 'お気に入りホテル編集') %>
 <% provide(:button_text, '編集') %>
-<h1>マイホテル編集</h1>
+<h1>お気に入りホテル編集</h1>
 
 <%= form_for(@hotel,url: update_hotel_path(@hotel,current_user.id)) do |f| %>
 　 <%= render 'shared/error_messages', object: f.object %>
@@ -24,8 +24,8 @@
       <% end %>
       <%= render :partial => "picture" %>
    </div>
-   <div class="myhotel_btn">
+   <div class="favoritehotel_btn">
      <%= f.submit yield(:button_text), class: "btn btn-primary register_btn" %>
-     <%= link_to "戻る",myhotel_path(current_user),class:"btn btn-success register_btn" %>
+     <%= link_to "戻る",favoritehotel_path(current_user),class:"btn btn-success register_btn" %>
    </div>
 <% end %>

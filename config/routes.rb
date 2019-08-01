@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :hotels,except: [:edit, :update, :destroy]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   
-  get  '/myhotel/:id',   to: 'hotels#myhotel',as: :myhotel
+  get  '/favoritehotel/:id',   to: 'hotels#favoritehotel',as: :favoritehotel
   get  '/hotels/:id/:user_id/edit',   to: 'hotels#edit', as: :edit_hotel
   patch  '/hotels/:id/:user_id',   to: 'hotels#update', as: :update_hotel
   delete  '/hotels/:id/:user_id',   to: 'hotels#destroy', as: :delete_hotel

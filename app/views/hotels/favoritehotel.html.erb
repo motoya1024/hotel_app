@@ -1,5 +1,5 @@
-<% provide(:title, 'マイホテル一覧') %>
-<h1>マイホテル一覧</h1>
+<% provide(:title, 'お気に入りホテル一覧') %>
+<h1>お気に入りホテル一覧</h1>
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle user_count" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <%= @page %>
@@ -7,7 +7,7 @@
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     <% @per_pages.each do |per_page| %>
-      <li><%= link_to(per_page, myhotel_path(@user,per_page: per_page)) %></li>
+      <li><%= link_to(per_page, favoritehotel_path(@user,per_page: per_page)) %></li>
     <% end %>
   </ul>
 </div>
@@ -15,5 +15,5 @@
   <%= will_paginate @users, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
 <% end %>
 
-<%= render :partial => "myhotel_index" %>
-<%= render :partial => "myhotel_sp_index" %>
+<%= render :partial => "favoritehotel_index" %>
+<%= render :partial => "favoritehotel_sp_index" %>

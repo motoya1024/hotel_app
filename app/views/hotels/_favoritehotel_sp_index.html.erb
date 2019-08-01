@@ -1,15 +1,15 @@
-<ul class="myhotel_sp_index">
+<ul class="favoritehotel_sp_index">
 <% @hotels.each do |hotel| %>
 　<% hotel_info = get_hotelinfo(hotel.hotel_number,hotel.site) %>
 <li>
-<div class="myhotel_sp_index_name">
+<div class="favoritehotel_sp_index_name">
 <% if hotel.site.to_s == "2" %>
 <%= hotel_info.elements["//Hotel/HotelName"].text %>
 <% else %>
 <%= hotel_info.elements["//hotels/hotel/hotelBasicInfo/hotelName"].text %>
 <% end %>
 </div>
-<div class="myhotel_sp_index_btn">
+<div class="favoritehotel_sp_index_btn">
 <%= link_to "編集",edit_hotel_path(hotel,current_user.id), class: 'btn btn-primary' %>
 <%= link_to "削除",delete_hotel_path(hotel,current_user.id), method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %>
 </div>
