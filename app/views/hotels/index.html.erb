@@ -46,6 +46,13 @@
   <%= link_to "1:楽天",hotels_path(site:1),class:"site_rakuten" %>
   <%= link_to "2:じゃらん",hotels_path(site:2),class:"site_jalan" %>
 </div>
+<div class='site_name'>
+  <% if @site == "1" %>
+    <%= link_to "楽天サイト","https://travel.rakuten.co.jp/",class:"site_rakuten" %>
+  <% else %>
+    <%= link_to "じゃらんサイト",hotels_path(site:2),class:"site_jalan" %>
+  <% end %>
+</div>
 <%= render :partial => "hotel_index" %>
 <%= render :partial => "hotel_sp_index" %>
 <%= render :partial => "picture" %>

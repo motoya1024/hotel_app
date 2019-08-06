@@ -23,8 +23,7 @@ class HotelsController < ApplicationController
       @hotel_number = params[:id]
       @arr = get_hotelinfo(@hotel_number,@site)
     end
-    
-    
+
    def index
       @site = params[:site]?params[:site]:"1"
       @search = params[:search]
@@ -58,6 +57,7 @@ class HotelsController < ApplicationController
         feedURL = feedURL + "&allReturnFlag=1"
         feedURL = feedURL + "&datumType=1"
         xml = open(feedURL).read
+       # render plain:xml.inspect
         @arr = REXML::Document.new(xml)
       else
         key = "leo157613fc400"
