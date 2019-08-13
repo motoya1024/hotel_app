@@ -20,6 +20,7 @@ body {
   background-color: rgba(255,165,0,0);
   */
   background-color: $gray-medium-light;
+  
 }
 
 
@@ -70,6 +71,7 @@ h2 {
 h3{
   text-align:center;
 }
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -131,16 +133,30 @@ td{
   box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.4);
   background-color:white;
 }
-
-.feature-1,.feature-2,.feature-3{
-    width:100%;
-  }
-  
   
 .feature-content{
-  text-align:center;
+  display:flex;
+  justify-content: center;
+  align-items: center;
   p{
-    font-size:15px;
+    font-size:20px;
+    padding-left:20px;
+  }
+}
+
+.image_form{
+  display:flex;
+  flex-direction: column;
+}
+
+.site_title{
+  background-image: url(/assets/hotel_image.jpg);
+  background-repeat: no-repeat;
+  background-size:cover;
+  height:650px;
+  h1{
+    color:white;
+    margin-top:250px;
   }
 }
 
@@ -151,9 +167,12 @@ td{
 .site-feature{
   width:95%;
   margin:80px auto 0;
-  z-index:0;
 }
 
+
+.comment{
+  margin-bottom:30px;
+}
 
 @media only screen and (min-width:769px) { 
     /*　画面サイズが768pxまではここを読み込む　*/
@@ -167,12 +186,17 @@ td{
   }
   
   .hotel_sample{
-    display:inline-block;
+    display:block;
+    float:left;
+    border:1px solid #BAD3FF;
+    margin-bottom:10px;
   }
   
+
   .hotel_sp_sample{
     display:none;
   }
+  
   .feature-2{
     margin-left:3.5%;
     display:inline-block;
@@ -231,7 +255,7 @@ td{
 }
 
 .hotelregister{
-  width:10%;
+  width:8%;
 }
 
 .hotelpicture{
@@ -259,6 +283,9 @@ td{
 
 #hotel_new,#hotel_edit{
   width:100%;
+  th:first-child{
+    width:15%;
+  }
 }
 
 .favoritehotel_btn{
@@ -268,11 +295,6 @@ td{
 
 #maxRows,#maxspRows{
   width:100px;
-}
-
-.picture:hover,.map:hover{
-  color:blue;
-  text-decoration:underline;
 }
 
 .site_form{
@@ -307,10 +329,6 @@ td{
     display:inline-block;
   }
 }
-.picture_map{
-  text-align:center;
-  margin-top:10px;
-}
 
 .hotel_show_sp_index,.hotel_edit_sp_index{
   display:none;
@@ -343,6 +361,27 @@ td{
   display:none;
 }
 
+
+.map{
+  display:inline-block;
+  width:22%;
+  padding:10px 0 10px 10px;
+}
+
+.access{
+  width:65%;
+  display:inline-block;
+}
+
+.picture{
+  width:33%;
+  margin:0 auto;
+}
+
+.favoritehotel_btn{
+  padding-bottom:30px;
+}
+
 @media screen and (max-width:768px) { 
     /*　画面サイズが768pxまではここを読み込む　*/
   .hotel_sp_index{
@@ -355,6 +394,11 @@ td{
       padding:5px 0 5px 15px;
       border-radius:30px;
     }
+  }
+  
+  .picture{
+    width:300px;
+    margin:0 auto;
   }
   
   .address{

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
-   has_many :hotels, dependent: :destroy 
+   has_many :favorites, dependent: :destroy 
+   has_many :posts, dependent: :destroy 
    before_save   :downcase_email
    before_save { self.email = email.downcase }
    validates :name, presence: true, length: { maximum: 50 }

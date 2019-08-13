@@ -1,0 +1,33 @@
+<% provide(:title, 'コメント投稿一覧') %>
+
+<h1>コメント投稿一覧</h1>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle user_count" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <%= @page %>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <% @per_pages.each do |per_page| %>
+      <li><%= link_to(per_page, all_hotel_path(per_page: per_page)) %></li>
+    <% end %>
+  </ul>
+</div>
+<% if @page != "全表示" %>
+  <%= will_paginate @posts, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
+<% end %>
+
+<%= render :partial => "post_index" %>
+<%= render :partial => "post_sp_index" %>
+
+<script>
+
+$(function(){
+  $(".all_comment").hide();
+  $('.comment_title').click(function(e) {
+      e.preventDefault();
+      $(this).siblings(".all_comment").slideToggle();
+   })
+});
+
+</script>

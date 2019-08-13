@@ -1,36 +1,17 @@
 <div class="hotel_sp_layout">
  <p>ホテル名をクリックすると詳細が表示されます。</p>
  <ul class="hotel_sp_index mysptable">
-  <% if @site == "2" %>
-     <% @arr.elements.each('//Hotel/') do |hotel| %>
-       <li>
-         <div>
-           <% if logged_in? %>
-             <%= link_to hotel.elements["HotelName"].text ,new_hotel_path(site: @site, number: hotel.elements["HotelID"].text) %>
-           <% else %>
-             <%= link_to hotel.elements["HotelName"].text ,hotel_path(site: @site,id: hotel.elements["HotelID"].text) %>
-           <% end %>
-         </div>
-         <div>
-            <%= hotel.elements["SampleRateFrom"].text %>円
-         </div>
-       </li>
-     <% end %>   
-   <% else %>
-      <% @arr.elements.each('//root/hotels/hotel/') do |hotel| %>
-        <li>
-          <div>
-            <% if logged_in? %>
-               <%= link_to hotel.elements["hotelBasicInfo/hotelName"].text ,new_hotel_path(site: @site, number: hotel.elements["hotelBasicInfo/hotelNo"].text) %>
-            <% else %>
-               <%= link_to hotel.elements["hotelBasicInfo/hotelName"].text ,hotel_path(site: @site,id: hotel.elements["hotelBasicInfo/hotelNo"].text) %>
-            <% end %>
-          </div>
-          <div>
-            <%= hotel.elements["hotelBasicInfo/hotelMinCharge"].text %>円
-          </div>
-        </li>
-      <% end %>
-   <% end %>
+    <% @hotels.each do |hotel| %>
+      <li>
+        <div>
+          <% if logged_in? %>
+             <%= link_to hotel["Name"] ,new_user_favorite_path(current_user,site: @site, number: hotel["No"]) %>
+          <% else %>
+             <%= link_to hotel["Name"] ,hotel_path(site: @site,id: hotel["No"]) %>
+          <% end %>
+        </div>
+        <div><%= hotel["Price"] %>円</div>
+      </li>
+    <% end %>
  </ul>
 </div>

@@ -1,0 +1,20 @@
+<ul class="favoritehotel_sp_index">
+  <% @posts.each do |key,value| %>
+    <li>
+      <div class="favoritehotel_sp_index_name"><%= key %></div>
+      <div class="favoritehotel_sp_index_name">
+         <%= link_to "コメント一覧を表示","#",class:"comment_title" %>
+         <ol class="all_comment">
+            <% value.each do |hotel| %>
+              <div class="comment">
+                <li><%= hotel.comment %></li>
+                <%= button_to "#", remote: true, class: "btn btn-success btn-xs" do %>
+                  <i class="fa fa-thumbs-o-up">いいね</i>
+                <% end %>
+              </div>
+            <% end %>
+          </ol>
+      </div>
+    </li>
+  <% end %>
+</ul>

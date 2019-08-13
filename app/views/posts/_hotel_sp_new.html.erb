@@ -1,0 +1,33 @@
+<ul class="hotel_show_sp_index">
+   <div class="hotel_show_content">
+      <li class="hotel_show_item">ホテル名</li>
+      <li class="hotel_show_content"><%= @hotel["Name"] %></li>
+   </div>
+   <div class="hotel_show_content">
+      <li class="hotel_show_item">住所</li> 
+      <li class="hotel_show_item"><%= @hotel["Address"] %></li> 
+   </div>
+   <div class="hotel_show_content">
+     <li class="hotel_show_item">価格</li> 
+     <li class="hotel_show_item"><%= @hotel["Price"] %>円<li>
+   </div>
+    <div class="hotel_show_content">
+     <li class="hotel_show_item">アクセス</li> 
+     <li class="hotel_show_item">
+        <%= link_to map_path(@hotel["Address"]),target: "new" do %>
+          <div><img src="<%= get_map(@hotel["Address"]) %>" width="200px" height="200px"></div>
+        <% end %>
+        <div><%= @hotel["Access"] %></div>
+     <li>
+   </div>
+    <% if logged_in? %>
+      <div id="text_sp_form">
+        <% if @sp_hotel %>
+          <p class="hotel_new_sp_text">登録済み</p>
+        <% else %>
+          <%= f.label :comment %>(250文字以内）<span class="letter_count"></span>
+          <%= f.text_area :comment, :size => "20x5",class:"hotel_new_sp_text letter" %>
+        <% end %>
+      </div>
+    <% end %>
+</ul>

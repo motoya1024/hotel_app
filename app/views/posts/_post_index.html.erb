@@ -1,0 +1,27 @@
+<table id="favoritehotel_index" class="table-bordered table-striped">
+  <tr>
+     <th class="hotelname">ホテル名</th>
+     <th class="hotelcomment">コメント</th>
+  </tr>
+  <% @posts.each do |key,value| %>
+    <tr>
+      <td id="favoritehotelname"><%= key %></td>
+      <td id="favoritehotelcomment">
+        <%= link_to "コメント一覧を表示","#",class:"comment_title" %>
+        <ol class="all_comment">
+          <% value.each do |hotel| %>
+            <div class="comment">
+              <li><%= hotel.comment %></li>
+              <% if hotel.user_id != current_user.id %>
+                <%= button_to "#", remote: true, class: "btn btn-success btn-xs" do %>
+                  <i class="fa fa-thumbs-o-up">いいね</i>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </ol>
+      </td>
+    </tr>
+  <% end %>
+</table>  
+

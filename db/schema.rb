@@ -10,16 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190713093205) do
+ActiveRecord::Schema.define(version: 20190812144525) do
 
-  create_table "hotels", force: :cascade do |t|
-    t.integer "hotel_number"
+  create_table "favorites", force: :cascade do |t|
+    t.integer "number"
+    t.string "name"
+    t.string "memo"
+    t.integer "site", default: 0
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer "number"
     t.integer "site", default: 1
+    t.string "name"
     t.string "comment"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_hotels_on_user_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -28,6 +40,8 @@ ActiveRecord::Schema.define(version: 20190713093205) do
     t.string "password_digest"
     t.boolean "admin"
     t.string "remember_digest"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

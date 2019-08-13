@@ -17,7 +17,7 @@ $(document).on("turbolinks:load", function() {
  
  $('.map').click(function() {
     var picture = $(this).data("id");
-    $('.modal-body').children('img').attr('src', picture);
+    $('#picture').children('img').attr('src', picture);
  });
  // 入力文字数
  $(document).on("keyup paste", ".letter", function (e) {

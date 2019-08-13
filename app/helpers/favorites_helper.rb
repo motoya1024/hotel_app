@@ -1,6 +1,5 @@
-module HotelsHelper
-
-   def get_hotelinfo(hotel_number,site)
+module FavoritesHelper
+  def get_hotelinfo(hotel_number,site)
       if site.to_s == "2"
          key = "leo157613fc400"
          feedURL = "http://jws.jalan.net/APIAdvance/HotelSearch/V1/?key="
@@ -37,16 +36,4 @@ module HotelsHelper
         }
       end
    end
-   
-   def get_map(address)
-      place = Geocoder.coordinates(address)
-      key = "dj0zaiZpPXdMV2NhazJleFFSTiZzPWNvbnN1bWVyc2VjcmV0Jng9MTI-"
-      feedURL = "https://map.yahooapis.jp/map/V1/static?appid="
-      feedURL = feedURL + key
-      feedURL = feedURL + "&pindefault=" + place[0].to_s + "," + place[1].to_s
-      feedURL = feedURL + "&z=16"
-      feedURL = feedURL + "&width=600"
-      feedURL = feedURL + "&height=600"
-   end
-      
 end

@@ -4,28 +4,15 @@ class HotelsController < ApplicationController
     before_action :logged_not_current_user, only: [:edit,:update,:favoritehotel,:destroy]
   
     include HotelsHelper
-    
-    def new
-      @user = User.find(current_user.id)
-      @hotel = @user.hotels.build
-      @site = params[:site]
-      @hotel_number = params[:number]
-      @arr = get_hotelinfo(@hotel_number,@site)
-      if @site == "2"
-         @sp_hotel = current_user.hotels.where(hotel_number: @arr.elements["//Hotel/HotelID"].text).present? 
-      else 
-         @sp_hotel = current_user.hotels.where(hotel_number: @arr.elements["//hotels/hotel/hotelBasicInfo/hotelNo"].text).present? 
-      end 
-    end
   
     def show
       @site = params[:site]
-      @hotel_number = params[:id]
-      @arr = get_hotelinfo(@hotel_number,@site)
+      @number = params[:id]
+      @hotels = get_hotelinfo(@number,@site)
     end
 
    def index
-      @site = params[:site]?params[:site]:"1"
+      @site = params[:site]? params[:site]:"1"
       @search = params[:search]
       order = params[:key]? params[:key]:4
       if params[:key] == "4"
@@ -44,6 +31,7 @@ class HotelsController < ApplicationController
       @counts = { "全表示" => 5000, "5" => 5,  "10" => 10, "20" => 20, "50" => 50, "100" => 100}
       @sorts = { "2" => "平均価格の安い順",  "3" => "平均価格の高い順","4" => "おすすめ順"}
       
+     @hotels = []
      begin
       if @site == "1"
         key = "1023150086339421281"
@@ -57,8 +45,19 @@ class HotelsController < ApplicationController
         feedURL = feedURL + "&allReturnFlag=1"
         feedURL = feedURL + "&datumType=1"
         xml = open(feedURL).read
-       # render plain:xml.inspect
+        
         @arr = REXML::Document.new(xml)
+        @arr.elements.each('//root/hotels/hotel/') do |hotel| 
+          @hotel = {
+                "No" => hotel.elements["hotelBasicInfo/hotelNo"].text,
+                "Name" => hotel.elements["hotelBasicInfo/hotelName"].text,
+                "Address" => hotel.elements["hotelBasicInfo/address1"].text << hotel.elements["hotelBasicInfo/address2"].text,
+                "Price" => hotel.elements["hotelBasicInfo/hotelMinCharge"].text,
+                "InformationURL" => hotel.elements["hotelBasicInfo/hotelInformationUrl"].text
+                
+          }
+          @hotels.push(@hotel)
+        end
       else
         key = "leo157613fc400"
         feedURL = "http://jws.jalan.net/APIAdvance/HotelSearch/V1/?key="
@@ -72,70 +71,33 @@ class HotelsController < ApplicationController
         feedURL = feedURL + "&count=100"
         feedURL = feedURL + "&order=" + order.to_s
         xml = open(feedURL).read 
-        #hash = Hash.from_xml(xml.to_s)
         @arr = REXML::Document.new(xml)
+         @arr.elements.each('//Hotel/') do |hotel| 
+            @hotel = {
+                  "No" => hotel.elements["HotelID"].text,
+                  "Name" => hotel.elements["HotelName"].text,
+                  "Address" => hotel.elements["HotelAddress"].text,
+                  "Price" => hotel.elements["SampleRateFrom"].text,
+                  "InformationURL" => hotel.elements["HotelDetailURL"].text
+            }
+            @hotels.push(@hotel)
+         end
        end
      rescue => e
        flash[:danger] = "住所が検索できませんでした。"
        redirect_to hotels_path(site: @site)
      end
-     
+    end
+    
+    def map
+        
+        
     end
 
-    def create
-        @user = User.find(current_user.id)
-        @hotel = @user.hotels.build(hotel_params)
-        @hotel_number = hotel_params["hotel_number"]
-        @site = hotel_params["site"]
-        @arr = get_hotelinfo(hotel_params["hotel_number"],hotel_params["site"])
-        if @hotel.save
-            flash[:success] = "コメントを登録しました。"
-            redirect_to favoritehotel_url(current_user)
-        else
-            render 'new'
-        end
-    end 
-    
-    def favoritehotel
-      @user = User.find(current_user.id)
-      @per_pages = ["全表示",5,10,20]
    
-      if params[:per_page] == nil || params[:per_page] == "全表示"
-        @page = "全表示"
-        @hotels = @user.hotels
-      else
-        @page = params[:per_page]
-        @hotels = @user.hotels.paginate(page: params[:page], per_page: @page)
-      end
-      
-    end
+    
+    
+    
+    
+end
    
-    def destroy
-      @hotel = Hotel.find(params[:id])
-      if @hotel.destroy
-         flash[:success] = "お気に入りホテル情報を削除しました。"
-         redirect_to favoritehotel_url(current_user)
-      else
-         render 'edit'
-      end
-    end
-    
-    def edit
-      @hotel = Hotel.find(params[:id])
-    end
-    
-    def update
-      @hotel = Hotel.find(params[:id])
-      if @hotel.update_attributes(hotel_params)
-        flash[:success] = "お気に入りホテル情報を更新しました。"
-        redirect_to favoritehotel_url(current_user)
-      else
-        render "edit"
-      end
-    end
-    
-    private
-      def hotel_params
-        params.require(:hotel).permit(:hotel_number,:comment,:site)
-      end  
-    end
