@@ -1,27 +1,39 @@
-<table id="favoritehotel_index" class="table-bordered table-striped">
-  <tr>
-     <th class="hotelname">ホテル名</th>
-     <th class="hotelcomment">コメント</th>
-  </tr>
-  <% @posts.each do |key,value| %>
+<table id="post_index" class="table-bordered table-striped" style="width:100%">
+  <thead>
     <tr>
-      <td id="favoritehotelname"><%= key %></td>
-      <td id="favoritehotelcomment">
-        <%= link_to "コメント一覧を表示","#",class:"comment_title" %>
-        <ol class="all_comment">
-          <% value.each do |hotel| %>
-            <div class="comment">
-              <li><%= hotel.comment %></li>
-              <% if hotel.user_id != current_user.id %>
-                <%= button_to "#", remote: true, class: "btn btn-success btn-xs" do %>
-                  <i class="fa fa-thumbs-o-up">いいね</i>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-        </ol>
-      </td>
+       <th class="hotelname">ホテル名</th>
+       <th class="hotelcomment">コメント</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+  　<% count = 0 %>
+    <% @posts.each do |key,value| %>
+      <% count = count + 1 %>
+      <tr>
+        <td class="posthotelname"><%= key %></td>
+        <td class="postehotelcomment">
+          <%= link_to "コメント一覧を表示","#",class:"comment_title" %>
+          <ul class="all_comment" id="comment_<%= count %>">
+            <% value.each do |hotel| %>
+              <div class="comment">
+                <li><%= hotel.comment %></li>
+                <% if hotel.user_id != current_user.id %>
+                  <% if !hotel.likes.where(user_id: current_user.id).first %>
+                    <%= link_to likes_path(id: hotel.id,count: count),method: :post,remote:true, class: "btn btn-success btn-xs" do %>
+                       <i class="fa fa-thumbs-up">いいね</i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to like_path(id: hotel.id,count: count),method: :delete,remote:true,class: "btn btn-default btn-xs" do %>
+                      <i class="fa">いいね済</i>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>  
 

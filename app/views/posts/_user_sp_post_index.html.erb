@@ -1,0 +1,12 @@
+<ul class="user_post_sp_index">
+  <% @posts.each do |post| %>
+    <li>
+      <div class="post_sp_index_name"><%= post.name %></div>
+      <div class="post_sp_index_btn">
+        <%= link_to "編集",edit_post_path(current_user.id,post), class: 'btn btn-primary' %>
+        <%= link_to "削除",post_path(post), method: :delete, class: 'btn btn-danger',data: { confirm: "コメントを消去してもいいですか？" } %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+

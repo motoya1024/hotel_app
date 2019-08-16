@@ -4,10 +4,11 @@ Rails.application.routes.draw do
     resources :favorites
   end
   resources :posts
+  get "/users/:user_id/posts/", to: "posts#user_index", as: :user_posts
+  resources :likes
   resources :hotels,only: [:show, :index]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   get  '/hotels/map/:map', to: 'hotels#map',as: :map
-  get '/hotel/all', to: 'hotels#all', as: :all_hotel
   
   root 'tops#home'
   get    '/login',   to: 'sessions#new'

@@ -1,0 +1,18 @@
+<% provide(:title, 'コメント編集') %>
+<% provide(:button_text, '編集') %>
+<h1>コメント編集</h1>
+
+<%= form_for(@post,url: post_path(@post)) do |f| %>
+　 <%= render 'shared/error_messages', object: f.object %>
+   <%= f.hidden_field :number, value: @post.number %>
+   <% hotel = get_hotelinfo(@post.number,@post.site) %>
+   <div class="picture">
+      <img src="<%= hotel["Picture"] %>" width="100%" height="100%">
+   </div>
+   <%= render :partial => "hotel_edit", locals: {hotel: hotel,f: f} %>
+   <%= render :partial => "hotel_sp_edit", locals: {hotel: hotel,f: f} %>
+   <div class="favoritehotel_btn">
+     <%= f.submit yield(:button_text), class: "btn btn-primary register_btn" %>
+     <%= link_to "戻る", user_favorites_path(current_user),class:"btn btn-success register_btn" %>
+   </div>
+<% end %>

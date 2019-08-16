@@ -1,18 +1,25 @@
-class PostsController < ApplicationController
+ 
+ class PostsController < ApplicationController
     
     include PostsHelper
   
     def index
-      @per_pages = ["全表示",10,20,30,50,100]
-      if params[:per_page] == nil || params[:per_page] == "全表示"
-         @page = "全表示"
-         @posts = Post.all.group_by {|i| i.name}
-      else
-         @page = params[:per_page]
-         @posts = Post.paginate(page: params[:page], per_page: @page).group_by {|i| i.name}
-      end
+      @counts = { "全表示" => 5000, "1" => 1,  "5" => 5,  "10" => 10, "20" => 20, "50" => 50, "100" => 100}
+      @posts = Post.all.group_by {|i| i.name}
     end
    
+    def user_index
+      @user = User.find(current_user.id)
+      @per_pages = ["全表示",5,10,20]
+      if params[:per_page] == nil || params[:per_page] == "全表示"
+        @page = "全表示"
+        @posts = @user.posts
+      else  
+        @page = params[:per_page]
+        @posts = @user.posts.paginate(page: params[:page], per_page: @page)
+      end
+    end 
+    
     def new
       @site = params[:site]
       @number = params[:number]
@@ -28,10 +35,36 @@ class PostsController < ApplicationController
       @hotel = get_hotelinfo(@number,@site)
        if @post.save
           flash[:success] = "コメントを登録しました。"
-          redirect_to user_favorites_url(current_user)
+          redirect_to posts_url(current_user)
       else
          render 'new'
       end
+    end
+    
+    def edit
+      @post = Post.find(params[:id])
+    end
+    
+    
+    def update
+      @post = Post.find(params[:id])
+      if @post.update_attributes(post_params)
+        flash[:success] = "コメントを更新しました。"
+        redirect_to user_posts_url(current_user)
+      else
+        render "edit"
+      end
+    end
+    
+    def destroy
+      @post = Post.find(params[:id])
+      if @post.destroy
+         flash[:success] = "コメントを削除しました。"
+         redirect_to user_posts_url(current_user)
+      else
+         render 'user_index'
+      end
+      
     end
     
     private

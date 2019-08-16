@@ -7,6 +7,8 @@ $(document).on("turbolinks:load", function() {
      windowindexsize();
      getPagination('.mytable');
      getspPagination();
+     getpostPagination ("#post_index");
+     getsppostPagination ();
 
 // jsを記載
  //地図の画像のモーダル表示
@@ -84,6 +86,11 @@ $(document).on("turbolinks:load", function() {
     }else{
       $(".state").attr("id","maxspRows");
     }
+    if(w > x){
+      $(".post_state").attr("id","maxpostRows");
+    }else{
+      $(".post_state").attr("id","maxsppostRows");
+    }
 	};
   
   
@@ -93,6 +100,8 @@ $(document).on("turbolinks:load", function() {
       windowindexsize();
       getPagination('.mytable');
       getspPagination();
+      getpostPagination ("#post_index");
+      getsppostPagination ();
   });
   
   

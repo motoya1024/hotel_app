@@ -1,24 +1,30 @@
 <% provide(:title, 'コメント投稿一覧') %>
 
 <h1>コメント投稿一覧</h1>
-
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle user_count" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <%= @page %>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <% @per_pages.each do |per_page| %>
-      <li><%= link_to(per_page, all_hotel_path(per_page: per_page)) %></li>
+<div>
+  <p id="count">表示件数</p>
+  <select class="form-control post_state" name="state">
+    <% @counts.each do |key,count| %>
+      <option value=<%= count %>><%= key %></option>
     <% end %>
-  </ul>
+  </select>
 </div>
-<% if @page != "全表示" %>
-  <%= will_paginate @posts, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
-<% end %>
+<div class='pagination-container'>
+	<nav>
+	  <ul class="pagination">
+	   <!--	Here the JS Function Will Add the Rows -->
+	  </ul>
+	</nav>
+</div>
 
-<%= render :partial => "post_index" %>
-<%= render :partial => "post_sp_index" %>
+<div class="post_layout">
+  <%= link_to "自身のコメント一覧へ", user_posts_path(current_user),class: "btn btn-primary" %> 
+</div>
+
+<div class="post_partial">
+  <%= render :partial => "post_index" %>
+  <%= render :partial => "post_sp_index" %>
+</div>
 
 <script>
 

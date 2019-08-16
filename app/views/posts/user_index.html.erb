@@ -1,0 +1,25 @@
+<% provide(:title, '自身のコメント投稿一覧') %>
+
+<h1>自身のコメント投稿一覧</h1>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle user_count" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <%= @page %>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <% @per_pages.each do |per_page| %>
+      <li><%= link_to(per_page, user_posts_path(current_user,per_page: per_page)) %></li>
+    <% end %>
+  </ul>
+</div>
+<% if @page != "全表示" %>
+  <%= will_paginate @posts, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
+<% end %>
+<div class="post_layout">
+  <%= link_to "全コメント一覧へ", posts_path,class: "btn btn-success" %>
+</div>
+<div class="post_partial">
+  <%= render :partial => "user_post_index" %>
+  <%= render :partial => "user_sp_post_index" %>
+</div>

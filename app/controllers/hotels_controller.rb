@@ -95,9 +95,5 @@ class HotelsController < ApplicationController
     end
 
    
-    
-    
-    
-    
 end
    
