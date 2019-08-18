@@ -17,7 +17,6 @@ class UsersController < ApplicationController
        @page = params[:per_page]
        @users = User.search(@search).paginate(page: params[:page], per_page: @page).order(id: :asc)
     end
-    p @page
   end
   
   def create
