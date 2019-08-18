@@ -1,8 +1,8 @@
 <ul class="favoritehotel_sp_index">
   <% @hotels.each do |hotel| %>
     <li>
-      <div class="favoritehotel_sp_index_name"><%= hotel.name %></div>
-      <div class="favoritehotel_sp_index_btn">
+      <div><%= hotel.name %></div>
+      <div>
         <%= link_to "編集",edit_user_favorite_path(current_user.id,hotel), class: 'btn btn-primary' %>
         <%= link_to "削除",user_favorite_path(current_user.id,hotel), method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %>
       </div>

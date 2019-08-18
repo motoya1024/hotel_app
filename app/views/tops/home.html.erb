@@ -1,5 +1,5 @@
 <div class="text-center jumbotron site_title">
-  <h1>ホテル情報検索サイト</h1>
+  <h1>ホテル情報検索・投稿サイト</h1>
   <div>
     <%= link_to "ログイン", login_path, class: "btn btn-primary account_btn" %>
     <%= link_to "アカウント作成", new_user_path,class:"btn btn-success account_btn" %>
@@ -7,61 +7,54 @@
 </div>
 <div class="panel panel-default site-layout">
   <div class="site-information">
-    <h2>ホテル情報検索サイトとは？</h2>
-    <p id="information-content">旅行サイト（楽天、じゃらん）のホテル情報を簡単検索できるサイトです!!</p>
+    <h2>ホテル情報検索・投稿サイトとは？</h2>
+    <p id="information-content">旅行サイト（楽天、じゃらん）のホテル情報を簡単検索し、感想等コメントを投稿できるサイトです!!</p>
   </div>
   <div class="site-feature">
-    <h2>ホテル情報検索サイトの特徴!!</h2>
+    <h2>ホテル情報検索・投稿サイトの特徴!!</h2>
     <p class="text-success">図をクリックすると拡大図が表示されます。</p>
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3>ホテル情報を簡単検索</h3>
       </div>
       <div class="panel-body feature-content">
-        <img src="assets/hotel_index.png" width="50%" height="50%" class="hotel_sample" data-toggle="modal" data-target="#picture" data-id="assets/hotel_index.png">
-        <img src="assets/hotel_sp_index.png" width="50%" height="50%" class="hotel_sp_sample" data-toggle="modal" data-target="#picture" data-id="assets/hotel_sp_index.png">
+        <div class="image_form">
+          <img src="assets/hotel_index.png" width="100%" height="100%" class="hotel_sample" data-toggle="modal" data-target="#picture" data-id="assets/hotel_index.png">
+          <img src="assets/hotel_sp_index.png" width="100%" height="100%" class="hotel_sp_sample" data-toggle="modal" data-target="#picture" data-id="assets/hotel_sp_index.png">
+        </div>
         <p>検索欄に場所を入力すれば、ホテル名、住所、価格、ホームページへのリンクを一覧表示。また、楽天、じゃらんリンクをクリックすることで、それぞれのサイトの
-        ホテル情報を瞬時に切り替え、表示します。</p>
+          ホテル情報を瞬時に切り替え、表示します。</p>
       </div>
     </div>
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3>お気に入りホテル登録</h3>
+        <h3>お気に入り登録</h3>
+      </div>
+      <div class="panel-body feature-content">
+        <p>泊まったホテルの特徴や感想等をメモとして記録しておくことができます。後で、前に泊まったホテルの名前なんだっけ？とならないように泊まった
+          ホテルの特徴をお気に入りホテル一覧として、残しておくことができます。</p>
+        <div class="image_form">
+          <img src="assets/favorite_index.png" width="100%" height="100%" class="hotel_sample" data-toggle="modal" data-target="#picture" data-id="assets/favorite_index.png">
+          <img src="assets/favorite_sp_index.png" width="100%" height="100%" class="hotel_sp_sample" data-toggle="modal" data-target="#picture" data-id="assets/favorite_sp_index.png">
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>コメント投稿</h3>
       </div>
       <div class="panel-body feature-content">
         <div class="image_form">
-          <img src="assets/favoritehotel_index.png" width="100%" height="100%" class="hotel_sample" data-toggle="modal" data-target="#picture" data-id="assets/favoritehotel_index.png">
-          <img src="assets/favoritehotel_sp_index.png" width="50%" height="50%" class="hotel_sp_sample" data-toggle="modal" data-target="#picture" data-id="assets/favoritehotel_sp_index.png">
-          <img src="assets/favoritehotel_new.png" width="100%" height="100%" class="hotel_sample" data-toggle="modal" data-target="#picture" data-id="assets/favoritehotel_new.png">
-          <img src="assets/favoritehotel_sp_new.png" width="50%" height="50%" class="hotel_sp_sample" data-toggle="modal" data-target="#picture" data-id="assets/favoritehotel_sp_new.png">
+          <img src="assets/post_index.png" width="100%" height="100%" class="hotel_sample" data-toggle="modal" data-target="#picture" data-id="assets/post_index.png">
+          <img src="assets/post_sp_index.png" width="100%" height="100%" class="hotel_sp_sample" data-toggle="modal" data-target="#picture" data-id="assets/post_sp_index.png">
+          <img src="assets/user_post_index.png" width="100%" height="100%" class="hotel_sample" data-toggle="modal" data-target="#picture" data-id="assets/user_post_index.png">
+          <img src="assets/user_post_sp_new.png" width="100%" height="100%" class="hotel_sp_sample" data-toggle="modal" data-target="#picture" data-id="assets/user_post_sp_index.png">
         </div>
-        <p>泊まったホテルの特徴や感想をメモとして記録しておくことができます。後で、前に泊まったホテルの名前なんだっけ？とならないように泊まった
-      
-        ホテルの特徴をお気に入りホテル一覧として、残しておくことができます。</p>
-      </div>
-    </div>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>料金は無料</h3>
-      </div>
-      <div class="panel-body feature-content">
-        <p>料金はかかりません。どなたでもサイトを利用することが可能です。ただ、お気に入りホテル登録に関しては、ログインが必要になりますので、アカウント登録をお願いします。</p>
+        <p>泊まったホテルの特徴や感想等のコメントを投稿することができます。また各ホテルごとに投稿した全ユーザーのコメントを閲覧・情報共有をすることが
+          できますので、泊まるホテルを選ぶ際の参考とすることができます。</p>
       </div>
     </div>
   </div>
 </div>
 
 <%= render :partial => "/hotels/picture" %>
-<script>
-
-$('.hotel_sample').click(function() {
-    var picture = $(this).data("id");
-    $('.modal-body').children('img').attr('src', picture);
- });
- 
- $('.hotel_sp_sample').click(function() {
-    var picture = $(this).data("id");
-    $('.modal-body').children('img').attr('src', picture);
- });
-
-</script>

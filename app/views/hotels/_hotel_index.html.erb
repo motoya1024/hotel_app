@@ -19,7 +19,7 @@
         <td><%= hotel["Address"] %></td>
         <td><%= hotel["Price"] %>円</td>
         <td class="text-center"><%= link_to "ホームページへ",hotel["InformationURL"],target: "_new" %></td>
-         <% if logged_in? %>
+        <% if logged_in? %>
            <% if current_user.posts.where(name: hotel["Name"]).present? %>
               <td class="text-center">登録済み</td>
            <% else %>

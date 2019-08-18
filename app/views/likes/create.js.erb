@@ -1,3 +1,13 @@
-$(".post_partial").html('<%= escape_javascript(render :partial => "posts/post_index",posts: @posts) %>');
+var x = 768
+var w = $(window).width();
+if(w > x){
+  $(".post_partial").html('<%= escape_javascript(render :partial => "posts/post_index",posts: @posts) %>');
+  $(".post_partial").append("<%= escape_javascript(render :partial => "posts/post_sp_index",posts: @posts) %>");
+}else if(x > w){
+  $(".post_partial").html('<%= escape_javascript(render :partial => "posts/post_sp_index",posts: @posts) %>');
+  $(".post_partial").append('<%= escape_javascript(render :partial => "posts/post_index",posts: @posts) %>');
+}
 $(".all_comment").hide();
 $("#comment_<%= @count %>").show();
+
+  

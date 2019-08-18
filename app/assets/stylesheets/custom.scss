@@ -23,6 +23,10 @@ body {
   
 }
 
+img{
+  cursor:pointer;
+}
+
 
 /* header */
 
@@ -128,7 +132,7 @@ td{
   border-radius:10px;
   font-size:20px;
   text-align:center;
-  width:80%;
+  width:85%;
   margin:auto;
   box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.4);
   background-color:white;
@@ -147,6 +151,7 @@ td{
 .image_form{
   display:flex;
   flex-direction: column;
+  width:200%;
 }
 
 .site_title{
@@ -169,42 +174,27 @@ td{
   margin:80px auto 0;
 }
 
-
 .comment{
-  margin-bottom:30px;
+  margin-bottom:20px;
+  padding-bottom:10px;
+  border-bottom:1px solid #CCCCCC;
 }
 
 @media only screen and (min-width:769px) { 
     /*　画面サイズが768pxまではここを読み込む　*/
-  .feature-1,.feature-2,.feature-3{
-    width:31%;
-    vertical-align:top;
-  }
 
-  .feature-1{
-    float:left;
-  }
-  
   .hotel_sample{
     display:block;
     float:left;
     border:1px solid #BAD3FF;
     margin-bottom:10px;
+    margin-left:10px;
   }
-  
 
   .hotel_sp_sample{
     display:none;
   }
   
-  .feature-2{
-    margin-left:3.5%;
-    display:inline-block;
-  }
-  
-  .feature-3{
-    float:right;
-  }
 }
 
 //login
@@ -283,6 +273,7 @@ td{
 
 #hotel_new,#hotel_edit{
   width:100%;
+  margin-bottom:20px;
   th:first-child{
     width:15%;
   }
@@ -389,6 +380,10 @@ td{
   margin-top:50px;
 }
 
+.all_comment{
+  list-style-type:none;
+}
+
 
 @media screen and (max-width:768px) { 
     /*　画面サイズが768pxまではここを読み込む　*/
@@ -404,9 +399,6 @@ td{
     }
   }
   
-  .all_comment{
-    list-style-type:none;
-  }
   
   .picture{
     width:300px;
@@ -437,12 +429,12 @@ td{
     }
   }
   
-  .favoritehotel_sp_index_btn,.post_sp_index_btn{
+  .favoritehotel_sp_index_btn,.user_post_sp_index_btn{
     margin-right:15px;
     float:right;
   }
   
-  .favoritehotel_sp_index_name,.post_sp_index_name{
+  .favoritehotel_sp_index_name,.user_post_sp_index_name{
     width : calc(100% - 150px) ;
     display:inline-block;
   }

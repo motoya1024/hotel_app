@@ -11,7 +11,7 @@
       <td id="favoritehotelname"><%= post.name %></td>
       <td id="favoritehotelcomment"><%= post.comment %></td>
       <td id="favoritehotelcomment"><%= post.likes.count %></td>
-      <td class="text-center"><%= link_to "編集",edit_post_path(current_user.id,post), class: 'btn btn-primary' %></td>
+      <td class="text-center"><%= link_to "編集",edit_post_path(post), class: 'btn btn-primary' %></td>
       <td class="text-center"><%= link_to "削除",post_path(post), method: :delete, class: 'btn btn-danger',data: { confirm: "コメントを消去してもいいですか？" } %></td>
     </tr>
   <% end %>

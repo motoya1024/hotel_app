@@ -12,23 +12,22 @@ class FavoritesController < ApplicationController
    end
 
    def create
-        @user = User.find(current_user.id)
-        @hotel = @user.favorites.build(hotel_params)
-        @number = hotel_params["number"]
-        @site = hotel_params["site"]
-        @arr = get_hotelinfo(@number,@site)
-        if @hotel.save
-            flash[:success] = "お気に入りに登録しました。"
-            redirect_to user_favorites_url(current_user)
-        else
-            render 'new'
-        end
+      @user = User.find(current_user.id)
+      @favorite = @user.favorites.build(hotel_params)
+      @number = hotel_params["number"]
+      @site = hotel_params["site"]
+      @hotels = get_hotelinfo(@number,@site)
+      if @favorite.save
+          flash[:success] = "お気に入りに登録しました。"
+          redirect_to user_favorites_url(current_user)
+      else
+          render 'new'
+      end
    end 
    
    def index
       @user = User.find(current_user.id)
       @per_pages = ["全表示",5,10,20]
-   
       if params[:per_page] == nil || params[:per_page] == "全表示"
         @page = "全表示"
         @hotels = @user.favorites
@@ -49,12 +48,12 @@ class FavoritesController < ApplicationController
     end
     
     def edit
-      @hotel = Favorite.find(params[:id])
+      @favorite = Favorite.find(params[:id])
     end
     
     def update
-      @hotel = Favorite.find(params[:id])
-      if @hotel.update_attributes(hotel_params)
+      @favorite = Favorite.find(params[:id])
+      if @favorite.update_attributes(hotel_params)
         flash[:success] = "お気に入りホテル情報を更新しました。"
         redirect_to user_favorites_url(current_user)
       else

@@ -2,10 +2,10 @@
 <% provide(:button_text, '編集') %>
 <h1>お気に入り編集</h1>
 
-<%= form_for(@hotel,url: user_favorite_path(current_user.id,@hotel)) do |f| %>
+<%= form_with(model:@favorite,url: user_favorite_path(current_user.id,@favorite),local:true) do |f| %>
 　 <%= render 'shared/error_messages', object: f.object %>
-   <%= f.hidden_field :number, value: @hotel.number %>
-   <% hotel = get_hotelinfo(@hotel.number,@hotel.site) %>
+   <%= f.hidden_field :number, value: @favorite.number %>
+   <% hotel = get_hotelinfo(@favorite.number,@favorite.site) %>
    <div class="picture">
       <img src="<%= hotel["Picture"] %>" width="100%" height="100%">
    </div>

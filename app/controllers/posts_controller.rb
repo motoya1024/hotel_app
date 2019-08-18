@@ -4,8 +4,10 @@
     include PostsHelper
   
     def index
+      @id_counts = 
+      @search = params[:search]
       @counts = { "全表示" => 5000, "1" => 1,  "5" => 5,  "10" => 10, "20" => 20, "50" => 50, "100" => 100}
-      @posts = Post.all.group_by {|i| i.name}
+      @posts = Post.search(@search)
     end
    
     def user_index

@@ -2,7 +2,7 @@
 <% provide(:button_text, '登録') %>
 <h1>お気に入り登録</h1>
 
-<%= form_for(@favorite, url:user_favorites_path(current_user)) do |f| %>
+<%= form_with(model:@favorite, url:user_favorites_path(current_user),local:true) do |f| %>
    <%= render 'shared/error_messages', object: f.object %>
  　<%= f.hidden_field :number, value: @number %>
    <%= f.hidden_field :site, value: @site %>

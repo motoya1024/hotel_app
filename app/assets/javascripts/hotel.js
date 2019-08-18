@@ -9,34 +9,27 @@ $(document).on("turbolinks:load", function() {
      getspPagination();
      getpostPagination ("#post_index");
      getsppostPagination ();
-
-// jsを記載
- //地図の画像のモーダル表示
- $('.picture').click(function() {
-    var picture = $(this).data("id");
-    $('.modal-body').children('img').attr('src', picture);
- });
- 
- $('.map').click(function() {
-    var picture = $(this).data("id");
-    $('#picture').children('img').attr('src', picture);
- });
- // 入力文字数
- $(document).on("keyup paste", ".letter", function (e) {
-    var txt = $(this).val();
-    var new_txt = $.trim(txt.replace(/\n/g, ""));
-    var count = new_txt.length;
-    $(".letter_count").text("入力文字数:"+count);
- });
- 
- 
+     CommentShow();
+  
+   // 入力文字数
+   $(document).on("keyup paste", ".letter", function (e) {
+      var txt = $(this).val();
+      var new_txt = $.trim(txt.replace(/\n/g, ""));
+      var count = new_txt.length;
+      $(".letter_count").text("入力文字数:"+count);
+   });
+  
+  $('.hotel_sample').click(function() {
+      var picture = $(this).data("id");
+      $('.modal-body').children('img').attr('src', picture);
+  });
+   
   function windownewsize (){
     var sp_hotel = $('#sp_hotel').data("id");
     var w = $(window).width();
-    console.log(widthnewFlag);
     var x = 768
     if(w > x && widthnewFlag != 'pc'){
-       widthnewFlag = "pc"
+       widthnewFlag = "pc";
        $(".hotel_new_sp_text").remove();
        if(!($('.hotel_new_text').length)){
            if(sp_hotel == false){
@@ -46,7 +39,7 @@ $(document).on("turbolinks:load", function() {
            }
        }
     }else if(x > w && widthnewFlag != 'sp'){
-       widthnewFlag = "sp"
+       widthnewFlag = "sp";
        $(".hotel_new_text").remove();
        if(!($('.hotel_new_sp_text').length)){
            if(sp_hotel == false){
@@ -83,16 +76,12 @@ $(document).on("turbolinks:load", function() {
     var x = 768
     if(w > x){
       $(".state").attr("id","maxRows");
-    }else{
-      $(".state").attr("id","maxspRows");
-    }
-    if(w > x){
       $(".post_state").attr("id","maxpostRows");
     }else{
+      $(".state").attr("id","maxspRows");
       $(".post_state").attr("id","maxsppostRows");
     }
 	};
-  
   
   $(window).on( 'resize', function() {
       windownewsize();
@@ -104,6 +93,13 @@ $(document).on("turbolinks:load", function() {
       getsppostPagination ();
   });
   
+  function CommentShow(){
+    $(".all_comment").hide();
+    $('.comment_title').click(function(e) {
+        e.preventDefault();
+        $(this).siblings(".all_comment").slideToggle();
+    });
+  }
   
 });
 

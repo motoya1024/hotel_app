@@ -41,7 +41,7 @@ class User < ApplicationRecord
   def self.search(search)
       return User.all unless search
       User.where(['name LIKE ?', "%#{search}%"])
-    end
+  end
   private
   
   # メールアドレスをすべて小文字にする

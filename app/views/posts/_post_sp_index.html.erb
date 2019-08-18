@@ -1,25 +1,29 @@
 <ul class="post_sp_index">
+  <% count = 0 %>
   <% @posts.each do |key,value| %>
+    <% count = count + 1 %>
     <li>
-      <div class="post_sp_index_name"><%= key %></div>
-      <div class="post_sp_index_comment">
+      <div><%= key %></div>
+      <div>
         <%= link_to "コメント一覧を表示","#",class:"comment_title" %>
-          <ul class="all_comment">
-            <% value.each do |hotel| %>
+        <ul class="all_comment" id="comment_<%= count %>">
+          <% value.each do |hotel| %>
             <div class="comment">
               <li><%= hotel.comment %></li>
               <% if hotel.user_id != current_user.id %>
-                <% if !hotel.likes.where(user_id: current_user.id) %>
-                  <%= button_to likes_path(id: hotel.id), class: "btn btn-success btn-xs" do %>
-                    <i class="fa fa-thumbs-o-up">いいね</i>
+                <% if !hotel.likes.where(user_id: current_user.id).first %>
+                  <%= link_to likes_path(id: hotel.id,count: count),method: :post,remote:true, class: "btn btn-success btn-xs" do %>
+                     <i class="fa fa-thumbs-up">いいね</i>
                   <% end %>
                 <% else %>
-                  <i class="fa fa-thumbs-o-up btn btn-default">いいね済</i>
+                  <%= link_to like_path(id: hotel.id,count: count),method: :delete,remote:true,class: "btn btn-default btn-xs" do %>
+                    <i class="fa">いいね済</i>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>
-          <% end %>
-          </ul>
+       　  <% end %>
+        </ul>
       </div>
     </li>
   <% end %>

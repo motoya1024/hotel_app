@@ -1,6 +1,13 @@
 <% provide(:title, 'コメント投稿一覧') %>
 
 <h1>コメント投稿一覧</h1>
+<div class="search_layout">
+  <%= form_with url: posts_path, local:true,method: :get do |f| %>
+    <%= f.label :search,"ホテル検索" %>
+    <%= f.text_field :search, value:@search,class:"form_inline search_form" %>
+    <%= f.submit "検索する",class:"search_btn" %>
+  <% end %>
+</div>
 <div>
   <p id="count">表示件数</p>
   <select class="form-control post_state" name="state">
@@ -26,14 +33,3 @@
   <%= render :partial => "post_sp_index" %>
 </div>
 
-<script>
-
-$(function(){
-  $(".all_comment").hide();
-  $('.comment_title').click(function(e) {
-      e.preventDefault();
-      $(this).siblings(".all_comment").slideToggle();
-   })
-});
-
-</script>
