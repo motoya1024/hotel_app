@@ -1,43 +1,45 @@
 <table id="hotel_new" class="table-bordered table-striped">
-   <tr>
-      <th>項目</th>
-      <th>内容</th>
-   </tr>
+  <tr>
+    <th>項目</th>
+    <th>内容</th>
+  </tr>
+  <tr>
+    <td>ホテル名</td>
+    <td><%= @hotels["Name"] %></td>
+  </tr>
+  <tr>
+   　<td>住所</td>
+   　<td><%= @hotels["Address"] %></td>
+  </tr>
+  <tr>
+   　<td>価格</td>
+   　<td><%= @hotels["Price"] %>円</td>
+  </tr>
+  <tr>
+   　<td>ホームページへ</td>
+   　<td><%= link_to "ホームページへ",@hotels["InformationURL"],target: "new" %></td>
+  </tr>
+  <tr>
+   　<td>アクセス</td>
+   　<td>
+       <%= link_to map_path(@hotels["Address"]),target: "new" do %>
+         <div class="map"><img src="<%= get_map(@hotels["Address"]) %>" width="100%" height="100%"></div>
+       <% end %>
+     　<div class="access"><%= @hotels["Access"] %></br>
+                          (地図をクリックすると拡大図が表示されます。)
+     　</div>
+     </td>
+  </tr>
+  <% if logged_in? %>
     <tr>
-      <td>ホテル名</td>
-      <td><%= @hotels["Name"] %></td>
-   </tr>
-    <tr>
-     　<td>住所</td>
-     　<td><%= @hotels["Address"] %></td>
-   </tr>
-    <tr>
-     　<td>価格</td>
-     　<td><%= @hotels["Price"] %>円</td>
+      <td>メモ</br>(250文字以内）</br><span class="letter_count"></span></td>
+      <td class="text_form">
+        <% if @sp_hotel %>
+          <p class="hotel_new_text">登録済み</p>
+        <% else %>
+          <%= f.text_area :memo, :size => "20x5",class:"hotel_new_text letter" %>
+        <% end %>
+      </td>
     </tr>
-    <tr>
-     　<td>ホームページへ</td>
-     　<td><%= link_to "ホームページへ",@hotels["InformationURL"],target: "new" %></td>
-    </tr>
-    <tr>
-     　<td>アクセス</td>
-     　<td>
-        　 <%= link_to map_path(@hotels["Address"]),target: "new" do %>
-            <div class="map"><img src="<%= get_map(@hotels["Address"]) %>" width="100%" height="100%"></div>
-          <% end %>
-        　<div class="access"><%= @hotels["Access"] %></div>
-       </td>
-    </tr>
-    <% if logged_in? %>
-      <tr>
-       　<td>メモ</br>(250文字以内）</br><span class="letter_count"></span></td>
-       　<td id="text_form">
-           <% if @sp_hotel %>
-              <p class="hotel_new_text">登録済み</p>
-           <% else %>
-              <%= f.text_area :memo, :size => "20x5",class:"hotel_new_text letter" %>
-           <% end %>
-         </td>
-       </tr>
-     <% end %>
+  <% end %>
 </table> 

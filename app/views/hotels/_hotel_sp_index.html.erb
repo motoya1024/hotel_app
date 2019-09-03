@@ -1,35 +1,35 @@
 <div class="hotel_sp_layout">
- <% if logged_in? %>
-   <p>お気に入り登録を行う場合は「登録」、コメント投稿を行う場合は「投稿」ボタンをクリックしてください。
-    </br>お気に入り登録または、コメント投稿済み場合は、「投稿」、または「登録」ボタンは表示されません。
-  </p>
- <% else %>
-   <p>ホテル名をクリックすると詳細が表示されます。</p>
- <% end %>
- <ul class="hotel_sp_index mysptable">
+  <% if logged_in? %>
+    <p>お気に入り登録を行う場合は「登録」、コメント投稿を行う場合は「投稿」ボタンをクリックしてください。</br>
+       お気に入り登録または、コメント投稿済み場合は、「投稿」、または「登録」ボタンは表示されません。
+    </p>
+  <% else %>
+    <p>ホテル名をクリックすると詳細が表示されます。</p>
+  <% end %>
+  <ul class="hotel_sp_index mysptable">
     <% @hotels.each do |hotel| %>
       <li>
         <div>
           <% if logged_in? %>
             <%= hotel["Name"] %>
           <% else %>
-            <%= link_to hotel["Name"] ,hotel_path(site: @site,id: hotel["No"]) %>
+            <%= link_to hotel["Name"] ,hotels_path(site: @site,id: hotel["No"]) %>
           <% end %>
         </div>
         <div><%= hotel["Price"] %>円</div>
         <div>
           <% if logged_in? %>
-             <% if !current_user.posts.where(name: hotel["Name"]).present? %>
-                <%= link_to "投稿",new_post_path(site:@site,number: hotel["No"]),class: "btn btn-success" %>
-             <% end %>
-             <% if !current_user.favorites.where(number: hotel["No"]).present? %>
-                <%= link_to "登録",new_user_favorite_path(current_user,site: @site, number: hotel["No"]),class: "btn btn-primary" %>
-             <% end %>
+            <% if !current_user.posts.where(name: hotel["Name"]).present? %>
+              <%= link_to "投稿",new_user_post_path(current_user,site:@site,number: hotel["No"]),class: "btn btn-success" %>
+            <% end %>
+            <% if !current_user.favorites.where(number: hotel["No"]).present? %>
+              <%= link_to "登録",new_user_favorite_path(current_user,site: @site, number: hotel["No"]),class: "btn btn-primary" %>
+            <% end %>
           <% else %>
-             <%= link_to "詳細",hotel_path(site: @site,id: hotel["No"]),class: "btn btn-primary" %>
+            <%= link_to "詳細",hotel_show_path(site: @site,number: hotel["No"]),class: "btn btn-primary" %>
           <% end %>
         </div>
       </li>
     <% end %>
- </ul>
+  </ul>
 </div>

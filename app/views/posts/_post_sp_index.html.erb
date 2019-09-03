@@ -12,11 +12,11 @@
               <li><%= hotel.comment %></li>
               <% if hotel.user_id != current_user.id %>
                 <% if !hotel.likes.where(user_id: current_user.id).first %>
-                  <%= link_to likes_path(id: hotel.id,count: count),method: :post,remote:true, class: "btn btn-success btn-xs" do %>
-                     <i class="fa fa-thumbs-up">いいね</i>
+                  <%= link_to likes_path(id: hotel.id,count: count,user_id:current_user),method: :post,remote:true, class: "btn btn-success btn-xs" do %>
+                    <i class="fa fa-thumbs-up">いいね</i>
                   <% end %>
                 <% else %>
-                  <%= link_to like_path(id: hotel.id,count: count),method: :delete,remote:true,class: "btn btn-default btn-xs" do %>
+                  <%= link_to like_path(id: hotel.id,count: count,user_id:current_user),method: :delete,remote:true,class: "btn btn-default btn-xs" do %>
                     <i class="fa">いいね済</i>
                   <% end %>
                 <% end %>

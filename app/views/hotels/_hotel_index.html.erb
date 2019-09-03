@@ -1,4 +1,3 @@
-
 <table id="hotel_index" class="table-bordered table-striped mytable">
   <thead>
     <tr>
@@ -8,8 +7,10 @@
       <th class="hotelinformation">ホームページ</th>
       <% if logged_in? %>
         <th class="hotelregister">コメント投稿</th>
+        <th class="hotelregister">お気に入り</th>
+      <% else %>
+        <th class="hotelregister">詳細</th>
       <% end %>
-      <th class="hotelregister"><% if logged_in? %>お気に入り<% else %>詳細<% end %></th>
     </tr>
   </thead>
   <tbody>
@@ -20,20 +21,20 @@
         <td><%= hotel["Price"] %>円</td>
         <td class="text-center"><%= link_to "ホームページへ",hotel["InformationURL"],target: "_new" %></td>
         <% if logged_in? %>
-           <% if current_user.posts.where(name: hotel["Name"]).present? %>
-              <td class="text-center">登録済み</td>
-           <% else %>
-              <td class="text-center"><%= link_to "投稿",new_post_path(site:@site,number: hotel["No"]),class: "btn btn-success" %></td>
-           <% end %>
+          <% if current_user.posts.where(name: hotel["Name"]).present? %>
+            <td class="text-center">登録済み</td>
+          <% else %>
+            <td class="text-center"><%= link_to "投稿",new_user_post_path(current_user,site:@site,number: hotel["No"]),class: "btn btn-success" %></td>
+          <% end %>
         <% end %>
         <% if logged_in? %>
-           <% if current_user.favorites.where(number: hotel["No"]).present? %>
-              <td class="text-center">登録済み</td>
-           <% else %>
-              <td class="text-center"><%= link_to "登録",new_user_favorite_path(current_user,site: @site, number: hotel["No"]),class: "btn btn-primary" %></td>
-           <% end %>
+          <% if current_user.favorites.where(number: hotel["No"]).present? %>
+            <td class="text-center">登録済み</td>
+          <% else %>
+            <td class="text-center"><%= link_to "登録",new_user_favorite_path(current_user,site: @site, number: hotel["No"]),class: "btn btn-primary" %></td>
+          <% end %>
         <% else %>
-           <td class="text-center"><%= link_to "詳細",hotel_path(site: @site,id: hotel["No"]),class: "btn btn-primary" %></td>
+          <td class="text-center"><%= link_to "詳細",hotel_show_path(site: @site,number: hotel["No"]),class: "btn btn-primary" %></td>
         <% end %>
       </tr>
     <% end %>

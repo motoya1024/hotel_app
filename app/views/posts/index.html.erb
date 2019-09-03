@@ -9,7 +9,7 @@
   <% end %>
 </div>
 <div>
-  <p id="count">表示件数</p>
+  <p class="count">表示件数</p>
   <select class="form-control post_state" name="state">
     <% @counts.each do |key,count| %>
       <option value=<%= count %>><%= key %></option>
@@ -19,13 +19,12 @@
 <div class='pagination-container'>
 	<nav>
 	  <ul class="pagination">
-	   <!--	Here the JS Function Will Add the Rows -->
 	  </ul>
 	</nav>
 </div>
 
 <div class="post_layout">
-  <%= link_to "自身のコメント一覧へ", user_posts_path(current_user),class: "btn btn-primary" %> 
+  <%= link_to "自身のコメント一覧へ", user_posts_index_path(current_user),class: "btn btn-primary" %> 
 </div>
 
 <div class="post_partial">

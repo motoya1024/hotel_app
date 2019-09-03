@@ -1,8 +1,8 @@
 <table id="post_index" class="table-bordered table-striped" style="width:100%">
   <thead>
     <tr>
-       <th class="hotelname">ホテル名</th>
-       <th class="hotelcomment">コメント</th>
+      <th class="post_name">ホテル名</th>
+      <th class="post_comment">コメント</th>
     </tr>
   </thead>
   <tbody>
@@ -10,8 +10,8 @@
     <% @posts.each do |key,value| %>
       <% count = count + 1 %>
       <tr>
-        <td class="posthotelname"><%= key %></td>
-        <td class="postehotelcomment">
+        <td><%= key %></td>
+        <td>
           <%= link_to "コメント一覧を表示","#",class:"comment_title" %>
           <ul class="all_comment" id="comment_<%= count %>">
             <% value.each do |hotel| %>
@@ -19,11 +19,11 @@
                 <li><%= hotel.comment %></li>
                 <% if hotel.user_id != current_user.id %>
                   <% if !hotel.likes.where(user_id: current_user.id).first %>
-                    <%= link_to likes_path(id: hotel.id,count: count),method: :post,remote:true, class: "btn btn-success btn-xs" do %>
-                       <i class="fa fa-thumbs-up">いいね</i>
+                    <%= link_to likes_path(id: hotel.id,count: count,user_id:current_user),method: :post,remote:true, class: "btn btn-success btn-xs" do %>
+                      <i class="fa fa-thumbs-up">いいね</i>
                     <% end %>
                   <% else %>
-                    <%= link_to like_path(id: hotel.id,count: count),method: :delete,remote:true,class: "btn btn-default btn-xs" do %>
+                    <%= link_to like_path(id: hotel.id,count: count,user_id:current_user),method: :delete,remote:true,class: "btn btn-default btn-xs" do %>
                       <i class="fa">いいね済</i>
                     <% end %>
                   <% end %>

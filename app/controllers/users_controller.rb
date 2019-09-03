@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+  before_action :logged_in, only: [:edit,:update]
   before_action :logged_in_admin, only: [:index,:destroy]
   before_action :logged_not_current_user, only: [:edit,:update]
   
@@ -11,19 +12,19 @@ class UsersController < ApplicationController
     @search = params[:search]
     @per_pages = ["全表示",10,20,30,50,100]
     if params[:per_page] == nil || params[:per_page] == "全表示"
-       @page = "全表示"
-       @users = User.search(@search).order(id: :asc)
+      @page = "全表示"
+      @users = User.search(@search).order(id: :asc)
     else
-       @page = params[:per_page]
-       @users = User.search(@search).paginate(page: params[:page], per_page: @page).order(id: :asc)
+      @page = params[:per_page]
+      @users = User.search(@search).paginate(page: params[:page], per_page: @page).order(id: :asc)
     end
   end
   
   def create
     @user = User.new(user_params)  
     if @user.save
-       log_in @user
-       redirect_to favoritehotel_url @user
+      log_in @user
+      redirect_to user_favorites_url @user
     else
       render 'new'
     end
@@ -53,7 +54,7 @@ class UsersController < ApplicationController
   
   private
     def user_params
-        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
 end

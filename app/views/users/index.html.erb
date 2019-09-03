@@ -23,7 +23,9 @@
   </ul>
 </div>
 <% if @page != "全表示" %>
-  <%= will_paginate @users, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
+  <div class="pagination">
+    <%= will_paginate @users, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
+  </div>
 <% end %>
 <table id="user_index" class="table-bordered table-striped">
   <tr>
@@ -35,8 +37,8 @@
     <tr>
       <td><%= user.name %></td>
       <td><%= user.email %></td>
-      <td class="user_btn"><%= link_to "編集", edit_user_path(user), class: 'btn btn-primary' %></td>
-      <td class="user_btn">
+      <td class="center"><%= link_to "編集", edit_user_path(user), class: 'btn btn-primary' %></td>
+      <td class="center">
         <%if user.admin != true %>
           <%= link_to "削除", user_path(user) , method: :delete, class: 'btn btn-danger',data: { confirm: "#{user.name}さんを消去してもいいですか？" } %>
         <% end %>

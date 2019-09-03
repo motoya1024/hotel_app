@@ -6,17 +6,23 @@
   <%= form_with url: hotels_path, local:true,method: :get do |f| %>
     <%= f.hidden_field :site, value:@site %>
     <%= f.hidden_field :key, value:params[:key] %>
-    <%= f.label :search,"住所検索" %>
+    <%= f.label :search,"場所検索" %>
     <%= f.text_field :search, value:@search,class:"form_inline search_form" %>
     <%= f.submit "検索する",class:"search_btn" %>
   <% end %>
 </div>
-<p class="text-primary address_sp">ページを開いた時は、「東京都千代田区」周辺のホテル一覧を表示しています。</p>
+<p class="text-primary address_sp">入力した場所から半径１km以内のホテルを表示します。</br>
+                                  ページを開いた時は、「東京都千代田区」周辺のホテル一覧を表示しています。
+</p>
 <div class="order_select">
   <p>検索順</p>
   <div class="dropdown">
     <button class="btn btn-default dropdown-toggle sort_count" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      <% if @sorts[params[:key]] %><%= @sorts[params[:key]] %><% else %>選んでください。 <% end %>
+      <% if @sorts[params[:key]] %>
+        <%= @sorts[params[:key]] %>
+      <% else %>
+        選んでください。
+      <% end %>
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -26,9 +32,11 @@
     </ul>
   </div>
 </div>
- <p class="text-primary address">ページを開いた時は、「東京都千代田区」周辺のホテル一覧を表示しています。</p>
+<p class="text-primary address">入力した場所から半径１km以内のホテルを表示します。</br>
+                                ページを開いた時は、「東京都千代田区」周辺のホテル一覧を表示しています。
+</p>
 <div>
-  <p id="count">表示件数</p>
+  <p class="count">表示件数</p>
   <select class="form-control state" name="state">
     <% @counts.each do |key,count| %>
       <option value=<%= count %>><%= key %></option>
@@ -38,7 +46,6 @@
 <div class='pagination-container'>
 	<nav>
 	  <ul class="pagination">
-	   <!--	Here the JS Function Will Add the Rows -->
 	  </ul>
 	</nav>
 </div>
@@ -50,7 +57,7 @@
   <% if @site == "1" %>
     <%= link_to "楽天サイト","https://travel.rakuten.co.jp/",class:"site_rakuten" %>
   <% else %>
-    <%= link_to "じゃらんサイト",hotels_path(site:2),class:"site_jalan" %>
+    <%= link_to "じゃらんサイト","#",class:"site_jalan" %>
   <% end %>
 </div>
 <%= render :partial => "hotel_index" %>

@@ -16,11 +16,7 @@ body {
 }
 
 .jumbotron {
- /*
-  background-color: rgba(255,165,0,0);
-  */
   background-color: $gray-medium-light;
-  
 }
 
 img{
@@ -114,12 +110,26 @@ td{
   font-size:20px;
 }
 
+.center{
+  text-align:center;
+}
+
 
 //top
+
 .account{
   font-size:20px;
 }
+
 .hotel_sample{
+  display:block;
+  float:left;
+  border:1px solid #BAD3FF;
+  margin-bottom:10px;
+  margin-left:10px;
+}
+
+.hotel_sp_sample{
   display:none;
 }
 
@@ -180,22 +190,6 @@ td{
   border-bottom:1px solid #CCCCCC;
 }
 
-@media only screen and (min-width:769px) { 
-    /*　画面サイズが768pxまではここを読み込む　*/
-
-  .hotel_sample{
-    display:block;
-    float:left;
-    border:1px solid #BAD3FF;
-    margin-bottom:10px;
-    margin-left:10px;
-  }
-
-  .hotel_sp_sample{
-    display:none;
-  }
-  
-}
 
 //login
 .login_check{
@@ -207,11 +201,13 @@ td{
   padding:10px 0 10px 0;
 }
 
-//user hotel
+
+//user
 .user_count{
   width:80px;
   margin-bottom:3px;
 }
+
 #user_index{
   width:100%;
 }
@@ -220,6 +216,9 @@ td{
   margin-top:0;
   padding-top:0;
 }
+
+
+//hotel
 
 #hotel_index,#favoritehotel_index{
   width:100%;
@@ -240,34 +239,51 @@ td{
   width:60%;
 }
 
-.hotelprice{
+.hotelprice,.hotelregister{
   width:8%;
 }
 
-.hotelregister{
-  width:8%;
-}
 
-.hotelpicture{
+.hotelpicture,.hotelmap{
   width:10%;
 }
 
-.center{
-  text-align:center;
-}
-.hotelmap{
-  width:10%;
+.address_sp{
+  display:none;
 }
 
-.user_btn{
-  text-align:center;
+.site_form{
+  font-size:25px;
+  padding-bottom:10px;
 }
 
-#favoritehotelcomment{
+.site_rakuten{
+  margin-right:20px;
+}
+
+.order_select{
+  display:inline-block;
+  p{
+    display:inline-block;
+    margin-right:10px;
+    font-weight:bold;
+  }
+  .dropdown{
+    display:inline-block;
+  }
+}
+
+.hotel_sp_layout{
+  display:none;
+}
+
+//favorite 
+
+#favorite_hotel_comment{
   width:50%;
 }
 
-#favoritehotelname{
+#favorite_hotel_name{
   width:30%;
 }
 
@@ -284,17 +300,22 @@ td{
   margin-top:30px;
 }
 
-#maxRows,#maxspRows{
-  width:100px;
+.hotel_show_content{
+  margin-bottom:30px;
 }
 
-.site_form{
-  font-size:25px;
-  padding-bottom:10px;
+.favoritehotel_sp_index,.hotel_show_sp_index,.hotel_edit_sp_index{
+  display:none;
 }
 
-.site_rakuten{
-  margin-right:20px;
+.favoritehotel_btn{
+  padding-bottom:30px;
+}
+
+//search 
+.search_layout{
+  display:inline-block;
+  width:55%;
 }
 
 .search_form{
@@ -305,49 +326,44 @@ td{
   width:100px;
 }
 
-#count{
-  font-weight:bold;
+//post 
+.post_layout{
+  float:right;
 }
 
-.order_select{
-  display:inline-block;
-  p{
-    display:inline-block;
-    margin-right:10px;
-    font-weight:bold;
-  }
-  .dropdown{
-    display:inline-block;
-  }
+.post_state{
+  width:100px;
 }
 
-.hotel_show_sp_index,.hotel_edit_sp_index,.post_sp_index,.hotel_sp_layout{
+.post_partial{
+  margin-top:50px;
+}
+
+.post_user_name{
+  width:25%;
+}
+
+.post_user_comment{
+  width:50%;
+}
+
+.post_name{
+  width:30%;
+}
+
+.post_comment{
+  width:70%;
+}
+
+.all_comment{
+  list-style-type:none;
+}
+
+.user_post_sp_index,.post_sp_index{
   display:none;
 }
 
-.hotel_show_content{
-  margin-bottom:30px;
-}
-
-.hotel_sp_layout,.favoritehotel_sp_index,.user_post_sp_index{
-  display:none;
-}
-
-.register_btn{
-  width:130px;
-}
-
-
-.search_layout{
-  display:inline-block;
-  width:55%;
-}
-
-.address_sp{
-  display:none;
-}
-
-
+//favorite post new edit
 .map{
   display:inline-block;
   width:22%;
@@ -364,29 +380,38 @@ td{
   margin:0 auto;
 }
 
-.favoritehotel_btn{
-  padding-bottom:30px;
+.register_btn{
+  width:130px;
 }
 
-.post_layout{
-  float:right;
+//post hotel index
+.count{
+  font-weight:bold;
 }
 
-.post_state{
+#maxRows,#maxspRows{
   width:100px;
 }
 
-.post_partial{
-  margin-top:50px;
-}
-
-.all_comment{
-  list-style-type:none;
+.user_post_sp_index,.post_sp_index,.hotel_sp_layout{
+  display:none;
 }
 
 
 @media screen and (max-width:768px) { 
     /*　画面サイズが768pxまではここを読み込む　*/
+    
+  //top 
+  .hotel_sample{
+    display:none;
+  
+  }
+
+  .hotel_sp_sample{
+   
+  }
+    
+  //hotel
   .hotel_sp_index{
     list-style-type:none;
     li{
@@ -399,6 +424,9 @@ td{
     }
   }
   
+  .hotel_sp_layout{
+    display:block;
+  }
   
   .picture{
     width:300px;
@@ -412,23 +440,39 @@ td{
   .address_sp{
     display:block;
   }
+  
+  //search
   .search_layout{
-    width:100%;
+     width:100%;
    }
+   
+  //favorite
+  #favoritehotel_index,#hotel_new,#hotel_edit{
+    display:none;
+  }
   
   .favoritehotel_sp_index,.post_sp_index,.user_post_sp_index{
     list-style-type:none;
     display:block;
-     li{
+    li{
       margin-top:5px;
       margin-left:-25px;
       font-size:25px;
       background-color:#DDDDDD;
       padding:15px 0 15px 15px;
       border-radius:30px;
-    }
+     }
   }
   
+  .hotel_show_sp_index,.hotel_edit_sp_index{
+    font-size:30px;
+    list-style-type:none;
+    text-align:center;
+    display:block;
+    margin-right:40px;
+  } 
+  
+  //favorite post
   .favoritehotel_sp_index_btn,.user_post_sp_index_btn{
     margin-right:15px;
     float:right;
@@ -438,26 +482,10 @@ td{
     width : calc(100% - 150px) ;
     display:inline-block;
   }
-
-  .hotel_sp_layout{
-    display:block;
-  }
   
-  .hotel_show_sp_index,.hotel_edit_sp_index{
-    font-size:30px;
-    list-style-type:none;
-    text-align:center;
-    display:block;
-    margin-right:40px;
- } 
+  //hotel post
+  #hotel_index,#post_index{
+    display:none;
+  }
 
-  #hotel_index,#favoritehotel_index,#post_index{
-    display:none;
-  }
-  #hotel_new,#hotel_edit{
-    display:none;
-  }
 }
-
-
-
