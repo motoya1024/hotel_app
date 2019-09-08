@@ -23,12 +23,12 @@
     </li>
   </div>
   <% if logged_in? %>
-    <div id="text_sp_form">
+    <div class="text_new_post_sp_form">
       <% if @sp_hotel %>
-        <p class="hotel_new_sp_text">登録済み</p>
+        <p class="hotel_new_post_sp_text">登録済み</p>
       <% else %>
         <%= f.label :comment %>(250文字以内）<span class="letter_count"></span>
-        <%= f.text_area :comment, :size => "20x5",class:"hotel_new_sp_text letter" %>
+        <%= f.text_area :comment, :size => "20x5",class:"hotel_new_post_sp_text letter" %>
       <% end %>
     </div>
   <% end %>

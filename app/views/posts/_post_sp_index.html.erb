@@ -8,7 +8,7 @@
         <%= link_to "コメント一覧を表示","#",class:"comment_title" %>
         <ul class="all_comment" id="comment_<%= count %>">
           <% value.each do |hotel| %>
-            <div class="comment">
+            <div class="sp_comment">
               <li><%= hotel.comment %></li>
               <% if hotel.user_id != current_user.id %>
                 <% if !hotel.likes.where(user_id: current_user.id).first %>
@@ -22,9 +22,9 @@
                 <% end %>
               <% end %>
             </div>
-       　  <% end %>
+          <% end %>
         </ul>
-      </div>
+   　  </div>
     </li>
   <% end %>
 </ul>

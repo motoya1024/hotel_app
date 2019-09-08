@@ -53,6 +53,7 @@ class HotelsController < ApplicationController
            }
           @hotels.push(@hotel)
         end
+        
       else
         key = "leo157613fc400"
         feedURL = "http://jws.jalan.net/APIAdvance/HotelSearch/V1/?key="

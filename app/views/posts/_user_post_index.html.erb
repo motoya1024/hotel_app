@@ -1,16 +1,22 @@
 <table id="favoritehotel_index" class="table-bordered table-striped">
   <tr>
-    <th class="post_user_name">ホテル名</th>
-    <th class="post_user_comment">コメント</th>
-    <th>いいね数</th>
-    <th>編集</th>
-    <th>削除</th>
+    <th class="post_user_name center">ホテル名</th>
+    <th class="post_user_comment center">コメント</th>
+    <th class="center">いいね数</th>
+    <th class="center">編集</th>
+    <th class="center">削除</th>
   </tr>
   <% @posts.each do |post| %>
     <tr>
       <td><%= post.name %></td>
-      <td id="post_user_comment"><%= post.comment %></td>
-      <td><%= post.likes.count %></td>
+      <td>
+        <span class="all_display"><%= post.comment %></span>
+        <span class="partical_display"><%= post.comment.truncate(100) %></span>
+        <% if post.comment.length > 100 %>
+          </br><span class="continue hotel_close"><続きを読む></span>
+        <% end %>
+      </td>
+      <td class="center"><%= post.likes.count %></td>
       <td class="text-center"><%= link_to "編集",edit_user_post_path(post.user_id,post), class: 'btn btn-primary' %></td>
       <td class="text-center"><%= link_to "削除",user_post_path(post.user_id,post), method: :delete, class: 'btn btn-danger',data: { confirm: "コメントを消去してもいいですか？" } %></td>
     </tr>

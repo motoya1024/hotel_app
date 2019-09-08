@@ -1,6 +1,6 @@
 class LikesController < ApplicationController
   before_action :logged_in, only: [:create, :destroy]
-  before_action :logged_not_current_user, only: [:create, :destroy]
+  before_action :logged_only_current_user, only: [:create, :destroy]
   
   def create
     @count = params[:count]

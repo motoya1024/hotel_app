@@ -1,7 +1,7 @@
 class FavoritesController < ApplicationController
   
-  before_action :logged_in, only: [:new, :create, :index, :destroy,:update]
-  before_action :logged_not_current_user, only: [:index ,:edit,:update,:destroy]
+  before_action :logged_in
+  before_action :logged_only_current_user
   
   include HotelsHelper
   

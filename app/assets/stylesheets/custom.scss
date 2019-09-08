@@ -121,21 +121,30 @@ td{
   font-size:20px;
 }
 
-.hotel_sample{
-  display:block;
-  float:left;
-  border:1px solid #BAD3FF;
-  margin-bottom:10px;
-  margin-left:10px;
+.site_title{
+  background-image: url(/assets/hotel_image.jpg);
+  background-repeat: no-repeat;
+  background-size:cover;
+  height:650px;
+  h1{
+    color:white;
+    margin-top:230px;
+  }
 }
 
-.hotel_sp_sample{
-  display:none;
+.site-layout{
+  background-image: url(/assets/b032.gif);
+}
+
+.site-feature{
+  width:95%;
+  margin:80px auto 0;
 }
 
 .site-information{
   margin-top:50px;
 }
+
 
 #information-content{
   padding:20px 10px 20px 10px;
@@ -164,32 +173,17 @@ td{
   width:200%;
 }
 
-.site_title{
-  background-image: url(/assets/hotel_image.jpg);
-  background-repeat: no-repeat;
-  background-size:cover;
-  height:650px;
-  h1{
-    color:white;
-    margin-top:250px;
-  }
+.hotel_sample{
+  display:block;
+  float:left;
+  border:1px solid #BAD3FF;
+  margin-bottom:10px;
+  margin-left:10px;
 }
 
-.site-layout{
-  background-image: url(/assets/b032.gif);
+.hotel_sp_sample{
+  display:none;
 }
-
-.site-feature{
-  width:95%;
-  margin:80px auto 0;
-}
-
-.comment{
-  margin-bottom:20px;
-  padding-bottom:10px;
-  border-bottom:1px solid #CCCCCC;
-}
-
 
 //login
 .login_check{
@@ -235,7 +229,7 @@ td{
   width:11%;
 }
 
-.hotelcomment{
+.hotelmemo{
   width:60%;
 }
 
@@ -277,13 +271,18 @@ td{
   display:none;
 }
 
-//favorite 
-
-#favorite_hotel_comment{
-  width:50%;
+#hotel_index{
+  margin-bottom:30px;
 }
 
-#favorite_hotel_name{
+//favorite 
+
+.favorite_hotel_comment{
+  width:50%;
+  position:relative;
+}
+
+.favorite_hotel_name{
   width:30%;
 }
 
@@ -300,12 +299,23 @@ td{
   margin-top:30px;
 }
 
+.continue{
+  color:red;
+  font-size:15px;
+  cursor:pointer;
+  text-decoration:underline;
+}
+
 .hotel_show_content{
   margin-bottom:30px;
 }
 
 .favoritehotel_sp_index,.hotel_show_sp_index,.hotel_edit_sp_index{
   display:none;
+}
+
+#favoritehotel_index,#hotel_show,#hotel_edit{
+  margin-bottom:30px;
 }
 
 .favoritehotel_btn{
@@ -359,20 +369,35 @@ td{
   list-style-type:none;
 }
 
+.comment{
+  margin-bottom:10px;
+  padding-bottom:5px;
+  border-bottom:1px solid #CCCCCC;
+  word-break : break-all;
+}
+
 .user_post_sp_index,.post_sp_index{
   display:none;
 }
 
+#post_index,#post_sp_index{
+  margin-bottom:30px;
+}
+
 //favorite post new edit
 .map{
-  display:inline-block;
+  float:left;
   width:22%;
   padding:10px 0 10px 10px;
 }
 
 .access{
   width:65%;
-  display:inline-block;
+  height:100%;
+  float:left;
+  display: flex;
+  align-items: center; 
+  margin-left:10px;
 }
 
 .picture{
@@ -397,18 +422,50 @@ td{
   display:none;
 }
 
-
 @media screen and (max-width:768px) { 
     /*　画面サイズが768pxまではここを読み込む　*/
+    
+  .site_title{
+    background-size:contain;
+    height:255px;
+    h1{
+      color:white;
+      font-size:25px;
+      margin-top:65px;
+    }
+  }
     
   //top 
   .hotel_sample{
     display:none;
-  
   }
 
   .hotel_sp_sample{
-   
+    display:block;
+    border:1px solid #BAD3FF;
+    margin-bottom:10px;
+    margin-left:10px;
+  }
+  
+  .feature-content{
+    display:flex;
+    flex-direction: column; 
+    align-items:normal;
+  }
+  
+  .order1{
+    order:2;
+  }
+  
+  .order2{
+    order:1;
+  }
+  
+  .image_form{
+    display:flex;
+    flex-direction: row;
+    width:100%;
+    margin-left:-10px;
   }
     
   //hotel
@@ -471,6 +528,16 @@ td{
     display:block;
     margin-right:40px;
   } 
+  
+  .sp_comment{
+    padding-bottom:5px;
+    border-bottom:1px solid #CCCCCC;
+    word-break : break-all;
+    li{
+      font-size:20px;
+    }
+  }
+  
   
   //favorite post
   .favoritehotel_sp_index_btn,.user_post_sp_index_btn{

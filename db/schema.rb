@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20190813090713) do
     t.integer "number"
     t.string "name"
     t.string "memo"
-    t.integer "site", default: 0
+    t.integer "site", default: 1
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

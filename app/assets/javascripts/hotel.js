@@ -1,15 +1,12 @@
 $(document).on("turbolinks:load", function() {
-  var widthFlag = "sp";
-  var widthnewFlag = "sp";
-//edit,new
-  windoweditsize();
-  windownewsize();
-  windowindexsize();
-  getPagination('.mytable');
-  getspPagination();
-  getpostPagination ("#post_index");
-  getsppostPagination ();
-  CommentShow();
+  WindowIndexSize ();
+  AllCommentShow();
+  MemoCommentShow();
+  
+    // スマホとPC表示を切り換えた時
+  $(window).on( 'resize', function() {
+    WindowIndexSize ();
+  });
   
    // 入力文字数
   $(document).on("keyup paste", ".letter", function (e) {
@@ -19,59 +16,21 @@ $(document).on("turbolinks:load", function() {
     $(".letter_count").text("入力文字数:"+count);
   });
   
+  //top画面での画像のモーダル表示(PC)
   $('.hotel_sample').click(function() {
     var picture = $(this).data("id");
     $('.modal-body').children('img').attr('src', picture);
   });
-   
-  function windownewsize (){
-    var sp_hotel = $('#sp_hotel').data("id");
-    var w = $(window).width();
-    var x = 768
-    if(w > x && widthnewFlag != 'pc'){
-       widthnewFlag = "pc";
-       $(".hotel_new_sp_text").remove();
-       if(!($('.hotel_new_text').length)){
-         if(sp_hotel == false){
-            $(".text_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_new_text letter"></textarea>');
-         }else{
-            $(".text_form").append('<p class="hotel_new_text">登録済み</p>');  
-         }
-       }
-    }else if(x > w && widthnewFlag != 'sp'){
-       widthnewFlag = "sp";
-       $(".hotel_new_text").remove();
-       if(!($('.hotel_new_sp_text').length)){
-         if(sp_hotel == false){
-            $(".text_sp_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_new_sp_text letter"></textarea>');
-         }else{
-            $(".text_sp_form").append('<p class="hotel_new_sp_text">登録済み</p>');  
-         }
-       }
-    }
-  };
   
-  function windoweditsize (){
-    var w = $(window).width();
-    var x = 768
-    if(w > x && widthFlag != 'pc'){
-       widthFlag = "pc"
-       var comment = $(".hotel_edit_sp_text").text();
-       $(".hotel_edit_sp_text").remove();
-       if(!($('.hotel_edit_text').length)){
-           $(".text_edit_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_edit_text letter">'+comment+'</textarea>');
-       }
-    }else if(x > w && widthFlag != 'sp'){
-       widthFlag = "sp"
-       var comment = $(".hotel_edit_text").text();
-       $(".hotel_edit_text").remove();
-       if(!($('.hotel_edit_sp_text').length)){
-           $(".text_edit_sp_form").append('<textarea cols="20" rows="5" name="hotel[comment]" class="hotel_edit_sp_text letter">'+comment+'</textarea>');
-       }
-     }
-  };
+  //top画面での画像のモーダル表示(スマホ)
+  $('.hotel_sp_sample').click(function() {
+    var picture = $(this).data("id");
+    $('.modal-body').children('img').attr('src', picture);
+  });
   
-  function windowindexsize (){
+
+  //スマホとPCのselectについて
+  function WindowIndexSize (){
     var w = $(window).width();
     var x = 768
     if(w > x){
@@ -83,21 +42,31 @@ $(document).on("turbolinks:load", function() {
     }
 	};
   
-  $(window).on( 'resize', function() {
-    windownewsize();
-    windoweditsize();
-    windowindexsize();
-    getPagination('.mytable');
-    getspPagination();
-    getpostPagination ("#post_index");
-    getsppostPagination ();
-  });
-  
-  function CommentShow(){
+  //コメント投稿一覧画面についてコメントのスライド表示
+  function AllCommentShow(){
     $(".all_comment").hide();
     $('.comment_title').click(function(e) {
-        e.preventDefault();
-        $(this).siblings(".all_comment").slideToggle();
+      e.preventDefault();
+      $(this).siblings(".all_comment").slideToggle();
+    });
+  }
+  
+  //お気に入り一覧画面のメモの一部表示と全表示の切り替え
+  function MemoCommentShow(){
+    $(".all_display").hide();
+    $(".partical_display").show();
+    $(".continue").click(function() {
+      if($(this).hasClass('hotel_close')){
+        $(this).siblings(".all_display").show();
+        $(this).siblings(".partical_display").hide();
+        $(this).removeClass("hotel_close");
+        $(this).text("<部分表示にする>");
+      }else{
+        $(this).siblings(".all_display").hide();
+        $(this).siblings(".partical_display").show();
+        $(this).addClass("hotel_close");
+        $(this).text("<続きを読む>");
+      }
     });
   }
 });

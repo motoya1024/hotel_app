@@ -26,20 +26,14 @@
         <div class="map"><img src="<%= get_map(hotel["Address"]) %>" width="100%" height="100%"></div>
       <% end %>
    　　<div class="access"><%= hotel["Access"] %></br>
-               　         (地図をクリックすると拡大図が表示されます。)
-    　</div>
+                          (地図をクリックすると拡大図が表示されます。)
+      </div>
     </td>
   </tr>
   <% if logged_in? %>
     <tr>
     　<td class="text_from">コメント</br>(250文字以内）</br><span class="letter_count"></span></td>
-      <td>
-        <% if @sp_hotel %>
-          <p class="hotel_new_text">登録済み</p>
-        <% else %>
-          <%= f.text_area :comment, :size => "20x5",class:"hotel_new_text" %>
-        <% end %>
-      </td>
+      <td class="text_edit_post_form"><%= f.text_area :comment, :size => "20x5",class:"hotel_edit_post_text letter" %></td>
     </tr>
   <% end %>
 </table>

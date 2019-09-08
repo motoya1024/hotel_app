@@ -1,15 +1,15 @@
 <table id="hotel_index" class="table-bordered table-striped mytable">
   <thead>
     <tr>
-      <th class="hotelname">ホテル名</th>
-      <th class="hoteladdress">住所</th>
-      <th class="hotelprice">価格</br><% if @site == "2"%>(参考料金)<% else %>(最安値)<% end %></th>
-      <th class="hotelinformation">ホームページ</th>
+      <th class="hotelname center">ホテル名</th>
+      <th class="hoteladdress center">住所</th>
+      <th class="hotelprice center">価格</br><% if @site == "2"%>(参考料金)<% else %>(最安値)<% end %></th>
+      <th class="hotelinformation center">ホームページ</th>
       <% if logged_in? %>
-        <th class="hotelregister">コメント投稿</th>
-        <th class="hotelregister">お気に入り</th>
+        <th class="hotelregister center">コメント投稿</th>
+        <th class="hotelregister center">お気に入り</th>
       <% else %>
-        <th class="hotelregister">詳細</th>
+        <th class="hotelregister center">詳細</th>
       <% end %>
     </tr>
   </thead>
@@ -18,23 +18,23 @@
       <tr>
         <td><%= hotel["Name"] %></td>
         <td><%= hotel["Address"] %></td>
-        <td><%= hotel["Price"] %>円</td>
-        <td class="text-center"><%= link_to "ホームページへ",hotel["InformationURL"],target: "_new" %></td>
+        <td class="center"><%= hotel["Price"] %>円</td>
+        <td class="center"><%= link_to "ホームページへ",hotel["InformationURL"],target: "_new" %></td>
         <% if logged_in? %>
           <% if current_user.posts.where(name: hotel["Name"]).present? %>
-            <td class="text-center">登録済み</td>
+            <td class="center">登録済み</td>
           <% else %>
-            <td class="text-center"><%= link_to "投稿",new_user_post_path(current_user,site:@site,number: hotel["No"]),class: "btn btn-success" %></td>
+            <td class="center"><%= link_to "投稿",new_user_post_path(current_user,site:@site,number: hotel["No"]),class: "btn btn-success" %></td>
           <% end %>
         <% end %>
         <% if logged_in? %>
           <% if current_user.favorites.where(number: hotel["No"]).present? %>
-            <td class="text-center">登録済み</td>
+            <td class="center">登録済み</td>
           <% else %>
-            <td class="text-center"><%= link_to "登録",new_user_favorite_path(current_user,site: @site, number: hotel["No"]),class: "btn btn-primary" %></td>
+            <td class="center"><%= link_to "登録",new_user_favorite_path(current_user,site: @site, number: hotel["No"]),class: "btn btn-primary" %></td>
           <% end %>
         <% else %>
-          <td class="text-center"><%= link_to "詳細",hotel_show_path(site: @site,number: hotel["No"]),class: "btn btn-primary" %></td>
+          <td class="center"><%= link_to "詳細",hotel_show_path(site: @site,number: hotel["No"]),class: "btn btn-primary" %></td>
         <% end %>
       </tr>
     <% end %>

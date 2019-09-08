@@ -9,7 +9,7 @@
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     <% @per_pages.each do |per_page| %>
-      <li><%= link_to(per_page, user_posts_path(current_user,per_page: per_page)) %></li>
+      <li><%= link_to(per_page, user_posts_index_path(current_user,per_page: per_page)) %></li>
     <% end %>
   </ul>
 </div>

@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     end
   
     # ログイン済みの自分以外のユーザに入れない
-    def logged_not_current_user
+    def logged_only_current_user
        if user_logged_in?
          if params[:user_id]
           @user = User.find(params[:user_id])

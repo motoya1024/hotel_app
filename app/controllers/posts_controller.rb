@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :logged_in, only: [:new,:index,:user_index,:create,:destroy,:update]
-  before_action :logged_not_current_user, only: [:edit,:update,:destroy,:user_index]
+  before_action :logged_in
+  before_action :logged_only_current_user, except: [:index]
   
   include HotelsHelper
 
@@ -27,6 +27,7 @@ class PostsController < ApplicationController
     @number = params[:number]
     @post = current_user.posts.build
     @hotel = get_hotelinfo(@number,@site)
+    @sp_hotel = current_user.posts.where(number: @hotel["ID"]).present? 
   end
   
   def create
@@ -35,7 +36,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = "コメントを登録しました。"
-      redirect_to posts_url(current_user)
+      redirect_to user_posts_index_url(current_user)
     else
       @hotel = get_hotelinfo(@number,@site)
       render 'new'
@@ -51,7 +52,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
       flash[:success] = "コメントを更新しました。"
-      redirect_to user_posts_url(current_user)
+      redirect_to user_posts_index_url(current_user)
     else
       render "edit"
     end
