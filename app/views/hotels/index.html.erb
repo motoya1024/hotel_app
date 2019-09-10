@@ -4,7 +4,6 @@
 
 <div class="search_layout">
   <%= form_with url: hotels_path, local:true,method: :get do |f| %>
-    <%= f.hidden_field :site, value:@site %>
     <%= f.hidden_field :key, value:params[:key] %>
     <%= f.label :search,"場所検索" %>
     <%= f.text_field :search, value:@search,class:"form_inline search_form" %>
@@ -27,7 +26,7 @@
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
       <% @sorts.each do |key,sort| %>
-        <li><%= link_to(sort, hotels_path(key:key,search:@search,site:@site)) %></li>
+        <li><%= link_to(sort, hotels_path(key:key,search:@search)) %></li>
       <% end %>
     </ul>
   </div>
@@ -49,16 +48,8 @@
 	  </ul>
 	</nav>
 </div>
-<div class='site_form'>
-  <%= link_to "1:楽天",hotels_path(site:1),class:"site_rakuten" %>
-  <%= link_to "2:じゃらん",hotels_path(site:2),class:"site_jalan" %>
-</div>
 <div class='site_name'>
-  <% if @site == "1" %>
-    <%= link_to "楽天サイト","https://travel.rakuten.co.jp/",class:"site_rakuten" %>
-  <% else %>
-    <%= link_to "じゃらんサイト","#",class:"site_jalan" %>
-  <% end %>
+  <%= link_to "じゃらんサイト","#",class:"site_jalan" %>
 </div>
 <%= render :partial => "hotel_index" %>
 <%= render :partial => "hotel_sp_index" %>

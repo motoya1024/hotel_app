@@ -538,7 +538,6 @@ td{
     }
   }
   
-  
   //favorite post
   .favoritehotel_sp_index_btn,.user_post_sp_index_btn{
     margin-right:15px;
@@ -550,6 +549,14 @@ td{
     display:inline-block;
   }
   
+  .display{
+    color:blue;
+    font-size:15px;
+  }
+  
+  .sp_memo_commewnt{
+    word-wrap: break-word;
+  }
   //hotel post
   #hotel_index,#post_index{
     display:none;

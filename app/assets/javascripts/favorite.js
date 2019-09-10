@@ -3,11 +3,12 @@ $(document).on("turbolinks:load", function() {
   var widthnewFlag = "sp";
   WindowFavoriteNewSize ();
   WindowFavoriteEditSize ();
+  SpMemoCommentShow();
   //スマホとPCのお気に入り登録画面について
   function WindowFavoriteNewSize (){
     var sp_hotel = $('#sp_hotel').data("id");
     var w = $(window).width();
-    var x = 768
+    var x = 768;
     if(w > x && widthnewFlag != 'pc'){
        widthnewFlag = "pc";
        $(".hotel_new_sp_text").remove();
@@ -52,9 +53,26 @@ $(document).on("turbolinks:load", function() {
     }
   };
   
-   // スマホとPC表示を切り換えた時
+  // スマホとPC表示を切り換えた時
   $(window).on( 'resize', function() {
     WindowFavoriteNewSize ();
     WindowFavoriteEditSize ();
   });
+  
+  //　お気に入り一覧画面のメモの表示と非表示の切り替え
+  function SpMemoCommentShow(){
+    $(".sp_memo_comment").hide();
+    $(".display").click(function() {
+      if($(this).hasClass('hotel_close')){
+        $(this).siblings(".sp_memo_comment").show();
+        $(this).removeClass("hotel_close");
+        $(this).text("<非表示にする>");
+      }else{
+        $(this).siblings(".sp_memo_comment").hide();
+        $(this).addClass("hotel_close");
+        $(this).text("<表示にする>");
+      }
+    });
+  }
+  
 });

@@ -2,6 +2,8 @@
   <% @hotels.each do |hotel| %>
     <li>
       <div><%= hotel.name %></div>
+      <div class="display hotel_close"><表示する></div>
+      <div class="sp_memo_comment"><%= hotel.memo %></div>
       <div>
         <%= link_to "編集",edit_user_favorite_path(current_user.id,hotel), class: 'btn btn-primary' %>
         <%= link_to "削除",user_favorite_path(current_user.id,hotel), method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %>
