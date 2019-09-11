@@ -23,22 +23,20 @@ class PostsController < ApplicationController
   end 
   
   def new
-    @site = params[:site]
     @number = params[:number]
     @post = current_user.posts.build
-    @hotel = get_hotelinfo(@number,@site)
+    @hotel = get_hotelinfo(@number)
     @sp_hotel = current_user.posts.where(number: @hotel["ID"]).present? 
   end
   
   def create
     @number = post_params["number"]
-    @site = post_params["site"]
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = "コメントを登録しました。"
       redirect_to user_posts_index_url(current_user)
     else
-      @hotel = get_hotelinfo(@number,@site)
+      @hotel = get_hotelinfo(@number)
       render 'new'
     end
   end
@@ -70,6 +68,6 @@ class PostsController < ApplicationController
   
   private
     def post_params
-      params.require(:post).permit(:number,:comment,:name,:site)
+      params.require(:post).permit(:number,:comment,:name)
     end  
 end

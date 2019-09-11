@@ -14,13 +14,13 @@
         <div>
           <% if logged_in? %>
             <% if !current_user.posts.where(name: hotel["Name"]).present? %>
-              <%= link_to "コメント投稿",new_user_post_path(current_user,site:@site,number: hotel["No"]),class: "btn btn-success" %>
+              <%= link_to "コメント投稿",new_user_post_path(current_user,number: hotel["No"]),class: "btn btn-success" %>
             <% end %>
             <% if !current_user.favorites.where(number: hotel["No"]).present? %>
-              <%= link_to "お気に入り登録",new_user_favorite_path(current_user,site: @site, number: hotel["No"]),class: "btn btn-primary" %>
+              <%= link_to "お気に入り登録",new_user_favorite_path(current_user, number: hotel["No"]),class: "btn btn-primary" %>
             <% end %>
           <% else %>
-            <%= link_to "詳細",hotel_show_path(site: @site,number: hotel["No"]),class: "btn btn-success" %>
+            <%= link_to "詳細",hotel_show_path(number: hotel["No"]),class: "btn btn-success" %>
           <% end %>
         </div>
       </li>

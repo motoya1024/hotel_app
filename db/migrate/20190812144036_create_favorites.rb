@@ -4,7 +4,6 @@ class CreateFavorites < ActiveRecord::Migration[5.1]
       t.integer :number
       t.string :name
       t.string :memo
-      t.integer :site,default:1
       t.references :user, foreign_key: true
       t.timestamps
     end

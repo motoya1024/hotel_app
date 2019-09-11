@@ -3,7 +3,7 @@
     <tr>
       <th class="hotelname center">ホテル名</th>
       <th class="hoteladdress center">住所</th>
-      <th class="hotelprice center">価格</br><% if @site == "2"%>(参考料金)<% else %>(最安値)<% end %></th>
+      <th class="hotelprice center">価格</br>(最安値)</th>
       <th class="hotelinformation center">ホームページ</th>
       <% if logged_in? %>
         <th class="hotelregister center">コメント投稿</th>
@@ -24,17 +24,17 @@
           <% if current_user.posts.where(name: hotel["Name"]).present? %>
             <td class="center">登録済み</td>
           <% else %>
-            <td class="center"><%= link_to "投稿",new_user_post_path(current_user,site:@site,number: hotel["No"]),class: "btn btn-success" %></td>
+            <td class="center"><%= link_to "投稿",new_user_post_path(current_user,number: hotel["No"]),class: "btn btn-success" %></td>
           <% end %>
         <% end %>
         <% if logged_in? %>
           <% if current_user.favorites.where(number: hotel["No"]).present? %>
             <td class="center">登録済み</td>
           <% else %>
-            <td class="center"><%= link_to "登録",new_user_favorite_path(current_user,site: @site, number: hotel["No"]),class: "btn btn-primary" %></td>
+            <td class="center"><%= link_to "登録",new_user_favorite_path(current_user, number: hotel["No"]),class: "btn btn-primary" %></td>
           <% end %>
         <% else %>
-          <td class="center"><%= link_to "詳細",hotel_show_path(site: @site,number: hotel["No"]),class: "btn btn-primary" %></td>
+          <td class="center"><%= link_to "詳細",hotel_show_path(number: hotel["No"]),class: "btn btn-primary" %></td>
         <% end %>
       </tr>
     <% end %>

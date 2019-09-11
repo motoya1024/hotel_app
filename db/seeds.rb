@@ -21,34 +21,20 @@ User.create!(name:  "管理者",
 end
 
 
-Favorite.create!(number:78211,name:"庭のホテル　東京",memo:"価格がとてもリーズブルだった",site:1,user_id:2);
-Favorite.create!(number:4924,name:"ホテルグランドパレス（Hotel　Grand　Palace）",memo:"従業員の接客がとても親切だった",site:1,user_id:2);
-Favorite.create!(number:391,name:"ホテルメトロポリタン　エドモント",memo:"部屋が清潔感にあふれていたがその割に価格がよかった",site:1,user_id:2);
-Favorite.create!(number:4805,name:"東京ドームホテル",memo:"価格が少し高いのが難点だが,内装が豪華で接客もよかった。あと,駅から近いのもよい",site:1,user_id:2);
-Favorite.create!(number:322536,name:"ホテルメトロポリタンエドモント",memo:"価格が少し高いのが難点だが,内装が豪華で接客もよかった。あと,駅から近いのもよい",site:2,user_id:2);
+Favorite.create!(number:322536,name:"ホテルメトロポリタンエドモント",memo:"価格が少し高いのが難点だが,内装が豪華で接客もよかった。あと,駅から近いのもよい",user_id:2);
 Favorite.create!(number:322305,name:"ホテルグランドパレス（HOTEL　GRAND　PALACE）",
-                  memo:"価格がとてもリーズブルだったが,やや駅から遠いのが難点",site:2,user_id:2);
+                  memo:"価格がとてもリーズブルだったが,やや駅から遠いのが難点",user_id:2);
 Favorite.create!(number:397528,name:"SAKU　REN　JIMBOCHO(サクレン神保町)",
-                  memo:"部屋が清潔感にあふれていたがその割に価格がよかった",site:2,user_id:2);
+                  memo:"部屋が清潔感にあふれていたがその割に価格がよかった",user_id:2);
                   
-Favorite.create!(number:78211,name:"庭のホテル　東京",memo:"価格がとてもリーズブルだった",site:1,user_id:3);
-Favorite.create!(number:4924,name:"ホテルグランドパレス（Hotel　Grand　Palace）",memo:"従業員の接客がとても親切だった",site:1,user_id:3);
-Favorite.create!(number:391,name:"ホテルメトロポリタン　エドモント",memo:"部屋が清潔感にあふれていたがその割に価格がよかった",site:1,user_id:3);
 Favorite.create!(number:397528,name:"SAKU　REN　JIMBOCHO(サクレン神保町)",
-                  memo:"部屋が清潔感にあふれていたがその割に価格がよかった",site:2,user_id:2);
+                  memo:"部屋が清潔感にあふれていたがその割に価格がよかった",user_id:3);
                   
-Post.create!(number:78211,name:"庭のホテル　東京",comment:"価格がとてもリーズブルだった",site:1,user_id:2);
-Post.create!(number:4924,name:"ホテルグランドパレス（Hotel　Grand　Palace）",comment:"従業員の接客がとても親切だった",site:1,user_id:2);
-Post.create!(number:391,name:"ホテルメトロポリタン　エドモント",comment:"部屋が清潔感にあふれていたがその割に価格がよかった",site:1,user_id:2);
-Post.create!(number:4805,name:"東京ドームホテル",comment:"価格が少し高いのが難点だが,内装が豪華で接客もよかった。あと,駅から近いのもよい",site:1,user_id:2);
-Post.create!(number:322536,name:"ホテルメトロポリタンエドモント",comment:"価格が少し高いのが難点だが,内装が豪華で接客もよかった。あと,駅から近いのもよい",site:2,user_id:2);
+
+Post.create!(number:322536,name:"ホテルメトロポリタンエドモント",comment:"価格が少し高いのが難点だが,内装が豪華で接客もよかった。あと,駅から近いのもよい",user_id:2);
 Post.create!(number:322305,name:"ホテルグランドパレス（HOTEL　GRAND　PALACE）",
-                  comment:"価格がとてもリーズブルだったが,やや駅から遠いのが難点",site:2,user_id:2);
+                  comment:"価格がとてもリーズブルだったが,やや駅から遠いのが難点",user_id:2);
 Post.create!(number:397528,name:"SAKU　REN　JIMBOCHO(サクレン神保町)",
-                  comment:"部屋が清潔感にあふれていたがその割に価格がよかった",site:2,user_id:2);
-                  
-Post.create!(number:78211,name:"庭のホテル　東京",comment:"価格がとてもリーズブルだった",site:1,user_id:3);
-Post.create!(number:4924,name:"ホテルグランドパレス（Hotel　Grand　Palace）",comment:"従業員の接客がとても親切だった",site:1,user_id:3);
-Post.create!(number:391,name:"ホテルメトロポリタン　エドモント",comment:"部屋が清潔感にあふれていたがその割に価格がよかった",site:1,user_id:3);
+                  comment:"部屋が清潔感にあふれていたがその割に価格がよかった",user_id:2);
 Post.create!(number:397528,name:"SAKU　REN　JIMBOCHO(サクレン神保町)",
-                  comment:"部屋が清潔感にあふれていたがその割に価格がよかった",site:2,user_id:2);
+                  comment:"部屋が清潔感にあふれていたがその割に価格がよかった",user_id:3);

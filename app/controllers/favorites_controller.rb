@@ -7,17 +7,15 @@ class FavoritesController < ApplicationController
   
   def new
     @favorite = current_user.favorites.build  
-    @site = params[:site]
     @number = params[:number]
-    @hotels = get_hotelinfo(@number,@site)
+    @hotels = get_hotelinfo(@number)
     @sp_hotel = current_user.favorites.where(number: @hotels["ID"]).present? 
   end
 
   def create
     @favorite = current_user.favorites.build(hotel_params)
     @number = hotel_params["number"]
-    @site = hotel_params["site"]
-    @hotels = get_hotelinfo(@number,@site)
+    @hotels = get_hotelinfo(@number)
     if @favorite.save
       flash[:success] = "お気に入りに登録しました。"
       redirect_to user_favorites_url(current_user)
@@ -63,6 +61,6 @@ class FavoritesController < ApplicationController
   
   private
     def hotel_params
-      params.require(:favorite).permit(:number,:memo,:name,:site)
+      params.require(:favorite).permit(:number,:memo,:name)
     end  
 end

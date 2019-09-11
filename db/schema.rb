@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20190813090713) do
     t.integer "number"
     t.string "name"
     t.string "memo"
-    t.integer "site", default: 1
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,7 +34,6 @@ ActiveRecord::Schema.define(version: 20190813090713) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "number"
-    t.integer "site", default: 1
     t.string "name"
     t.string "comment"
     t.integer "user_id"
