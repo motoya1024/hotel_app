@@ -22,7 +22,7 @@
         <td class="center"><%= link_to "ホームページへ",hotel["InformationURL"],target: "_new" %></td>
         <% if logged_in? %>
           <% if current_user.posts.where(name: hotel["Name"]).present? %>
-            <td class="center">登録済み</td>
+            <td class="center">投稿済み</td>
           <% else %>
             <td class="center"><%= link_to "投稿",new_user_post_path(current_user,number: hotel["No"]),class: "btn btn-success" %></td>
           <% end %>

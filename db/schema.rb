@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20190813090713) do
     t.integer "number"
     t.string "name"
     t.string "memo"
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_favorites_on_user_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20190813090713) do
     t.integer "number"
     t.string "name"
     t.string "comment"
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
