@@ -4,7 +4,7 @@ class HotelsController < ApplicationController
 
   def show
     @number = params[:number]
-    @hotels = get_hotelinfo(@number,@site)
+    @hotels = get_hotelinfo(@number)
   end
 
   def index
