@@ -3,6 +3,7 @@ $(document).on("turbolinks:load", function() {
   var widthnewFlag = "sp";
   WindowPostNewSize ();
   WindowPostEditSize ();
+  SpCommentShow();
 //スマホとPCのコメント登録画面について
   function WindowPostNewSize (){
     var sp_hotel = $('#sp_post_hotel').data("id");
@@ -51,6 +52,22 @@ $(document).on("turbolinks:load", function() {
       }
     }
   };
+  
+   //　お気に入り一覧画面のメモの表示と非表示の切り替え
+  function SpCommentShow(){
+    $(".sp_user_comment").hide();
+    $(".comment_display").click(function() {
+      if($(this).hasClass('hotel_close')){
+        $(this).siblings(".sp_user_comment").show();
+        $(this).removeClass("hotel_close");
+        $(this).text("<コメントを非表示にする>");
+      }else{
+        $(this).siblings(".sp_user_comment").hide();
+        $(this).addClass("hotel_close");
+        $(this).text("<コメントを表示する>");
+      }
+    });
+  }
   
    // スマホとPC表示を切り換えた時
   $(window).on( 'resize', function() {

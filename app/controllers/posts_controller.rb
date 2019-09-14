@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  
   before_action :logged_in
   before_action :logged_only_current_user, except: [:index]
   
@@ -6,8 +7,13 @@ class PostsController < ApplicationController
 
   def index
     @search = params[:search]
-    @counts = { "全表示" => 5000, "1" => 1,  "5" => 5,  "10" => 10, "20" => 20, "50" => 50, "100" => 100}
-    @posts = Post.search(@search)
+    @counts = { "全表示" => 5000, "5" => 5,  "10" => 10, "20" => 20, "50" => 50, "100" => 100}
+    if Post.search(@search).present? && @search != ""
+      @posts = Post.search(@search)
+    else
+      flash[:danger] = "ホテルが存在しませんでした。"
+      redirect_to user_posts_url(current_user)
+    end
   end
  
   def user_index
@@ -45,7 +51,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
   
-  
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
@@ -60,9 +65,9 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.destroy
       flash[:success] = "コメントを削除しました。"
-      redirect_to user_posts_url(current_user)
+      redirect_to user_posts_index_url(current_user)
     else
-      render 'user_index'
+      render 'edit'
     end
   end
   

@@ -11,21 +11,19 @@ class HotelsController < ApplicationController
     @search = params[:search]
     order = params[:key]? params[:key]:4
     if params[:key] == "4"
-       sort = "standard"
+      sort = "standard"
     elsif params[:key] == "2"
-       sort = "+roomCharge"
+      sort = "+roomCharge"
     else
-       sort = "-roomCharge"
+      sort = "-roomCharge"
     end
-
     if @search == nil
-       place = Geocoder.coordinates("東京都千代田区")
+      place = Geocoder.coordinates("東京都千代田区")
     else
-       place = Geocoder.coordinates(@search)
+      place = Geocoder.coordinates(@search)
     end
     @counts = { "全表示" => 5000, "5" => 5,  "10" => 10, "20" => 20, "50" => 50, "100" => 100}
     @sorts = { "2" => "平均価格の安い順",  "3" => "平均価格の高い順","4" => "おすすめ順"}
-    
     @hotels = []
     begin
       key = "leo157613fc400"

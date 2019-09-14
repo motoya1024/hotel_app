@@ -51,7 +51,7 @@ $(document).on("turbolinks:load", function() {
     });
   }
   
-  //お気に入り一覧画面のメモの一部表示と全表示の切り替え
+  //お気に入り一覧画面のメモと自身のコメント投稿画面の一部表示と全表示の切り替え
   function MemoCommentShow(){
     $(".all_display").hide();
     $(".partical_display").show();
@@ -65,7 +65,7 @@ $(document).on("turbolinks:load", function() {
         $(this).siblings(".all_display").hide();
         $(this).siblings(".partical_display").show();
         $(this).addClass("hotel_close");
-        $(this).text("<続きを読む>");
+        $(this).text("<続きを表示する>");
       }
     });
   }

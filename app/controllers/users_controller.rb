@@ -35,9 +35,9 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    user = User.find(params[:id])
-    if user.destroy
-      flash[:success] = user.name + "さんのユーザー情報を削除しました。"
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:success] = @user.name + "さんのユーザー情報を削除しました。"
       redirect_to users_url 
     end
   end
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = @user.name + "さんのプロフィールを更新しました。"
+      flash[:success] = @user.name_before_last_save + "さんのプロフィールを更新しました。"
       redirect_to edit_user_url(@user)
     else
       render "edit"

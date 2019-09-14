@@ -1,9 +1,5 @@
 <div class="hotel_sp_layout">
-  <% if logged_in? %>
-    <p>お気に入り登録を行う場合は「お気に入り登録」、コメント投稿を行う場合は「コメント投稿」ボタンをクリックしてください。</br>
-       お気に入り登録または、コメント投稿済み場合は、「コメント投稿」、または「お気に入り登録」ボタンは表示されません。
-    </p>
-  <% else %>
+  <% if !logged_in? %>
     <p>ホテル名をクリックすると詳細が表示されます。</p>
   <% end %>
   <ul class="hotel_sp_index mysptable">
@@ -15,9 +11,13 @@
           <% if logged_in? %>
             <% if !current_user.posts.where(name: hotel["Name"]).present? %>
               <%= link_to "コメント投稿",new_user_post_path(current_user,number: hotel["No"]),class: "btn btn-success" %>
+            <% else %>
+              <p class="btn btn-default">コメント投稿済</p>
             <% end %>
             <% if !current_user.favorites.where(number: hotel["No"]).present? %>
               <%= link_to "お気に入り登録",new_user_favorite_path(current_user, number: hotel["No"]),class: "btn btn-primary" %>
+            <% else %>
+              <p class="btn btn-default">お気に入り登録済</p>
             <% end %>
           <% else %>
             <%= link_to "詳細",hotel_show_path(number: hotel["No"]),class: "btn btn-success" %>

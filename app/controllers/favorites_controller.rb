@@ -25,19 +25,19 @@ class FavoritesController < ApplicationController
   end 
  
   def index
-    @per_pages = ["全表示",5,10,20]
+    @per_pages = ["全表示",5,10]
     if params[:per_page] == nil || params[:per_page] == "全表示"
       @page = "全表示"
-      @hotels = @user.favorites
+      @hotels = current_user.favorites
     else  
       @page = params[:per_page]
-      @hotels = @user.favorites.paginate(page: params[:page], per_page: @page)
+      @hotels = current_user.favorites.paginate(page: params[:page], per_page: @page)
     end
   end
  
   def destroy
-    @hotel = Favorite.find(params[:id])
-    if @hotel.destroy
+    @favorite = Favorite.find(params[:id])
+    if @favorite.destroy
       flash[:success] = "お気に入り情報を削除しました。"
       redirect_to user_favorites_url(current_user)
     else
@@ -52,7 +52,7 @@ class FavoritesController < ApplicationController
   def update
     @favorite = Favorite.find(params[:id])
     if @favorite.update_attributes(hotel_params)
-      flash[:success] = "お気に入りホテル情報を更新しました。"
+      flash[:success] = "お気に入り情報を更新しました。"
       redirect_to user_favorites_url(current_user)
     else
       render "edit"

@@ -426,7 +426,6 @@ td{
     /*　画面サイズが768pxまではここを読み込む　*/
     
   .site_title{
-    background-size:contain;
     height:255px;
     h1{
       color:white;
@@ -469,10 +468,11 @@ td{
   }
     
   //hotel
+
   .hotel_sp_index{
     list-style-type:none;
     li{
-      margin-top:10px;
+      margin-top:25px;
       margin-left:-25px;
       font-size:30px;
       background-color:#DDDDDD;
@@ -549,12 +549,12 @@ td{
     display:inline-block;
   }
   
-  .display{
+  .memo_display,.comment_display{
     color:blue;
     font-size:15px;
   }
   
-  .sp_memo_commewnt{
+  .sp_memo,.sp_comment{
     word-wrap: break-word;
   }
   //hotel post

@@ -2,8 +2,9 @@
   <% @posts.each do |post| %>
     <li>
       <div><%= post.name %></div>
-      <div class="display hotel_close"><表示する></div>
-      <div class="sp_memo_comment"><%= post.comment %></div>
+      <div>いいね数：<%= post.likes.count %></div>
+      <div class="comment_display hotel_close"><コメントを表示する></div>
+      <div class="sp_user_comment"><%= post.comment %></div>
       <div>
         <%= link_to "編集",edit_user_post_path(post.user_id,post), class: 'btn btn-primary' %>
         <%= link_to "削除",user_post_path(post.user_id,post), method: :delete, class: 'btn btn-danger',data: { confirm: "コメントを消去してもいいですか？" } %>

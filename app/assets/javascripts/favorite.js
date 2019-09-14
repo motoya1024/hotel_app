@@ -3,7 +3,7 @@ $(document).on("turbolinks:load", function() {
   var widthnewFlag = "sp";
   WindowFavoriteNewSize ();
   WindowFavoriteEditSize ();
-  SpMemoCommentShow();
+  SpMemoShow();
   //スマホとPCのお気に入り登録画面について
   function WindowFavoriteNewSize (){
     var sp_hotel = $('#sp_hotel').data("id");
@@ -60,17 +60,17 @@ $(document).on("turbolinks:load", function() {
   });
   
   //　お気に入り一覧画面のメモの表示と非表示の切り替え
-  function SpMemoCommentShow(){
-    $(".sp_memo_comment").hide();
-    $(".display").click(function() {
+  function SpMemoShow(){
+    $(".sp_memo").hide();
+    $(".memo_display").click(function() {
       if($(this).hasClass('hotel_close')){
-        $(this).siblings(".sp_memo_comment").show();
+        $(this).siblings(".sp_memo").show();
         $(this).removeClass("hotel_close");
-        $(this).text("<非表示にする>");
+        $(this).text("<メモを非表示にする>");
       }else{
-        $(this).siblings(".sp_memo_comment").hide();
+        $(this).siblings(".sp_memo").hide();
         $(this).addClass("hotel_close");
-        $(this).text("<表示にする>");
+        $(this).text("<メモを表示する>");
       }
     });
   }

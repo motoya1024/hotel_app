@@ -13,7 +13,7 @@
         <span class="all_display"><%= post.comment %></span>
         <span class="partical_display"><%= post.comment.truncate(100) %></span>
         <% if post.comment.length > 100 %>
-          </br><span class="continue hotel_close"><続きを読む></span>
+          </br><span class="continue hotel_close"><続きを表示する></span>
         <% end %>
       </td>
       <td class="center"><%= post.likes.count %></td>
