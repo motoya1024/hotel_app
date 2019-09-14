@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_action :logged_in, only: [:edit,:update]
   before_action :logged_in_admin, only: [:index,:destroy]
-  before_action :logged_only_current_user, only: [:edit,:update]
+  before_action :correct_user, only: [:edit,:update]
   
   def new
     @user = User.new
@@ -56,5 +56,15 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
-
+      
+    # 正しいユーザーかどうか確認
+    def correct_user
+      @user = User.find(params[:id])
+      unless current_user.admin == true
+        unless current_user?(@user)
+          flash[:danger] ="他のユーザーのサイトにはアクセスできません。"
+          redirect_to hotels_url
+        end
+      end
+    end
 end

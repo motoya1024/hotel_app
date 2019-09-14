@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   
     # ログイン済みの自分以外のユーザに入れない
     def logged_only_current_user
-      if logged_in? && current_user.admin == false
+      if logged_in?
         if params[:user_id]
           @user = User.find(params[:user_id])
         else
