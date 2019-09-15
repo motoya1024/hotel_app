@@ -9,7 +9,7 @@ $(document).on("turbolinks:load", function() {
   });
   
    // 入力文字数
-  $(document).on("keyup paste", ".letter", function (e) {
+  $(document).on("input", ".letter", function (e) {
     var txt = $(this).val();
     var new_txt = $.trim(txt.replace(/\n/g, ""));
     var count = new_txt.length;
