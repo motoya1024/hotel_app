@@ -13,6 +13,6 @@
     <%= render :partial => "hotel_sp_edit", locals: {hotel: hotel,f: f} %>
   <div class="favoritehotel_btn">
     <%= f.submit yield(:button_text), class: "btn btn-primary register_btn" %>
-    <%= link_to "戻る", user_favorites_path(current_user),class:"btn btn-success register_btn" %>
+    <%= link_to "戻る",user_posts_index_path(current_user),class:"btn btn-success register_btn" %>
   </div>
 <% end %>

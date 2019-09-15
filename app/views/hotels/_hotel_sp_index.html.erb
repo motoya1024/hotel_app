@@ -1,7 +1,4 @@
 <div class="hotel_sp_layout">
-  <% if !logged_in? %>
-    <p>ホテル名をクリックすると詳細が表示されます。</p>
-  <% end %>
   <ul class="hotel_sp_index mysptable">
     <% @hotels.each do |hotel| %>
       <li>

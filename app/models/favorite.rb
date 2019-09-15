@@ -7,7 +7,7 @@ class Favorite < ApplicationRecord
   def memo_length
     memo_for_validation = memo.gsub(/\r\n/,"")
     if memo_for_validation.length > 250
-      errors.add(:memo, "は250文字以内で入力してください。")
+      errors.add(:memo, "は250文字以内で入力してください")
     end
   end
 end

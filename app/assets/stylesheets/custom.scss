@@ -267,10 +267,6 @@ td{
   }
 }
 
-.hotel_sp_layout{
-  display:none;
-}
-
 #hotel_index{
   margin-bottom:30px;
 }
@@ -474,7 +470,7 @@ td{
     li{
       margin-top:25px;
       margin-left:-25px;
-      font-size:30px;
+      font-size:20px;
       background-color:#DDDDDD;
       padding:5px 0 5px 15px;
       border-radius:30px;
@@ -514,7 +510,7 @@ td{
     li{
       margin-top:5px;
       margin-left:-25px;
-      font-size:25px;
+      font-size:20px;
       background-color:#DDDDDD;
       padding:15px 0 15px 15px;
       border-radius:30px;
@@ -522,7 +518,7 @@ td{
   }
   
   .hotel_show_sp_index,.hotel_edit_sp_index{
-    font-size:30px;
+    font-size:20px;
     list-style-type:none;
     text-align:center;
     display:block;

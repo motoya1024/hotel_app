@@ -16,7 +16,7 @@
         <% end %>
       </td>
       <td class="text-center"><%= link_to "編集",edit_user_favorite_path(current_user.id,hotel), class: 'btn btn-primary' %></td>
-      <td class="text-center"><%= link_to "削除",user_favorite_path(current_user.id,hotel), method: :delete, class: 'btn btn-danger',data: { confirm: "消去してもいいですか？" } %></td>
+      <td class="text-center"><%= link_to "削除",user_favorite_path(current_user.id,hotel), method: :delete, class: 'btn btn-danger',data: { confirm: "メモを消去してもいいですか？" } %></td>
     </tr>
   <% end %>
 </table>  
