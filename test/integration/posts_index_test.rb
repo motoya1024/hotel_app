@@ -15,9 +15,6 @@ class PostsIndexTest < ActionDispatch::IntegrationTest
 
   test "posts search" do
     log_in_as(@user)
-    # All users
-    get posts_path, params: {search: ""}
-    posts = Post.all.group_by {|i| i.name}
     
     # User search
     get posts_path, params: {search: "D"}

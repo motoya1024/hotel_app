@@ -19,7 +19,7 @@ most_recent:
   user: michael
   
 ants:
-  number: 78211
+  number: 305158
   comment: "Oh, is that what you want? Because that's how you get ants!"
   created_at: <%= 2.years.ago %>
   user: archer
@@ -37,4 +37,4 @@ tone:
 van:
   comment: "Dude, this van's, like, rolling probable cause."
   created_at: <%= 4.hours.ago %>
-  user: 
+  user: lana
