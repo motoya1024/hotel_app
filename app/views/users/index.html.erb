@@ -36,8 +36,8 @@
   </tr>
 　<% @users.each do |user| %>
     <tr>
-      <td class="center"><%= user.name %></td>
-      <td class="center"><%= user.email %></td>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
       <td class="center"><%= link_to "編集", edit_user_path(user), class: 'btn btn-primary' %></td>
       <td class="center">
         <%if user.admin != true %>
