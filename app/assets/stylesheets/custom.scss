@@ -421,12 +421,15 @@ td{
 @media screen and (max-width:768px) { 
     /*　画面サイズが768pxまではここを読み込む　*/
     
+  #logo{
+    font-size:18px;
+  }
   .site_title{
     height:255px;
     h1{
       color:white;
-      font-size:16px;
-      margin-top:65px;
+      font-size:25px;
+      margin-top:75px;
     }
   }
   
