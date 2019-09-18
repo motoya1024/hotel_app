@@ -10,7 +10,7 @@
     <% @posts.each do |key,value| %>
       <% count = count + 1 %>
       <tr>
-        <td><span>ホテル名：</span><%= key %></td>
+        <td><%= key %></td>
         <td>
           <%= link_to "コメント一覧を表示","#",class:"comment_title" %>
           <ul class="all_comment" id="comment_<%= count %>">
