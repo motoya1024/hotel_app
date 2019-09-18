@@ -2,8 +2,18 @@
   <ul class="hotel_sp_index mysptable">
     <% @hotels.each do |hotel| %>
       <li>
-        <div><%= hotel["Name"] %></div>
-        <div><%= hotel["Price"] %>円</div>
+        <div class="sp_item">
+          <div>ホテル名：</div>
+          <div><%= link_to hotel["Name"],hotel["InformationURL"],target: "_new" %></div>
+        </div>
+        <div class="sp_item">
+          <div>住所：</div>
+          <div><%= hotel["Address"] %></div>
+        </div>
+        <div class="sp_item">
+          <div>価格：</div>
+          <div><%= hotel["Price"] %>円(最安値)</div>
+        </div>
         <div>
           <% if logged_in? %>
             <% if !current_user.posts.where(name: hotel["Name"]).present? %>

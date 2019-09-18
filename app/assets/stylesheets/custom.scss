@@ -73,7 +73,6 @@ h3{
 }
 
 p {
-  font-size: 1.1em;
   line-height: 1.7em;
 }
 
@@ -102,18 +101,20 @@ input {
 
 th{
   height:35px;
-  font-size:20px;
 }
 
 td{
   height:40px;
-  font-size:20px;
 }
 
 .center{
   text-align:center;
 }
 
+.homepage{
+  clear:both;
+  margin-top:10px;
+}
 
 //top
 
@@ -164,13 +165,13 @@ td{
   p{
     font-size:20px;
     padding-left:20px;
+    width:220%;
   }
 }
 
 .image_form{
   display:flex;
   flex-direction: column;
-  width:200%;
 }
 
 .hotel_sample{
@@ -297,7 +298,6 @@ td{
 
 .continue{
   color:red;
-  font-size:15px;
   cursor:pointer;
   text-decoration:underline;
 }
@@ -376,7 +376,7 @@ td{
   display:none;
 }
 
-#post_index,#post_sp_index{
+#post_index,#post_sp_index,#user_index{
   margin-bottom:30px;
 }
 
@@ -425,11 +425,24 @@ td{
     height:255px;
     h1{
       color:white;
-      font-size:25px;
+      font-size:16px;
       margin-top:65px;
     }
   }
+  
+  .sp_item{
+    display:flex;
+    div:last-child{
+      max-width:70%;
+    }
+  }
     
+  .sp_item:not(:first-child){
+    div:first-child{
+      margin-left:31px;
+    }
+  }
+  
   //top 
   .hotel_sample{
     display:none;
@@ -446,6 +459,9 @@ td{
     display:flex;
     flex-direction: column; 
     align-items:normal;
+    p{
+      width:100%;
+    }
   }
   
   .order1{
@@ -469,11 +485,11 @@ td{
     list-style-type:none;
     li{
       margin-top:25px;
-      margin-left:-25px;
-      font-size:20px;
+      margin-left:-30px;
+      font-size:16px;
       background-color:#DDDDDD;
       padding:5px 0 5px 15px;
-      border-radius:30px;
+      border-radius:15px;
     }
   }
   
@@ -509,16 +525,16 @@ td{
     display:block;
     li{
       margin-top:5px;
-      margin-left:-25px;
-      font-size:20px;
+      margin-left:-30px;
+      font-size:16px;
       background-color:#DDDDDD;
       padding:15px 0 15px 15px;
-      border-radius:30px;
+      border-radius:15px;
      }
   }
   
   .hotel_show_sp_index,.hotel_edit_sp_index{
-    font-size:20px;
+    font-size:16px;
     list-style-type:none;
     text-align:center;
     display:block;
@@ -530,7 +546,7 @@ td{
     border-bottom:1px solid #CCCCCC;
     word-break : break-all;
     li{
-      font-size:20px;
+      font-size:16px;
     }
   }
   
@@ -547,7 +563,7 @@ td{
   
   .memo_display,.comment_display{
     color:blue;
-    font-size:15px;
+    font-size:16px;
   }
   
   .sp_memo,.sp_comment{
@@ -557,5 +573,7 @@ td{
   #hotel_index,#post_index{
     display:none;
   }
+  
+  
 
 }

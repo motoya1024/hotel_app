@@ -18,7 +18,7 @@ class HotelsController < ApplicationController
       sort = "-roomCharge"
     end
     if @search == nil
-      place = Geocoder.coordinates("東京都千代田区")
+      place = Geocoder.coordinates("東京都渋谷")
     else
       place = Geocoder.coordinates(@search)
     end

@@ -12,7 +12,7 @@
         <span class="all_display"><%= hotel.memo %></span>
         <span class="partical_display"><%= hotel.memo.truncate(100) %></span>
         <% if hotel.memo.length > 100 %>
-           </br><span class="continue hotel_close"><続きを表示する></span>
+          </br><span class="continue hotel_close"><続きを表示する></span>
         <% end %>
       </td>
       <td class="text-center"><%= link_to "編集",edit_user_favorite_path(current_user.id,hotel), class: 'btn btn-primary' %></td>

@@ -1,7 +1,10 @@
 <ul class="favoritehotel_sp_index">
   <% @hotels.each do |hotel| %>
     <li>
-      <div><%= hotel.name %></div>
+      <div class="sp_item">
+        <div>ホテル名：</div>
+        <div><%= hotel.name %></div>
+      </div>
       <div class="memo_display hotel_close"><メモを表示する></div>
       <div class="sp_memo"><%= hotel.memo %></div>
       <div>

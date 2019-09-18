@@ -5,30 +5,26 @@
   </tr>
   <tr>
     <td>ホテル名</td>
-    <td><%= @hotels["Name"] %></td>
+    <td><%= link_to @hotels["Name"],@hotels["InformationURL"],target: "new" %></td>
   </tr>
   <tr>
-   　<td>住所</td>
-   　<td><%= @hotels["Address"] %></td>
+    <td>住所</td>
+    <td><%= @hotels["Address"] %></td>
   </tr>
   <tr>
-   　<td>価格</td>
-   　<td><%= @hotels["Price"] %>円</td>
+    <td>価格</td>
+    <td><%= @hotels["Price"] %>円</td>
   </tr>
   <tr>
-   　<td>ホームページへ</td>
-   　<td><%= link_to "ホームページへ",@hotels["InformationURL"],target: "new" %></td>
-  </tr>
-  <tr>
-   　<td>アクセス</td>
-   　<td>
-       <%= link_to map_path(@hotels["Address"]),target: "new" do %>
-         <div class="map"><img src="<%= get_map(@hotels["Address"]) %>" width="100%" height="100%"></div>
-       <% end %>
-     　<div class="access"><%= @hotels["Access"] %></br>
-                          (地図をクリックすると拡大図が表示されます。)
-     　</div>
-     </td>
+    <td>アクセス</td>
+    <td>
+      <%= link_to map_path(@hotels["Address"]),target: "new" do %>
+        <div class="map"><img src="<%= get_map(@hotels["Address"]) %>" width="100%" height="100%"></div>
+      <% end %>
+    　<div class="access"><%= @hotels["Access"] %></br>
+                        (地図をクリックすると拡大図が表示されます。)
+    　</div>
+    </td>
   </tr>
   <% if logged_in? %>
     <tr>

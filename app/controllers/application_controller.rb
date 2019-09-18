@@ -18,6 +18,15 @@ class ApplicationController < ActionController::Base
       end
     end
     
+    # ログイン済みユーザーかどうか確認
+    def logged_not_in
+      if logged_in?
+        store_location
+        flash[:danger] = "ログイン中はアクセスできません。"
+        redirect_to root_url
+      end
+    end
+    
      # ログイン済み管理者ユーザーかどうか確認
     def logged_in_admin
       unless admin_logged_in?

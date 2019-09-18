@@ -14,6 +14,5 @@
 <% if @page != "全表示" %>
   <%= will_paginate @hotels, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
 <% end %>
-
 <%= render :partial => "favorite_index" %>
 <%= render :partial => "favorite_sp_index" %>

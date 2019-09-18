@@ -1,7 +1,7 @@
 <ul class="hotel_edit_sp_index">
   <div class="hotel_show_content">
     <li class="hotel_show_item">ホテル名</li>
-    <li class="hotel_show_content"><%= hotel["Name"] %></li>
+    <li class="hotel_show_content"><%= link_to hotel["Name"],hotel["InformationURL"],target: "new" %></li>
   </div>
   <div class="hotel_show_content">
     <li class="hotel_show_item">住所</li> 
@@ -10,10 +10,6 @@
   <div class="hotel_show_content">
     <li class="hotel_show_item">価格</li> 
     <li class="hotel_show_item"><%= hotel["Price"] %>円<li>
-  </div>
-  <div class="hotel_show_content">
-    <li class="hotel_show_item">ホームページ</li> 
-    <li class="hotel_show_item"><%= link_to "ホームページへ",hotel["InformationURL"],target: "new" %><li>
   </div>
   <div class="hotel_show_content">
     <li class="hotel_show_item">アクセス</li> 

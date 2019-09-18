@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
   
+  before_action :logged_not_in, only: [:new,:create]
+  
   def new
-    if logged_in?
-      @user = User.find(current_user.id)
-    end
+  
   end
   
   def create
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       if user.admin == nil
         redirect_to user_favorites_path(current_user)
       else 
-        redirect_to root_path
+        redirect_to users_path
       end
     else
       # エラーメッセージを作成する

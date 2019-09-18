@@ -3,7 +3,10 @@
   <% @posts.each do |key,value| %>
     <% count = count + 1 %>
     <li>
-      <div><%= key %></div>
+      <div class="sp_item">
+        <div>ホテル名：</div>
+        <div><%= key %></div>
+      </div>
       <div>
         <%= link_to "コメント一覧を表示","#",class:"comment_title" %>
         <ul class="all_comment" id="comment_<%= count %>">

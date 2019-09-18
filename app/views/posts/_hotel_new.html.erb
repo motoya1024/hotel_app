@@ -5,7 +5,7 @@
   </tr>
   <tr>
     <td>ホテル名</td>
-    <td><%= @hotel["Name"] %></td>
+    <td><%= link_to @hotel["Name"],@hotel["InformationURL"],target: "new" %></td>
   </tr>
   <tr>
   　<td>住所</td>
@@ -16,13 +16,9 @@
     <td><%= @hotel["Price"] %>円</td>
   </tr>
   <tr>
-    <td>ホームページへ</td>
-    <td><%= link_to "ホームページへ",@hotel["InformationURL"],target: "new" %></td>
-  </tr>
-  <tr>
   　<td>アクセス</td>
   　<td>
-    　 <%= link_to map_path(@hotel["Address"]),target: "new" do %>
+    　<%= link_to map_path(@hotel["Address"]),target: "new" do %>
         <div class="map"><img src="<%= get_map(@hotel["Address"]) %>" width="100%" height="100%"></div>
       <% end %>
     　<div class="access"><%= @hotel["Access"] %></br>
@@ -32,7 +28,7 @@
   </tr>
   <% if logged_in? %>
     <tr>
-      <td class="text_post_form">コメント</br>(250文字以内）</br><span class="letter_count"></span></td>
+      <td class="text_post_form">コメント</br>(250文字以内)</br><span class="letter_count"></span></td>
       <td class="text_new_post_form">
         <% if @sp_hotel %>
           <p class="hotel_new_post_text">登録済み</p>

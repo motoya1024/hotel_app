@@ -22,11 +22,9 @@
 	  </ul>
 	</nav>
 </div>
-
 <div class="post_layout">
   <%= link_to "自身のコメント一覧へ", user_posts_index_path(current_user),class: "btn btn-primary" %> 
 </div>
-
 <div class="post_partial">
   <%= render :partial => "post_index" %>
   <%= render :partial => "post_sp_index" %>

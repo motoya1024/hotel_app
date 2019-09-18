@@ -1,7 +1,10 @@
 <ul class="user_post_sp_index">
   <% @posts.each do |post| %>
     <li>
-      <div><%= post.name %></div>
+      <div class="sp_item">
+        <div>ホテル名：</div>
+        <div><%= post.name %></div>
+      </div>
       <div>いいね数：<%= post.likes.count %></div>
       <div class="comment_display hotel_close"><コメントを表示する></div>
       <div class="sp_user_comment"><%= post.comment %></div>

@@ -5,7 +5,7 @@
   </tr>
   <tr>
     <td>ホテル名</td>
-    <td><%= hotel["Name"] %></td>
+    <td><%= link_to hotel["Name"],hotel["InformationURL"],target: "new" %></td>
   </tr>
   <tr>
     <td>住所</td>
@@ -14,10 +14,6 @@
   <tr>
     <td>価格</td>
     <td><%= hotel["Price"] %>円</td>
-  </tr>
-  <tr>
-  　<td>ホームページへ</td>
-  　<td><%= link_to "ホームページへ",hotel["InformationURL"],target: "new" %></td>
   </tr>
   <tr>
   　<td>アクセス</td>

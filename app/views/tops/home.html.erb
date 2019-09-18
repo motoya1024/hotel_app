@@ -1,9 +1,11 @@
 <div class="text-center jumbotron site_title">
   <h1>ホテル情報検索・投稿サイト</h1>
-  <div>
-    <%= link_to "ログイン", login_path, class: "btn btn-primary account_btn" %>
-    <%= link_to "アカウント作成", new_user_path,class:"btn btn-success account_btn" %>
-  </div>
+  <% if !logged_in? %>
+    <div>
+      <%= link_to "ログイン", login_path, class: "btn btn-primary account_btn" %>
+      <%= link_to "アカウント作成", new_user_path,class:"btn btn-success account_btn" %>
+    </div>
+  <% end %>
 </div>
 <div class="panel panel-default site-layout">
   <div class="site-information">
@@ -34,8 +36,9 @@
           <img src="assets/favorite_index.png" width="100%" height="100%" class="hotel_sample" data-toggle="modal" data-target="#picture" data-id="assets/favorite_index.png">
           <img src="assets/favorite_sp_index.png" width="100%" height="100%" class="hotel_sp_sample" data-toggle="modal" data-target="#picture" data-id="assets/favorite_sp_index.png">
         </div>
-         <p class="order2">泊まったホテルの特徴や感想等をメモとして記録しておくことができます。後で、前に泊まったホテルの名前なんだっけ？とならないように泊まった
-          ホテルの特徴をお気に入り一覧として、残しておくことができます。</p>
+        <p class="order2">泊まったホテルの特徴や感想等をメモとして記録しておくことができます。後で、前に泊まったホテルの名前なんだっけ？とならないように泊まった
+                        ホテルの特徴をお気に入り一覧として、残しておくことができます。
+        </p>
       </div>
     </div>
     <div class="panel panel-primary">
@@ -44,7 +47,8 @@
       </div>
       <div class="panel-body feature-content">
         <p>泊まったホテルの特徴や感想等のコメントを投稿することができます。各ホテルを利用した人のコメントを自由に閲覧することができ、情報共有を図ること
-          ができますので、泊まるホテルを選ぶ際の参考とすることができます。</p>
+          ができますので、泊まるホテルを選ぶ際の参考とすることができます。
+        </p>
         <div class="image_form">
           <img src="assets/post_index.png" width="100%" height="100%" class="hotel_sample" data-toggle="modal" data-target="#picture" data-id="assets/post_index.png">
           <img src="assets/post_sp_index.png" width="48%" height="100%" class="hotel_sp_sample" data-toggle="modal" data-target="#picture" data-id="assets/post_sp_index.png">
