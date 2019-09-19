@@ -17,7 +17,7 @@
   <%= will_paginate @posts, prev_label: '&lt 前へ', next_label: '次へ &gt',class: "user_pagination" %>
 <% end %>
 <div class="post_layout">
-  <%= link_to "全コメント一覧へ", user_posts_path(current_user),class: "btn btn-success" %>
+  <%= link_to "コメント投稿一覧へ", user_posts_path(current_user),class: "btn btn-success" %>
 </div>
 <div class="post_partial">
   <%= render :partial => "user_post_index" %>
