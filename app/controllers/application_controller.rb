@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
       unless admin_logged_in?
         store_location
         flash[:danger] = "アクセス権がありません。"
-        redirect_to login_url
+        redirect_to root_url
       end
     end
   
