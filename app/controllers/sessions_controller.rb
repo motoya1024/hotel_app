@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   before_action :logged_not_in, only: [:new,:create]
   
   def new
-    @user = User.find(current_user.id)
+    
   end
   
   def create
