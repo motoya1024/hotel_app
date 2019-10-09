@@ -11,7 +11,7 @@ class Post < ApplicationRecord
   end
   
   def comment_length
-    comment_for_validation = comment.gsub(/\r\n/,"")
+    comment_for_validation = comment.gsub(/\r\n/,"").gsub(/r/,"").gsub(/\s/,"")
     if comment_for_validation.length > 250
       errors.add(:comment, "は250文字以内で入力してください")
     end
