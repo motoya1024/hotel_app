@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       end
     end
     
-    # ログイン済みユーザーかどうか確認
+    # ログイン済みの場合はアクセスできない
     def logged_not_in
       if logged_in?
         store_location

@@ -9,7 +9,10 @@ class LikesTest < ActionDispatch::IntegrationTest
   end
   
   test "should like post a user with Ajax" do
-   
+    log_in_as(@user)
+    assert_difference '@user.likes.count', 1 do
+      post likes_path(id: @post.id,user_id:@user.id), xhr: true
+    end
   end
 
   test "should like delete a user with Ajax" do 

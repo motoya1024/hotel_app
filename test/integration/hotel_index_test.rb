@@ -3,7 +3,7 @@ require 'test_helper'
 class HotelsIndexTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:lana)
-    @number = 305158
+    @number = 398395
   end
 
   test "hotelindex no_login" do
@@ -16,8 +16,8 @@ class HotelsIndexTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get hotels_path
     assert_template 'hotels/index'
-    assert_select 'a[href=?]', new_user_favorite_path(@user,number: @number), text: "登録"
-    assert_select 'a[href=?]', new_user_post_path(@user,number: @number), text: "投稿"
+    assert_select 'a[href=?]', new_user_favorite_path(@user,number: @number), text: "新規登録"
+    assert_select 'a[href=?]', new_user_post_path(@user,number: @number), text: "新規投稿"
   end
 
 end

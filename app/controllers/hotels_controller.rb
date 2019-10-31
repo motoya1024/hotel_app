@@ -53,6 +53,7 @@ class HotelsController < ApplicationController
       flash[:danger] = "場所が検索できませんでした。"
       redirect_to hotels_path
     end
+  
   end
   
   def map
